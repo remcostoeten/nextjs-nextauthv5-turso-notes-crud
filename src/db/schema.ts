@@ -47,6 +47,7 @@ export const notes = sqliteTable("notes", {
     .default(sql`CURRENT_TIMESTAMP`),
 });
 
+// Type definitions for TypeScript support
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
 export type Folder = typeof folders.$inferSelect;

@@ -19,7 +19,9 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "auth": ["./auth.ts"]
+      "auth": ["./auth.ts"],
+      "db": ["./src/db/index.ts"],
+      "actions": ["./src/core/server/actions/index.ts"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -4,10 +4,9 @@ import { db } from "@/db";
 import { users } from "@/db/schema";
 import argon2 from "argon2";
 import { eq } from "drizzle-orm";
-import { getCurrentUser } from "./user.actions";
-
+import getCurrentUser from "./user.actions";
 export async function updateProfile(prevState: any, formData: FormData) {
-  const user = await getCurrentUser();
+  const user = await getCurrentUser(prevState);
   if (!user) {
     return { error: "Not authenticated" };
   }

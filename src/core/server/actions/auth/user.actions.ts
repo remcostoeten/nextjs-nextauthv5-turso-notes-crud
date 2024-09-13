@@ -2,12 +2,9 @@
 
 import { db } from "@/db";
 import { users } from "@/db/schema";
-import { authConfig } from "auth";
 import { eq } from "drizzle-orm";
-import getServerSession from "next-auth";
 
-export async function getCurrentUser() {
-  const session = await getServerSession(authConfig);
+export default async function getCurrentUser({ session }: { session: any }) {
   if (!session?.user) {
     return null;
   }

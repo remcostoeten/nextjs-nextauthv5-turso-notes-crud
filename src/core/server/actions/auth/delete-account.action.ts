@@ -1,12 +1,10 @@
 "use server";
 
 import { db } from "@/db";
-import { users } from "@/db/schema";
+import { User, users } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { getCurrentUser } from "./user.actions";
 
-export async function deleteAccount() {
-  const user = await getCurrentUser();
+export default async function deleteAccount({ user }: { user: User }) {
   if (!user) {
     return { error: "Not authenticated" };
   }

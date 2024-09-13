@@ -1,26 +1,30 @@
 "use server";
 
+import { FolderSchema } from "@/core/models/folder-schema.z";
 import { db } from "@/db";
 import { folders } from "@/db/schema";
 import { auth } from "auth";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
-import { z } from "zod";
+import { notFound } from "next/navigation";
 
-const FolderSchema = z.object({
-  name: z
-    .string()
-    .min(1, "Folder name is required")
-    .max(50, "Folder name must be 50 characters or less"),
-  description: z
-    .string()
-    .max(200, "Description must be 200 characters or less")
-    .optional(),
-  color: z
-    .string()
-    .regex(/^#[0-9A-F]{6}$/i, "Invalid color format")
-    .optional(),
-});
+export async function getFolder(id: number) {
+  const session = await auth();
+  if (!session?.user?.id) {
+    throw new Error("Unauthorized");
+  }
+
+  const [folder] = await db
+    .select()
+    .from(folders)
+    .where(and(eq(folders.id, id), eq(folders.userId, session.user.id)));
+
+  if (!folder) {
+    notFound();
+  }
+
+  return folder;
+}
 
 export async function getFolders() {
   const session = await auth();
@@ -52,7 +56,7 @@ export async function createFolder(formData: FormData) {
     .returning();
 
   revalidatePath("/dashboard/notes");
-  return { message: "Folder created successfully" };
+  return { message: "Folder created successfully", folderId: newFolder.id };
 }
 
 export async function updateFolder(formData: FormData) {
@@ -61,30 +65,17 @@ export async function updateFolder(formData: FormData) {
     throw new Error("Unauthorized");
   }
 
-  const id = formData.get("id");
-  if (!id || typeof id !== "string") {
-    throw new Error("Invalid folder ID");
-  }
-
+  const folderId = parseInt(formData.get("id") as string);
   const validatedFields = FolderSchema.parse({
     name: formData.get("name"),
     description: formData.get("description"),
     color: formData.get("color"),
   });
 
-  const [updatedFolder] = await db
+  await db
     .update(folders)
     .set(validatedFields)
-    .where(
-      and(eq(folders.id, parseInt(id)), eq(folders.userId, session.user.id)),
-    )
-    .returning();
-
-  if (!updatedFolder) {
-    throw new Error(
-      "Folder not found or you do not have permission to update it",
-    );
-  }
+    .where(and(eq(folders.id, folderId), eq(folders.userId, session.user.id)));
 
   revalidatePath("/dashboard/notes");
   return { message: "Folder updated successfully" };
@@ -96,23 +87,11 @@ export async function deleteFolder(formData: FormData) {
     throw new Error("Unauthorized");
   }
 
-  const id = formData.get("id");
-  if (!id || typeof id !== "string") {
-    throw new Error("Invalid folder ID");
-  }
+  const folderId = parseInt(formData.get("id") as string);
 
-  const [deletedFolder] = await db
+  await db
     .delete(folders)
-    .where(
-      and(eq(folders.id, parseInt(id)), eq(folders.userId, session.user.id)),
-    )
-    .returning();
-
-  if (!deletedFolder) {
-    throw new Error(
-      "Folder not found or you do not have permission to delete it",
-    );
-  }
+    .where(and(eq(folders.id, folderId), eq(folders.userId, session.user.id)));
 
   revalidatePath("/dashboard/notes");
   return { message: "Folder deleted successfully" };
