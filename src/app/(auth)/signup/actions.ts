@@ -1,10 +1,10 @@
 'use server'
 
-import { signIn } from '@/auth'
 import { db } from '@/db'
 import { NewUser, users } from '@/db/schema'
 import argon2 from 'argon2'
 import { eq, or } from 'drizzle-orm'
+import { signIn } from 'next-auth/react'
 import { v4 as uuidv4 } from 'uuid'
 
 export async function registerUser(prevState: any, formData: FormData): Promise<{ success: boolean; error?: string }> {

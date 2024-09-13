@@ -1,8 +1,8 @@
-import { auth } from "@/auth";
+import { auth } from "auth";
 
-import WhoAmIServerAction from "./WhoAmIServerAction";
 import WhoAmIAPI from "./WhoAmIAPI";
 import WhoAmIRSC from "./WhoAmIRSC";
+import WhoAmIServerAction from "./WhoAmIServerAction";
 
 export default async function TestRoute() {
   const session = await auth();

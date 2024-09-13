@@ -1,5 +1,5 @@
+import { BASE_PATH, auth } from "auth";
 import { SessionProvider } from "next-auth/react";
-import { BASE_PATH, auth } from "@/auth";
 
 import AuthButtonClient from "./AuthButton.client";
 
