@@ -1,5 +1,8 @@
+import Header from "@/components/header";
 import type { Metadata } from "next";
+import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,8 +19,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} dark max-w-3xl mx-auto text-2xl`}>
-        {children}
+      <body className={`${inter.className} dark  text-2xl`}>
+        <SessionProvider>
+          <Header />
+          <main
+            className="max-w-3xl mx-auto"
+          >{children}
+          </main>
+          <Toaster />
+        </SessionProvider>
       </body>
     </html>
   );

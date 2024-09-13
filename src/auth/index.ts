@@ -1,46 +1,85 @@
-import NextAuth, { User, NextAuthConfig } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
+import { db } from '@/db'
+import { users } from '@/db/schema'
+import { DrizzleAdapter } from '@auth/drizzle-adapter'
+import argon2 from 'argon2'
+import { eq, or } from 'drizzle-orm'
+import NextAuth, { NextAuthConfig, User } from 'next-auth'
+import CredentialsProvider from 'next-auth/providers/credentials'
 
-export const BASE_PATH = "/api/auth";
+type ExtendedUser = User & {
+  username?: string
+}
 
-const authOptions: NextAuthConfig = {
+export const authConfig: NextAuthConfig = {
+  adapter: DrizzleAdapter(db),
   providers: [
-    Credentials({
-      name: "Credentials",
+    CredentialsProvider({
+      name: 'credentials',
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" },
+        usernameOrEmail: { label: "Username or Email", type: "text" },
+        password: { label: "Password", type: "password" }
       },
-      async authorize(credentials): Promise<User | null> {
-        const users = [
-          {
-            id: "test-user-1",
-            userName: "test1",
-            name: "Test 1",
-            password: "pass",
-            email: "test1@donotreply.com",
-          },
-          {
-            id: "test-user-2",
-            userName: "test2",
-            name: "Test 2",
-            password: "pass",
-            email: "test2@donotreply.com",
-          },
-        ];
-        const user = users.find(
-          (user) =>
-            user.userName === credentials.username &&
-            user.password === credentials.password
-        );
-        return user
-          ? { id: user.id, name: user.name, email: user.email }
-          : null;
-      },
-    }),
-  ],
-  basePath: BASE_PATH,
-  secret: process.env.NEXTAUTH_SECRET,
-};
+      async authorize(credentials) {
+        if (!credentials?.usernameOrEmail || !credentials?.password) {
+          return null
+        }
 
-export const { handlers, auth, signIn, signOut } = NextAuth(authOptions);
+        const user = await db.select()
+          .from(users)
+          .where(or(
+            eq(users.username, credentials.usernameOrEmail),
+            eq(users.email, credentials.usernameOrEmail)
+          ))
+          .get()
+
+        if (!user) {
+          return null
+        }
+
+        if (typeof user.password === 'string') {
+          try {
+            const passwordMatch = await argon2.verify(user.password, credentials.password)
+            if (!passwordMatch) {
+              return null
+            }
+          } catch (error) {
+            console.error('Password verification error:', error)
+            return null
+          }
+        }
+
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          username: user.username,
+        }
+      }
+    })
+  ],
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id
+        token.username = (user as ExtendedUser).username
+      }
+      return token
+    },
+    async session({ session, token }) {
+      if (token && session.user) {
+        session.user.id = token.id as string
+        (session.user as ExtendedUser).username = token.username as string
+      }
+      return session
+    }
+  },
+  pages: {
+    signIn: '/login',
+  },
+  session: {
+    strategy: 'jwt',
+  },
+  debug: process.env.NODE_ENV === 'development',
+}
+
+export const { handlers, auth, signIn, signOut } = NextAuth(authConfig)
