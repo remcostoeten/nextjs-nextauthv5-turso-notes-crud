@@ -4,6 +4,7 @@
 
 @import "./theme/_generic.css";
 @import "./theme/_utilities.css";
+@import "./theme/_animations.css";
 
 :root {
   --white: #fff;
