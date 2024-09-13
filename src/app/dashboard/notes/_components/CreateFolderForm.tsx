@@ -10,23 +10,39 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { createFolder } from "@/core/server/actions/folders";
+import { Folder } from "@/db/schema";
 import { PlusIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
-export function CreateFolderForm() {
+type CreateFolderFormProps = {
+  folders: Folder[];
+};
+
+export function CreateFolderForm({ folders }: CreateFolderFormProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const [color, setColor] = useState("#000000");
+  const [parentId, setParentId] = useState<string | undefined>(undefined);
   const router = useRouter();
 
   async function action(formData: FormData) {
     setIsPending(true);
     try {
       formData.append("color", color);
+      if (parentId) {
+        formData.append("parentId", parentId);
+      }
       const result = await createFolder(formData);
       toast.success(result.message);
       setIsOpen(false);
@@ -86,6 +102,22 @@ export function CreateFolderForm() {
                 placeholder="#000000"
               />
             </div>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="parentId">Parent Folder (optional)</Label>
+            <Select onValueChange={setParentId} value={parentId}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select a parent folder" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value={undefined}>None</SelectItem>
+                {folders?.map((folder) => (
+                  <SelectItem key={folder.id} value={folder.id.toString()}>
+                    {folder.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           <div className="flex justify-end space-x-2">
             <Button

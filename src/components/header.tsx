@@ -109,7 +109,7 @@ export default function Header() {
             <Menu className="h-6 w-6" aria-hidden="true" />
           </Button>
         </div>
-        <div className="hidden lg:flex lg:gap-x-8">
+        <div className="hidden lg:flex lg:gap-x-8 items-center justify-center content-center">
           {mainRoutes.map((route) => (
             <Link key={route.name} href={route.path}>
               <motion.div

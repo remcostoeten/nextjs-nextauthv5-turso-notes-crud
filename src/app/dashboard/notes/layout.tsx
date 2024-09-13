@@ -14,7 +14,7 @@ export default async function NotesLayout({
     <div className="space-y-6">
       <h1 className="text-3xl font-bold">Notes</h1>
       <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6">
-        <aside className="md:border-r pr-6">
+        <aside className="md:border-r pr-6 px-4">
           <Suspense fallback={<FolderListSkeleton />}>
             <FolderList initialFolders={folders} />
           </Suspense>

@@ -45,6 +45,9 @@ export async function createFolder(formData: FormData) {
     name: formData.get("name"),
     description: formData.get("description"),
     color: formData.get("color"),
+    parentId: formData.get("parentId")
+      ? parseInt(formData.get("parentId") as string)
+      : undefined,
   });
 
   const [newFolder] = await db

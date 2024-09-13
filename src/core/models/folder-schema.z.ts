@@ -1,20 +1,13 @@
 import { z } from "zod";
 
-const FolderSchema = z.object({
-  name: z
-    .string()
-    .min(1, "Folder name is required")
-    .max(50, "Folder name must be 50 characters or less"),
-  description: z
-    .string()
-    .max(200, "Description must be 200 characters or less")
-    .optional(),
+export const FolderSchema = z.object({
+  name: z.string().min(1, "Name is required").max(255),
+  description: z.string().max(1000).optional(),
   color: z
     .string()
-    .regex(/^#[0-9A-F]{6}$/i, "Invalid color format")
+    .regex(/^#[0-9A-Fa-f]{6}$/, "Invalid color format")
     .optional(),
+  parentId: z.number().int().positive().optional(),
 });
 
 export type Folder = z.infer<typeof FolderSchema>;
-
-export { FolderSchema };

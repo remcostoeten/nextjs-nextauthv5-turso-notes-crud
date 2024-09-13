@@ -19,7 +19,7 @@ async function FolderListContent() {
 export function FolderList() {
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col  gap-2 items-start">
         <h2 className="text-2xl font-bold">Folders</h2>
         <CreateFolderForm />
       </div>
