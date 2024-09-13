@@ -1,23 +1,41 @@
 "use client";
-import { useSession } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
-
-import { signIn, signOut } from "auth/helpers";
+import { signIn, signOut } from "@/core/constants"; // Make sure this path is correct
+import { useSession } from "next-auth/react";
+import { useTransition } from "react";
 
 export default function AuthButton() {
-  const session = useSession();
+  const { data: session, status } = useSession();
+  const [isPending, startTransition] = useTransition();
 
-  return session?.data?.user ? (
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  return session ? (
     <Button
-      onClick={async () => {
-        await signOut();
-        await signIn();
-      }}
+      onClick={() =>
+        startTransition(async () => {
+          await signOut();
+        })
+      }
+      disabled={isPending}
     >
-      {session.data?.user?.name} : Sign Out
+      {isPending
+        ? "Signing out..."
+        : `${session.user?.name ?? "User"} : Sign Out`}
     </Button>
   ) : (
-    <Button onClick={async () => await signIn()}>Sign In</Button>
+    <Button
+      onClick={() =>
+        startTransition(async () => {
+          await signIn();
+        })
+      }
+      disabled={isPending}
+    >
+      {isPending ? "Signing in..." : "Sign In"}
+    </Button>
   );
 }

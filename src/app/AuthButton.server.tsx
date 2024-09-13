@@ -1,7 +1,8 @@
-import { BASE_PATH, auth } from "auth";
-import { SessionProvider } from "next-auth/react";
+import { auth } from "auth";
 
 import AuthButtonClient from "./AuthButton.client";
+
+const BASE_PATH = "/dashboard";
 
 export default async function AuthButton() {
   const session = await auth();
@@ -12,9 +13,5 @@ export default async function AuthButton() {
     };
   }
 
-  return (
-    <SessionProvider basePath={BASE_PATH} session={session}>
-      <AuthButtonClient />
-    </SessionProvider>
-  );
+  return <AuthButtonClient />;
 }

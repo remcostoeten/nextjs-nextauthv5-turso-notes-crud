@@ -6,14 +6,13 @@
   :root {
     /* custom theme colors */
     --border: "#1b1b1a";
-    --input: '#171616';
+    --input: "#171616";
 
-    --card: '#111110';
+    --card: "#111110";
 
-    --muted: '#727273';
-    --white: 'red';
-    --destructive: '#e26969';
-
+    --muted: "#727273";
+    --white: "red";
+    --destructive: "#e26969";
 
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -72,7 +71,6 @@
     @apply bg-background text-foreground;
   }
 }
-
 
 h1,
 h2,

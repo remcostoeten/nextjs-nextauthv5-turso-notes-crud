@@ -128,7 +128,8 @@ body {
     background: var(--white);
   }
 
-  &.f {}
+  &.f {
+  }
 
   background: var(--green);
 }
