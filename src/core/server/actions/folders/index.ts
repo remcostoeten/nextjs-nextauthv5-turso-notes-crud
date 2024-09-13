@@ -2,9 +2,9 @@
 
 import { FolderSchema } from "@/core/models/folder-schema.z";
 import { db } from "@/db";
-import { folders } from "@/db/schema";
+import { Folder, folders, notes } from "@/db/schema";
 import { auth } from "auth";
-import { and, eq } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { notFound } from "next/navigation";
 
@@ -33,6 +33,23 @@ export async function getFolders() {
   }
 
   return db.select().from(folders).where(eq(folders.userId, session.user.id));
+}
+
+export async function getFoldersWithNotesCount(): Promise<{ folder: Folder; notesCount: number }[]> {
+  const session = await auth();
+  if (!session?.user?.id) {
+    throw new Error("Unauthorized");
+  }
+
+  return db
+    .select({
+      folder: folders,
+      notesCount: sql<number>`count(${notes.id})`.as('notesCount'),
+    })
+    .from(folders)
+    .leftJoin(notes, eq(folders.id, notes.folderId))
+    .where(eq(folders.userId, session.user.id))
+    .groupBy(folders.id);
 }
 
 export async function createFolder(formData: FormData) {
