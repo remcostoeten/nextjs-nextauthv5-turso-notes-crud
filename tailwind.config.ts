@@ -25,7 +25,7 @@ const config: Config = {
         "bg-card": "var(--bg-card)",
 
         "bg-section": "var(--bg-section)",
-        "bg-section-lighter": "var(--bg-section-lighter)",
+        "section-lighter": "var(--bg-section-lighter)",
         "bg-input": "var(--bg-input)",
         "bg-dropdown": "var(--bg-dropdown)",
         "bg-modal": "var(--bg-modal)",
@@ -87,11 +87,11 @@ const config: Config = {
           foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
+          DEFAULT: "var(--bg-dropdown)",
           foreground: "hsl(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
+          DEFAULT: "var(--bg-card)",
           foreground: "hsl(var(--card-foreground))",
         },
       },

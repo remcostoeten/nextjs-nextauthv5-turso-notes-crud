@@ -1,0 +1,11 @@
+.border-regular {
+  border: 1px solid var(--border-default);
+}
+
+.border-outline {
+  border: 1px solid var(--border-outline);
+}
+
+.border-separator {
+  border: 1px solid var(--border-separator);
+}

@@ -11,7 +11,7 @@ import { notFound } from "next/navigation";
 export async function getFolder(id: number) {
   const session = await auth();
   if (!session?.user?.id) {
-    throw new Error("Unauthorized");
+    return { message: "Unauthorized" };
   }
 
   const [folder] = await db
@@ -29,33 +29,46 @@ export async function getFolder(id: number) {
 export async function getFolders() {
   const session = await auth();
   if (!session?.user?.id) {
-    throw new Error("Unauthorized");
+    return { message: "Unauthorized" };
   }
 
   return db.select().from(folders).where(eq(folders.userId, session.user.id));
 }
 
-export async function getFoldersWithNotesCount(): Promise<{ folder: Folder; notesCount: number }[]> {
+export async function getFoldersWithNotesCount(): Promise<{
+  folders: { folder: Folder; notesCount: number }[];
+  totalCount: number;
+}> {
   const session = await auth();
   if (!session?.user?.id) {
-    throw new Error("Unauthorized");
+    return { folders: [], totalCount: 0 };
   }
 
-  return db
+  const foldersWithCount = await db
     .select({
       folder: folders,
-      notesCount: sql<number>`count(${notes.id})`.as('notesCount'),
+      notesCount: sql<number>`count(${notes.id})`.as("notesCount"),
     })
     .from(folders)
     .leftJoin(notes, eq(folders.id, notes.folderId))
     .where(eq(folders.userId, session.user.id))
     .groupBy(folders.id);
+
+  const [{ count }] = await db
+    .select({ count: sql<number>`count(*)` })
+    .from(folders)
+    .where(eq(folders.userId, session.user.id));
+
+  return {
+    folders: foldersWithCount,
+    totalCount: count,
+  };
 }
 
 export async function createFolder(formData: FormData) {
   const session = await auth();
   if (!session?.user?.id) {
-    throw new Error("Unauthorized");
+    return { message: "Unauthorized" };
   }
 
   const validatedFields = FolderSchema.parse({
@@ -82,7 +95,7 @@ export async function createFolder(formData: FormData) {
 export async function updateFolder(formData: FormData) {
   const session = await auth();
   if (!session?.user?.id) {
-    throw new Error("Unauthorized");
+    return { message: "Unauthorized" };
   }
 
   const folderId = parseInt(formData.get("id") as string);
@@ -104,7 +117,7 @@ export async function updateFolder(formData: FormData) {
 export async function deleteFolder(formData: FormData) {
   const session = await auth();
   if (!session?.user?.id) {
-    throw new Error("Unauthorized");
+    return { message: "Unauthorized" };
   }
 
   const folderId = parseInt(formData.get("id") as string);

@@ -60,9 +60,9 @@ export default function LoginPage() {
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
-                  <EyeOffIcon className="h-4 w-4" />
+                  <EyeOffIcon className="h-4 w-4 text-placeholder" />
                 ) : (
-                  <EyeIcon className="h-4 w-4" />
+                  <EyeIcon className="h-4 w-4 text-placeholder" />
                 )}
               </Button>
             </div>
