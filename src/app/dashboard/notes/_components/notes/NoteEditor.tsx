@@ -1,10 +1,10 @@
 "use client";
 
-import { updateNote } from "@/app/actions/notes";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Note } from "@/db/schema";
+import { updateNote } from "actions";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -19,6 +19,7 @@ export function NoteEditor({ note }: { note: Note }) {
       formData.append("id", note.id.toString());
       const result = await updateNote(formData);
       toast.success(result.message);
+
       router.refresh();
     } catch (error) {
       toast.error("Failed to update note");
