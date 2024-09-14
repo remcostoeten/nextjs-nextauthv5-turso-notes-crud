@@ -1,4 +1,5 @@
-"use client";
+   turso db show mac
+   "use client";
 import { useEffect, useState } from "react";
 
 export default function WhoAmIServerAction({

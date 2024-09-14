@@ -1,35 +1,38 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useFormState } from "react-dom";
-import toast from "react-hot-toast";
-import { registerUser } from "./actions";
+  CardTitle
+} from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { EyeIcon, EyeOffIcon } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { useFormState } from 'react-dom'
+import toast from 'react-hot-toast'
+import { registerUser } from './actions'
 
 export default function RegisterPage() {
-  const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
-  const [state, formAction] = useFormState(registerUser, null);
+  const [showPassword, setShowPassword] = useState(false)
+  const router = useRouter()
+  const [state, formAction] = useFormState(registerUser, null)
 
   useEffect(() => {
-    if (state?.success) {
-      toast.success("Registration successful");
-      router.push("/dashboard"); // Redirect to dashboard after successful registration and auto-login
-    } else if (state?.error) {
-      toast.error(state.error);
+    if (state) {
+      console.log('Registration state:', state)
+      if (state.success) {
+        toast.success(state.message || 'Registration successful')
+        router.push('/dashboard')
+      } else if (state.error) {
+        toast.error(state.error)
+      }
     }
-  }, [state, router]);
+  }, [state, router])
 
   return (
     <Card className="w-[350px] mx-auto mt-10">
@@ -53,7 +56,7 @@ export default function RegisterPage() {
               <Input
                 id="password"
                 name="password"
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 required
               />
               <Button
@@ -86,5 +89,5 @@ export default function RegisterPage() {
         </form>
       </CardContent>
     </Card>
-  );
+  )
 }
