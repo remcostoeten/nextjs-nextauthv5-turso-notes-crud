@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, motion } from "framer-motion";
 import {
   FileText,
   HelpCircle,
@@ -8,40 +8,40 @@ import {
   LayoutDashboard,
   NotebookTabs,
   Settings,
-  User
-} from 'lucide-react'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+  User,
+} from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const mainSidebarItems = [
-  { name: 'Home', path: '/', icon: Home },
-  { name: 'Docs', path: '/docs', icon: FileText },
-  { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
-  { name: 'Profile', path: '/dashboard/profile', icon: User },
-  { name: 'Notes', path: '/dashboard/notes', icon: NotebookTabs }
-]
+  { name: "Home", path: "/", icon: Home },
+  { name: "Docs", path: "/docs", icon: FileText },
+  { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
+  { name: "Profile", path: "/dashboard/profile", icon: User },
+  { name: "Notes", path: "/dashboard/notes", icon: NotebookTabs },
+];
 
 const bottomSidebarItems = [
-  { name: 'Settings', path: '/settings', icon: Settings },
-  { name: 'Help', path: '/help', icon: HelpCircle }
-]
+  { name: "Settings", path: "/settings", icon: Settings },
+  { name: "Help", path: "/help", icon: HelpCircle },
+];
 
 function SidebarIcon({
   item,
-  isActive
+  isActive,
 }: {
-  item: (typeof mainSidebarItems)[0]
-  isActive: boolean
+  item: (typeof mainSidebarItems)[0];
+  isActive: boolean;
 }) {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.div
       className={`relative flex items-center justify-center w-10 h-10 rounded-xl transition-colors duration-200 ${
         isActive
-          ? 'bg-zinc-800 text-white'
-          : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+          ? "bg-zinc-800 text-white"
+          : "text-zinc-400 hover:text-white hover:bg-zinc-800"
       }`}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
@@ -63,20 +63,20 @@ function SidebarIcon({
         )}
       </AnimatePresence>
     </motion.div>
-  )
+  );
 }
 
 export function Sidebar() {
-  const pathname = usePathname()
-  const [activePath, setActivePath] = useState('')
+  const pathname = usePathname();
+  const [activePath, setActivePath] = useState("");
 
   useEffect(() => {
     const matchingItem =
       [...mainSidebarItems, ...bottomSidebarItems].find(
-        (item) => pathname.startsWith(item.path) && item.path !== '/'
-      ) || mainSidebarItems[0]
-    setActivePath(matchingItem.path)
-  }, [pathname])
+        (item) => pathname.startsWith(item.path) && item.path !== "/",
+      ) || mainSidebarItems[0];
+    setActivePath(matchingItem.path);
+  }, [pathname]);
 
   return (
     <aside className="fixed left-0 top-[60px] bottom-0 w-16 bg-zinc-950 border border-r flex flex-col justify-between py-4 border-white">
@@ -95,5 +95,5 @@ export function Sidebar() {
         ))}
       </div>
     </aside>
-  )
+  );
 }

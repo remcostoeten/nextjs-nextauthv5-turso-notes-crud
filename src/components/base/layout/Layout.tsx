@@ -1,5 +1,8 @@
+"use client";
+
 import { BackgroundGradient, UI_CONFIG } from "@/core/config/hero-ui.config";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import LogoIcon from "../logo";
 import SignInButton from "./header/SignInButton";
 
@@ -15,8 +18,18 @@ const navigation: NavigationItem[] = [
   { title: "Pricing", path: "#pricing" },
 ];
 
-function Layout({ children }: PageProps) {
+export default function Layout({ children }: { children: React.ReactNode }) {
+  const [isSticky, setIsSticky] = useState(false);
   const selectedGradient = BackgroundGradient.PINK;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsSticky(window.scrollY > 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className="relative mt-8">
@@ -24,9 +37,11 @@ function Layout({ children }: PageProps) {
         className="absolute -mt-8 inset-0 blur-xl h-[710px] animate-gradient-move animate-opacity-pulse"
         style={{ background: UI_CONFIG.COLORS.BACKGROUND[selectedGradient] }}
       />
-      <header>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${isSticky ? "bg-white shadow-md" : "bg-transparent"}`}
+      >
         <nav
-          className={`pb-5 ${UI_CONFIG.FONTS.SIZES.SMALL} absolute top-0 inset-x-0 bg-white ${UI_CONFIG.SHADOWS.DEFAULT} ${UI_CONFIG.BORDERS.ROUNDED} border mx-2 mt-2 md:shadow-none md:border-none md:mx-0 md:mt-0 md:relative md:bg-transparent`}
+          className={`pb-5 ${UI_CONFIG.FONTS.SIZES.SMALL} ${isSticky ? "py-2" : "py-5"} transition-all duration-300 ease-in-out`}
         >
           <div
             className={`gap-x-14 items-center ${UI_CONFIG.SPACING.SECTION} md:flex`}
@@ -41,7 +56,7 @@ function Layout({ children }: PageProps) {
           </div>
         </nav>
       </header>
-      <div className="relative">{children}</div>
+      <div className="relative pt-20">{children}</div>
     </div>
   );
 }
@@ -64,5 +79,3 @@ function NavigationMenu() {
     </ul>
   );
 }
-
-export default Layout;

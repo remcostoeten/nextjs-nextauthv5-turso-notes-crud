@@ -15,33 +15,40 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import toast from "react-hot-toast";
-import { loginUser } from "./actions";
+import { registerUser } from "./actions";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
-  const [state, formAction] = useFormState(loginUser, null);
+  const [state, formAction] = useFormState(registerUser, null);
 
   useEffect(() => {
-    if (state?.success) {
-      toast.success("Login successful");
-      router.push("/dashboard");
-    } else if (state?.error) {
-      toast.error(state.error);
+    if (state) {
+      console.log("Registration state:", state);
+      if (state.success) {
+        toast.success(state.message || "Registration successful");
+        router.push("/dashboard");
+      } else if (state.error) {
+        toast.error(state.error);
+      }
     }
   }, [state, router]);
 
   return (
     <Card className="w-[350px] mx-auto mt-10">
       <CardHeader>
-        <CardTitle>Login</CardTitle>
-        <CardDescription>Sign in to your account</CardDescription>
+        <CardTitle>Register</CardTitle>
+        <CardDescription>Create a new account</CardDescription>
       </CardHeader>
       <CardContent>
         <form action={formAction} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="usernameOrEmail">Username or Email</Label>
-            <Input id="usernameOrEmail" name="usernameOrEmail" required />
+            <Label htmlFor="email">Email</Label>
+            <Input id="email" name="email" type="email" required />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="username">Username</Label>
+            <Input id="username" name="username" required />
           </div>
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
@@ -67,8 +74,17 @@ export default function LoginPage() {
               </Button>
             </div>
           </div>
+          <div className="space-y-2">
+            <Label htmlFor="confirmPassword">Confirm Password</Label>
+            <Input
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              required
+            />
+          </div>
           <Button type="submit" className="w-full">
-            Login
+            Register
           </Button>
         </form>
       </CardContent>

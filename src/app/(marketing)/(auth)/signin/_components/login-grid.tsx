@@ -1,9 +1,12 @@
 "use client";
 
+import Logo from "@/components/base/logo";
 import { Input } from "@/components/ui/input";
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
-import ProviderButton from "./login.providers-buttons";
+import ProviderButton from "./login-provider-button";
+import providers from "./providers";
 
 type LoginGridWithProvidersProps = {
   enabledProviders?: string[];
@@ -12,7 +15,7 @@ type LoginGridWithProvidersProps = {
 };
 
 export default function LoginGridWithProviders({
-  enabledProviders = ["google", "twitter", "github"],
+  enabledProviders = ["google", "github"],
   onSubmit,
   onProviderLogin,
 }: LoginGridWithProvidersProps) {
@@ -31,7 +34,7 @@ export default function LoginGridWithProviders({
         <LoginHeader />
         <div className="bg-transparent shadow p-4 py-6 space-y-8 sm:p-6 sm:rounded-lg">
           <ProviderButtons
-            providers={enabledProviders}
+            enabledProviders={enabledProviders}
             onProviderLogin={onProviderLogin}
           />
           <Divider />
@@ -43,7 +46,7 @@ export default function LoginGridWithProviders({
             onSubmit={handleSubmit}
           />
         </div>
-        <ForgotPassword />
+        <AlreadyGotAccount />
       </div>
     </main>
   );
@@ -52,23 +55,19 @@ export default function LoginGridWithProviders({
 function LoginHeader() {
   return (
     <div className="text-center">
-      <img
-        src="https://farmui.com/logo.svg"
-        width={100}
-        className="mx-auto rounded-full"
-      />
+      <Logo />
       <div className="mt-5 space-y-2">
         <h3 className="text-gray-200 text-2xl font-normal sm:text-3xl tracking-tighter font-geist">
           Log in to your account
         </h3>
         <p className="text-gray-400">
           Don't have an account?{" "}
-          <a
-            href="javascript:void(0)"
+          <Link
+            href="/signup"
             className="font-medium text-purple-600 hover:text-purple-500"
           >
             Sign up
-          </a>
+          </Link>
         </p>
       </div>
     </div>
@@ -76,21 +75,27 @@ function LoginHeader() {
 }
 
 function ProviderButtons({
-  providers,
+  enabledProviders,
   onProviderLogin,
 }: {
-  providers: string[];
+  enabledProviders: string[];
   onProviderLogin?: (provider: string) => void;
 }) {
   return (
     <div className="grid grid-cols-3 gap-x-3">
-      {providers.map((providerKey) => (
-        <ProviderButton
-          key={providerKey}
-          provider={providers[providerKey as keyof typeof providers]}
-          onClick={() => onProviderLogin?.(providerKey)}
-        />
-      ))}
+      {enabledProviders.map((providerKey) => {
+        const provider = providers[providerKey as keyof typeof providers];
+        if (provider) {
+          return (
+            <ProviderButton
+              key={providerKey}
+              provider={provider}
+              onClick={() => onProviderLogin?.(providerKey)}
+            />
+          );
+        }
+        return null;
+      })}
     </div>
   );
 }
@@ -151,11 +156,11 @@ function LoginForm({
   );
 }
 
-function ForgotPassword() {
+function AlreadyGotAccount() {
   return (
     <div className="text-center">
-      <a href="javascript:void(0)" className="hover:text-purple-600">
-        Forgot password?
+      <a href="/signin" className="hover:text-purple-600">
+        Already got an account? Sign in
       </a>
     </div>
   );
