@@ -23,6 +23,7 @@ import ProviderButton from "./login-provider-button";
 
 import { loginUser } from "../actions";
 import { providers } from "./providers";
+import { OrContinueWith } from "./register.grid";
 
 type LoginState = { loading: boolean; success: boolean; error: string | null };
 
@@ -43,9 +44,16 @@ export default function LoginForm({
   });
 
   const handleSuccessfulAuth = useCallback(async () => {
-    toast.success("Login successful");
-    await update();
-    router.push("/dashboard");
+    try {
+      await update();
+      toast.success("Login successful");
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Error updating session:", error);
+      toast.error(
+        "Login successful, but there was an error updating your session. Please try refreshing the page.",
+      );
+    }
   }, [update, router]);
 
   useEffect(() => {
@@ -61,8 +69,8 @@ export default function LoginForm({
       const result = await signIn(provider, { redirect: false });
       if (result?.error) {
         toast.error(`Error signing in with ${provider}: ${result.error}`);
-      } else {
-        handleSuccessfulAuth();
+      } else if (result?.ok) {
+        await handleSuccessfulAuth();
       }
     } catch (error) {
       console.error(`Error signing in with ${provider}:`, error);
@@ -71,9 +79,9 @@ export default function LoginForm({
   };
 
   return (
-    <main className="w-full min-h-screen flex flex-col items-center justify-center:px-4 relative">
-      <div className="absolute pointer-events-none top-0 z-[0] h-screen w-screen bg-purple-950/10 bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
-      <Card className="w-full sm:max-w-md md:max-w-xl lg:max-w-xl">
+    <main className="w-full min-h-screen flex flex-col items-center justify-center:px-4">
+      <Card className="w-full sm:max-w-md md:max-w-xl lg:max-w-xl overflow-hidden relative">
+        <div className="absolute pointer-events-none top-0 z-[0] h-screen w-screen bg-purple-950/10 bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
         <CardHeader className="text-center">
           <Logo />
           <CardTitle className="text-2xl font-normal sm:text-3xl tracking-tighter font-geist mt-5">
@@ -105,12 +113,7 @@ export default function LoginForm({
               return null;
             })}
           </div>
-          <div className="relative">
-            <span className="block w-full h-px bg-gray-300" />
-            <p className="inline-block w-fit text-sm bg-white px-2 absolute -top-2 inset-x-0 mx-auto">
-              Or continue with
-            </p>
-          </div>
+          <OrContinueWith />
           <form action={formAction} className="space-y-4">
             <div className="space-y-2">
               <label
@@ -119,7 +122,12 @@ export default function LoginForm({
               >
                 Email or Username
               </label>
-              <Input id="usernameOrEmail" name="usernameOrEmail" required />
+              <Input
+                className="border-outline-bottom"
+                id="usernameOrEmail"
+                name="usernameOrEmail"
+                required
+              />
             </div>
             <div className="space-y-2">
               <label

@@ -9,7 +9,6 @@ export default async function Home() {
     <>
       <Hero />
       <pre>{JSON.stringify(session, null, 2)}</pre>
-      <TextHoverEffectDemo />
     </>
   );
 }

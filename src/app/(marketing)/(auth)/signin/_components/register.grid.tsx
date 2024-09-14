@@ -1,6 +1,5 @@
 "use client";
 
-import { useSessionWithUpdate } from "@/core/hooks/useSessionWithUpdate";
 import { ChevronRight, EyeIcon, EyeOffIcon } from "lucide-react";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
@@ -19,16 +18,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { useSessionWithUpdate } from "@/core/hooks/useSessionWithUpdate";
+import { RegisterState, registerUser } from "../../signup/actions";
 import ProviderButton from "./login-provider-button";
-
-import { registerUser } from "../../signup/actions";
 import { providers } from "./providers";
-
-type RegisterState = {
-  loading: boolean;
-  success: boolean;
-  error: string | null;
-};
 
 type RegisterFormProps = {
   enabledProviders?: string[];
@@ -38,7 +31,6 @@ export default function RegisterForm({
   enabledProviders = ["github", "google"],
 }: RegisterFormProps) {
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
   const { update } = useSessionWithUpdate();
   const [state, formAction] = useFormState<RegisterState, FormData>(
@@ -51,13 +43,22 @@ export default function RegisterForm({
   );
 
   const handleSuccessfulAuth = useCallback(async () => {
-    toast.success("Registration successful");
-    await update();
-    router.push("/dashboard");
+    try {
+      await update();
+      toast.success(
+        "Registration successful! Please log in with your new account.",
+      );
+      router.push("/signin");
+    } catch (error) {
+      console.error("Error updating session:", error);
+      toast.error(
+        "Registration successful, but there was an error updating your session. Please try logging in manually.",
+      );
+    }
   }, [update, router]);
 
   useEffect(() => {
-    if (state.success) {
+    if (state.success && state.requireLogin) {
       handleSuccessfulAuth();
     } else if (state.error) {
       toast.error(state.error);
@@ -69,8 +70,8 @@ export default function RegisterForm({
       const result = await signIn(provider, { redirect: false });
       if (result?.error) {
         toast.error(`Error signing up with ${provider}: ${result.error}`);
-      } else {
-        handleSuccessfulAuth();
+      } else if (result?.ok) {
+        await handleSuccessfulAuth();
       }
     } catch (error) {
       console.error(`Error signing up with ${provider}:`, error);
@@ -79,13 +80,13 @@ export default function RegisterForm({
   };
 
   return (
-    <main className="w-full min-h-screen flex flex-col items-center justify-center:px-4 relative">
-      <div className="absolute pointer-events-none top-0 z-[0] h-screen w-screen bg-purple-950/10 bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
-      <Card className="w-full sm:max-w-md md:max-w-xl lg:max-w-xl">
+    <main className="w-full min-h-screen flex flex-col items-center justify-center px-4">
+      <Card className="w-full sm:max-w-md md:max-w-xl lg:max-w-xl overflow-hidden relative">
+        <div className="absolute pointer-events-none top-0 z-[0] h-screen w-screen bg-purple-950/10 bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
         <CardHeader className="text-center">
           <Logo />
           <CardTitle className="text-2xl font-normal sm:text-3xl tracking-tighter font-geist mt-5">
-            Create an account
+            Create your account
           </CardTitle>
           <CardDescription>
             Already have an account?{" "}
@@ -113,13 +114,22 @@ export default function RegisterForm({
               return null;
             })}
           </div>
-          <div className="relative">
-            <span className="block w-full h-px bg-gray-300" />
-            <p className="inline-block w-fit text-sm bg-white px-2 absolute -top-2 inset-x-0 mx-auto">
-              Or continue with
-            </p>
-          </div>
+          <OrContinueWith />
           <form action={formAction} className="space-y-4">
+            <div className="space-y-2">
+              <label
+                htmlFor="name"
+                className="text-sm font-medium text-gray-700"
+              >
+                Full Name
+              </label>
+              <Input
+                className="border-outline-bottom"
+                id="name"
+                name="name"
+                required
+              />
+            </div>
             <div className="space-y-2">
               <label
                 htmlFor="email"
@@ -127,7 +137,13 @@ export default function RegisterForm({
               >
                 Email
               </label>
-              <Input id="email" name="email" type="email" required />
+              <Input
+                className="border-outline-bottom"
+                id="email"
+                name="email"
+                type="email"
+                required
+              />
             </div>
             <div className="space-y-2">
               <label
@@ -136,7 +152,12 @@ export default function RegisterForm({
               >
                 Username
               </label>
-              <Input id="username" name="username" required />
+              <Input
+                className="border-outline-bottom"
+                id="username"
+                name="username"
+                required
+              />
             </div>
             <div className="space-y-2">
               <label
@@ -178,22 +199,9 @@ export default function RegisterForm({
                 <Input
                   id="confirmPassword"
                   name="confirmPassword"
-                  type={showConfirmPassword ? "text" : "password"}
+                  type={showPassword ? "text" : "password"}
                   required
                 />
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  className="absolute right-2 top-1/2 -translate-y-1/2"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                >
-                  {showConfirmPassword ? (
-                    <EyeOffIcon className="h-4 w-4 text-gray-500" />
-                  ) : (
-                    <EyeIcon className="h-4 w-4 text-gray-500" />
-                  )}
-                </Button>
               </div>
             </div>
             <Button type="submit" className="w-full group">
@@ -204,5 +212,16 @@ export default function RegisterForm({
         </CardContent>
       </Card>
     </main>
+  );
+}
+
+export function OrContinueWith() {
+  return (
+    <div className="relative">
+      <span className="block w-full h-px bg-border-outline" />
+      <p className="inline-block w-fit text-sm bg-border-outline px-2 absolute -top-2 inset-x-0 mx-auto">
+        Or continue with
+      </p>
+    </div>
   );
 }

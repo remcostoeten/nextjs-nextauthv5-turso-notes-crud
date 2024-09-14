@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useFormState } from "react-dom";
 import toast from "react-hot-toast";
-import { loginUser } from "./actions";
 import LoginForm from "./_components/login-grid";
+import { loginUser } from "./actions";
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
