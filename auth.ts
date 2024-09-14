@@ -28,8 +28,8 @@ export const authConfig: NextAuthConfig = {
           .where(
             or(
               eq(users.username, credentials.usernameOrEmail),
-              eq(users.email, credentials.usernameOrEmail)
-            )
+              eq(users.email, credentials.usernameOrEmail),
+            ),
           )
           .get();
 
@@ -39,7 +39,7 @@ export const authConfig: NextAuthConfig = {
 
         const passwordMatch = await argon2.verify(
           user.password as string,
-          credentials.password as string
+          credentials.password as string,
         );
 
         if (!passwordMatch) {
@@ -68,7 +68,7 @@ export const authConfig: NextAuthConfig = {
       if (user) {
         token.id = user.id;
         token.name = user.name;
-        if ('username' in user) {
+        if ("username" in user) {
           token.username = user.username;
         }
       }

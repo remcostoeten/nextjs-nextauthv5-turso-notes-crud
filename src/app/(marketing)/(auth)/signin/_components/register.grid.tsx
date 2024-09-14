@@ -21,29 +21,37 @@ import {
 import { Input } from "@/components/ui/input";
 import ProviderButton from "./login-provider-button";
 
-import { loginUser } from "../actions";
+import { registerUser } from "../../signup/actions";
 import { providers } from "./providers";
 
-type LoginState = { loading: boolean; success: boolean; error: string | null };
+type RegisterState = {
+  loading: boolean;
+  success: boolean;
+  error: string | null;
+};
 
-type LoginFormProps = {
+type RegisterFormProps = {
   enabledProviders?: string[];
 };
 
-export default function LoginForm({
+export default function RegisterForm({
   enabledProviders = ["github", "google"],
-}: LoginFormProps) {
+}: RegisterFormProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
   const { update } = useSessionWithUpdate();
-  const [state, formAction] = useFormState<LoginState, FormData>(loginUser, {
-    loading: false,
-    success: false,
-    error: null,
-  });
+  const [state, formAction] = useFormState<RegisterState, FormData>(
+    registerUser,
+    {
+      loading: false,
+      success: false,
+      error: null,
+    },
+  );
 
   const handleSuccessfulAuth = useCallback(async () => {
-    toast.success("Login successful");
+    toast.success("Registration successful");
     await update();
     router.push("/dashboard");
   }, [update, router]);
@@ -60,13 +68,13 @@ export default function LoginForm({
     try {
       const result = await signIn(provider, { redirect: false });
       if (result?.error) {
-        toast.error(`Error signing in with ${provider}: ${result.error}`);
+        toast.error(`Error signing up with ${provider}: ${result.error}`);
       } else {
         handleSuccessfulAuth();
       }
     } catch (error) {
-      console.error(`Error signing in with ${provider}:`, error);
-      toast.error(`Error signing in with ${provider}`);
+      console.error(`Error signing up with ${provider}:`, error);
+      toast.error(`Error signing up with ${provider}`);
     }
   };
 
@@ -77,15 +85,15 @@ export default function LoginForm({
         <CardHeader className="text-center">
           <Logo />
           <CardTitle className="text-2xl font-normal sm:text-3xl tracking-tighter font-geist mt-5">
-            Log in to your account
+            Create an account
           </CardTitle>
           <CardDescription>
-            Don't have an account?{" "}
+            Already have an account?{" "}
             <Link
-              href="/signup"
+              href="/signin"
               className="font-medium text-purple-600 hover:text-purple-500"
             >
-              Sign up
+              Sign in
             </Link>
           </CardDescription>
         </CardHeader>
@@ -114,12 +122,21 @@ export default function LoginForm({
           <form action={formAction} className="space-y-4">
             <div className="space-y-2">
               <label
-                htmlFor="usernameOrEmail"
+                htmlFor="email"
                 className="text-sm font-medium text-gray-700"
               >
-                Email or Username
+                Email
               </label>
-              <Input id="usernameOrEmail" name="usernameOrEmail" required />
+              <Input id="email" name="email" type="email" required />
+            </div>
+            <div className="space-y-2">
+              <label
+                htmlFor="username"
+                className="text-sm font-medium text-gray-700"
+              >
+                Username
+              </label>
+              <Input id="username" name="username" required />
             </div>
             <div className="space-y-2">
               <label
@@ -150,8 +167,37 @@ export default function LoginForm({
                 </Button>
               </div>
             </div>
+            <div className="space-y-2">
+              <label
+                htmlFor="confirmPassword"
+                className="text-sm font-medium text-gray-700"
+              >
+                Confirm Password
+              </label>
+              <div className="relative">
+                <Input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type={showConfirmPassword ? "text" : "password"}
+                  required
+                />
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  className="absolute right-2 top-1/2 -translate-y-1/2"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
+                  {showConfirmPassword ? (
+                    <EyeOffIcon className="h-4 w-4 text-gray-500" />
+                  ) : (
+                    <EyeIcon className="h-4 w-4 text-gray-500" />
+                  )}
+                </Button>
+              </div>
+            </div>
             <Button type="submit" className="w-full group">
-              Sign in
+              Sign up
               <ChevronRight className="inline-flex justify-center items-center w-4 h-4 ml-2 group-hover:translate-x-1 duration-300" />
             </Button>
           </form>

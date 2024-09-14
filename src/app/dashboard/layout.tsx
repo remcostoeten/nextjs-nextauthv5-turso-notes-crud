@@ -9,7 +9,7 @@ type DashboardLayoutProps = {
   children: ReactNode;
 };
 
-function Sidebar({ }: SidebarProps) {
+function Sidebar({}: SidebarProps) {
   return (
     <aside className="w-64 bg-gray-800 h-screen sticky top-0 text-white">
       Sidebar

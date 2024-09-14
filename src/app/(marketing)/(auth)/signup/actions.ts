@@ -3,7 +3,7 @@
 import { db } from "@/db";
 import { NewUser, users } from "@/db/schema";
 import argon2 from "argon2";
-import { eq, or } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { v4 as uuidv4 } from "uuid";
 
 export async function registerUser(
@@ -20,14 +20,26 @@ export async function registerUser(
   }
 
   try {
-    const existingUser = await db
+    // Check if email is already in use
+    const existingEmail = await db
       .select()
       .from(users)
-      .where(or(eq(users.email, email), eq(users.username, username)))
+      .where(eq(users.email, email))
       .get();
 
-    if (existingUser) {
-      return { success: false, error: "Email or username already in use" };
+    if (existingEmail) {
+      return { success: false, error: "Email is already in use" };
+    }
+
+    // Check if username is already in use
+    const existingUsername = await db
+      .select()
+      .from(users)
+      .where(eq(users.username, username))
+      .get();
+
+    if (existingUsername) {
+      return { success: false, error: "Username is already in use" };
     }
 
     const hashedPassword = await argon2.hash(password);

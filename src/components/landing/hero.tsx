@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { BackgroundGradient, UI_CONFIG } from "@/core/config/hero-ui.config";
 import { useEffect, useState } from "react";
@@ -28,8 +28,12 @@ function HeroContent() {
             Build your SAAS exactly how you want
           </h1>
           <p>
-            {isSecondTextGenerated && <p>Sed ut perspiciatis unde omnis iste natus voluptatem accusantium
-              doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>}
+            {isSecondTextGenerated && (
+              <p>
+                Sed ut perspiciatis unde omnis iste natus voluptatem accusantium
+                doloremque laudantium, totam rem aperiam, eaque ipsa quae.
+              </p>
+            )}
           </p>
           <div className="flex items-center gap-x-3 sm:text-sm">
             <GetStartedButton />

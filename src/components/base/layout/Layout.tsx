@@ -1,41 +1,41 @@
-'use client'
+"use client";
 
-import { BackgroundGradient, UI_CONFIG } from "@/core/config/hero-ui.config"
-import { Menu, X } from "lucide-react"
-import Link from "next/link"
-import { useEffect, useState } from "react"
-import LogoIcon from "../logo"
-import SignInButton from "./header/SignInButton"
+import { BackgroundGradient, UI_CONFIG } from "@/core/config/hero-ui.config";
+import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import LogoIcon from "../logo";
+import SignInButton from "./header/SignInButton";
 
 type NavigationItem = {
-  title: string
-  path: string
-}
+  title: string;
+  path: string;
+};
 
 const navigation: NavigationItem[] = [
   { title: "Features", path: "#features" },
   { title: "Integrations", path: "#integrations" },
   { title: "Customers", path: "#customers" },
   { title: "Pricing", path: "#pricing" },
-]
+];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const [isSticky, setIsSticky] = useState(false)
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const selectedGradient = BackgroundGradient.PINK_DARK
+  const [isSticky, setIsSticky] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const selectedGradient = BackgroundGradient.PINK_DARK;
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsSticky(window.scrollY > 100)
-    }
+      setIsSticky(window.scrollY > 100);
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen)
-  }
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <div className="relative mt-8">
@@ -44,12 +44,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         style={{ background: UI_CONFIG.COLORS.BACKGROUND[selectedGradient] }}
       />
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 hover:scale-100 ease-in-out ${isSticky ? "scale-[.9] bg-background/80 backdrop-blur-sm" : "bg-transparent"
-          }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 hover:scale-100 ease-in-out ${
+          isSticky
+            ? "scale-[.9] bg-background/80 backdrop-blur-sm"
+            : "bg-transparent"
+        }`}
       >
         <nav
-          className={`${UI_CONFIG.FONTS.SIZES.SMALL} ${isSticky ? "py-2" : "py-5"
-            } transition-all duration-300 ease-in-out`}
+          className={`${UI_CONFIG.FONTS.SIZES.SMALL} ${
+            isSticky ? "py-2" : "py-5"
+          } transition-all duration-300 ease-in-out`}
         >
           <div
             className={`flex justify-between items-center ${UI_CONFIG.SPACING.SECTION}`}
@@ -81,7 +85,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       )}
       <div className="relative pt-20">{children}</div>
     </div>
-  )
+  );
 }
 
 function NavigationMenu() {
@@ -98,7 +102,7 @@ function NavigationMenu() {
         </li>
       ))}
     </ul>
-  )
+  );
 }
 
 function MobileNavigationMenu() {
@@ -115,5 +119,5 @@ function MobileNavigationMenu() {
         </li>
       ))}
     </ul>
-  )
+  );
 }

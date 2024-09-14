@@ -1,3 +1,4 @@
+// components/auth-component.tsx
 "use client";
 
 import { useSessionWithUpdate } from "@/core/hooks/useSessionWithUpdate";
@@ -26,13 +27,15 @@ import { providers } from "./providers";
 
 type LoginState = { loading: boolean; success: boolean; error: string | null };
 
-type LoginFormProps = {
+type AuthComponentProps = {
   enabledProviders?: string[];
+  mode: "login" | "signup";
 };
 
-export default function LoginForm({
+export default function AuthComponent({
   enabledProviders = ["github", "google"],
-}: LoginFormProps) {
+  mode,
+}: AuthComponentProps) {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const { update } = useSessionWithUpdate();
@@ -43,10 +46,10 @@ export default function LoginForm({
   });
 
   const handleSuccessfulAuth = useCallback(async () => {
-    toast.success("Login successful");
+    toast.success(`${mode === "login" ? "Login" : "Signup"} successful`);
     await update();
     router.push("/dashboard");
-  }, [update, router]);
+  }, [mode, update, router]);
 
   useEffect(() => {
     if (state.success) {
@@ -69,23 +72,24 @@ export default function LoginForm({
       toast.error(`Error signing in with ${provider}`);
     }
   };
-
   return (
-    <main className="w-full min-h-screen flex flex-col items-center justify-center:px-4 relative">
+    <main className="w-full min-h-screen flex flex-col items-center pt-20 rounded-lg sm:px-4 relative">
       <div className="absolute pointer-events-none top-0 z-[0] h-screen w-screen bg-purple-950/10 bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
       <Card className="w-full sm:max-w-md md:max-w-xl lg:max-w-xl">
         <CardHeader className="text-center">
           <Logo />
           <CardTitle className="text-2xl font-normal sm:text-3xl tracking-tighter font-geist mt-5">
-            Log in to your account
+            {mode === "login" ? "Log in to your account" : "Create an account"}
           </CardTitle>
           <CardDescription>
-            Don't have an account?{" "}
+            {mode === "login"
+              ? "Don't have an account? "
+              : "Already have an account? "}
             <Link
-              href="/signup"
+              href={mode === "login" ? "/signup" : "/signin"}
               className="font-medium text-purple-600 hover:text-purple-500"
             >
-              Sign up
+              {mode === "login" ? "Sign up" : "Log in"}
             </Link>
           </CardDescription>
         </CardHeader>
@@ -151,7 +155,7 @@ export default function LoginForm({
               </div>
             </div>
             <Button type="submit" className="w-full group">
-              Sign in
+              {mode === "login" ? "Sign in" : "Sign up"}
               <ChevronRight className="inline-flex justify-center items-center w-4 h-4 ml-2 group-hover:translate-x-1 duration-300" />
             </Button>
           </form>

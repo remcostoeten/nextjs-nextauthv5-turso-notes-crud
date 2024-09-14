@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Flex from "@/components/atoms/Flex";
 import { GithubIcon, Sparkles } from "lucide-react";
@@ -8,7 +8,7 @@ import { Suspense } from "react";
 import Logo from "../../logo";
 import SearchModal from "../search/search-modal";
 import { buttonLabels } from "./buttonConfig";
-import { useSessionWithUpdate } from '@/core/hooks/useSessionWithUpdate';
+import { useSessionWithUpdate } from "@/core/hooks/useSessionWithUpdate";
 
 const TooltipButton = dynamic(() => import("./TooltipButton"), { ssr: false });
 const HeaderDropdown = dynamic(() => import("./header-dropdown"), {
