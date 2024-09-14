@@ -1,71 +1,92 @@
-"use client";
+'use client'
 
-import { BackgroundGradient, UI_CONFIG } from "@/core/config/hero-ui.config";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import LogoIcon from "../logo";
-import SignInButton from "./header/SignInButton";
+import { BackgroundGradient, UI_CONFIG } from "@/core/config/hero-ui.config"
+import { Menu, X } from "lucide-react"
+import Link from "next/link"
+import { useEffect, useState } from "react"
+import LogoIcon from "../logo"
+import SignInButton from "./header/SignInButton"
 
 type NavigationItem = {
-  title: string;
-  path: string;
-};
+  title: string
+  path: string
+}
 
 const navigation: NavigationItem[] = [
   { title: "Features", path: "#features" },
   { title: "Integrations", path: "#integrations" },
   { title: "Customers", path: "#customers" },
   { title: "Pricing", path: "#pricing" },
-];
+]
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  const [isSticky, setIsSticky] = useState(false);
-  const selectedGradient = BackgroundGradient.PINK;
+  const [isSticky, setIsSticky] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const selectedGradient = BackgroundGradient.PINK_DARK
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsSticky(window.scrollY > 100);
-    };
+      setIsSticky(window.scrollY > 100)
+    }
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
 
   return (
     <div className="relative mt-8">
       <div
-        className="absolute -mt-8 inset-0 blur-xl h-[710px] animate-gradient-move animate-opacity-pulse"
+        className="absolute -mt-8 inset-0 blur-[100px] h-[710px] animate-gradient-move animate-opacity-pulse"
         style={{ background: UI_CONFIG.COLORS.BACKGROUND[selectedGradient] }}
       />
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${isSticky ? "bg-white shadow-md" : "bg-transparent"}`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 hover:scale-100 ease-in-out ${isSticky ? "scale-[.9] bg-background/80 backdrop-blur-sm" : "bg-transparent"
+          }`}
       >
         <nav
-          className={`pb-5 ${UI_CONFIG.FONTS.SIZES.SMALL} ${isSticky ? "py-2" : "py-5"} transition-all duration-300 ease-in-out`}
+          className={`${UI_CONFIG.FONTS.SIZES.SMALL} ${isSticky ? "py-2" : "py-5"
+            } transition-all duration-300 ease-in-out`}
         >
           <div
-            className={`gap-x-14 items-center ${UI_CONFIG.SPACING.SECTION} md:flex`}
+            className={`flex justify-between items-center ${UI_CONFIG.SPACING.SECTION}`}
           >
             <LogoIcon isLink />
-            <div
-              className={`flex-1 text-${UI_CONFIG.COLORS.SECONDARY} items-center mt-8 md:mt-0 md:flex block`}
-            >
+            <div className="hidden md:flex items-center space-x-6">
               <NavigationMenu />
               <SignInButton />
             </div>
+            <button
+              className="md:hidden text-primary"
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </nav>
       </header>
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-black/30 backdrop-blur-sm">
+          <div className="flex flex-col items-center justify-center h-full">
+            <MobileNavigationMenu />
+            <div className="mt-6">
+              <SignInButton />
+            </div>
+          </div>
+        </div>
+      )}
       <div className="relative pt-20">{children}</div>
     </div>
-  );
+  )
 }
 
 function NavigationMenu() {
   return (
-    <ul
-      className={`mx-auto flex justify-center items-center space-y-6 md:space-x-6 md:space-y-0 ${UI_CONFIG.BORDERS.ROUNDED} dark:bg-zinc-800/10 dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset] px-6 py-4 ${UI_CONFIG.FONTS.SIZES.SMALL} font-medium text-zinc-800 ${UI_CONFIG.SHADOWS.DEFAULT} ring-1 ring-zinc-900/5 backdrop-blur dark:text-zinc-200 dark:ring-white/10 w-fit`}
-    >
+    <ul className="flex space-x-6">
       {navigation.map((item) => (
         <li
           key={item.title}
@@ -77,5 +98,22 @@ function NavigationMenu() {
         </li>
       ))}
     </ul>
-  );
+  )
+}
+
+function MobileNavigationMenu() {
+  return (
+    <ul className="flex flex-col items-center space-y-6 text-lg">
+      {navigation.map((item) => (
+        <li
+          key={item.title}
+          className={`text-${UI_CONFIG.COLORS.SECONDARY} shadow-3xl shadow-black hover:text-${UI_CONFIG.COLORS.PRIMARY}`}
+        >
+          <Link href={item.path} className="block shadow-3xl shadow-black">
+            {item.title}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
 }

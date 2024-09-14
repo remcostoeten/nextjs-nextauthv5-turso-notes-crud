@@ -1,0 +1,24 @@
+## Generate a secret key using 'openssl rand -base64 32'
+NEXTAUTH_SECRET='your_secret_key_here'
+
+## Local URL for NextAuth
+NEXTAUTH_URL=http://localhost:3000
+
+
+## Database URL and Auth Token for your application
+## 💡Hint:for blazingly fast db creation and credentials retrieval https://github.com/remcostoeten/Turso-db-creator-auto-retrieve-env-credentials 🔥
+
+DATABASE_URL=your_database_url_here
+DATABASE_AUTH_TOKEN=your_database_auth_token_here
+
+# OAuth
+
+## GitHub OAuth credentials
+
+GITHUB_CLIENT_ID=your_github_client_id_here
+GITHUB_CLIENT_SECRET=your_github_client_secret_here
+
+## Google OAuth credentials
+
+GOOGLE_CLIENT_ID=your_google_client_id_here
+GOOGLE_CLIENT_SECRET=your_google_client_secret_here

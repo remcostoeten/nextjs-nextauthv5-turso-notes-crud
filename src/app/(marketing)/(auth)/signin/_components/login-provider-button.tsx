@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -28,12 +28,14 @@ export default function ProviderButton({
         <provider.icon
           className={cn(
             "w-6 h-6 transition-all duration-300",
-            isHovered ? "-translate-y-1" : "translate-y-0",
+            isHovered ? "-translate-y-1" : "translate-y-0"
           )}
         />
       )}
       {hasText ? (
-        <span className="ml-3 font-medium">Continue with {provider.name}</span>
+        <span className="ml-3 font-medium">
+          Continue with {provider.name}
+        </span>
       ) : null}
     </button>
   );

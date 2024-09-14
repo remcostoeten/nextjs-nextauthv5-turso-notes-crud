@@ -1,0 +1,504 @@
+how to update header        with authentiicated menu etc directly after login , currently it onl showsafter refresh
+
+i got thesefiles
+
+"use client";
+
+import Flex from "@/components/atoms/Flex";
+import {
+    ChevronDownIcon,
+    LogoutIcon,
+    SettingsIcon,
+} from "@/components/atoms/Icons";
+import { Button } from "@/components/ui";
+import { Switch } from "@/components/ui/switch";
+import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
+import { useState } from "react";
+
+type UserAvatarProps = {
+    name: string | null | undefined;
+    size?: "small" | "large";
+};
+
+const UserAvatar: React.FC<UserAvatarProps> = ({ name, size = "small" }) => {
+    const initials =
+        name
+            ?.split(" ")
+            .map((n) => n[0])
+            .join("")
+            .toUpperCase() || "";
+    const sizeClasses = size === "small" ? "w-7 h-7" : "w-9 h-9";
+
+    return (
+        <Flex
+      justify= "center"
+    align = "center"
+    className = {`bg-avatar text-neutral-300 ${sizeClasses} overflow-hidden text-[12px] leading-[16px] font-semibold rounded-full`
+}
+    >
+    { initials }
+    </Flex>
+  );
+};
+
+export default function HeaderDropdown() {
+    const { data: session, status } = useSession();
+    const [isOpen, setIsOpen] = useState(false);
+
+    if (status === "loading") {
+        return null;
+    }
+
+    const toggleDropdown = () => setIsOpen((prev) => !prev);
+
+    const handleLogout = () => signOut();
+
+    return (
+        <div className= "relative" >
+        {
+            session?.user?(
+        <button
+          onClick = { toggleDropdown }
+          className = "bg-section-lighter pr-4 hover:bg-[#262626] duration-300 text-neutral-400 transition-all ease-in-out pl-0.5 pr-2 py-0.5 rounded-full"
+                    >
+                    <Flex align="center" gap = "1.5" >
+                        <UserAvatar name={ session.user.name
+        } />
+        <ChevronDownIcon
+              className={ `transition-transform duration-200 translate-x-1.5 ease-in-out ${isOpen ? "rotate-180" : ""}` }
+            />
+        </Flex>
+        </button>
+      ) : (
+        <Link href= "/signin" >
+        <Button>Login </Button>
+        </Link>
+      )
+}
+{
+    session?.user && (
+        <div
+          className={
+        `absolute border-separator right-0 mt-2 w-64 rounded-xl bg-section-lighter border-default shadow-lg z-10 p-1.5 transition-all duration-300 
+                ${isOpen ? "scale-in animate-in fade-in-0 zoom-in-95" : "initial-hidden !total-hide"}`
+    }
+        >
+        <div className="absolute -top-2 right-[18px] w-4 h-4 bg-section-lighter rotate-45 transform origin-center" > </div>
+            < header className = "p-2.5" >
+                <Flex align="center" gap = "3" className = "pr-3" >
+                    <UserAvatar name={ session.user.name } size = "large" />
+                        <div className="text-text-subtitle pl-4" >
+                            <p className="font-medium m-0 text-text-title" >
+                                { session.user.name }
+                                </p>
+                                < i className = "leading-[16px] opacity-80 m-0 text-text-title" >
+                                    { session.user.email }
+                                    </i>
+                                    </div>
+                                    </Flex>
+                                    </header>
+                                    < hr className = "my-1 border-separator" />
+                                        <nav>
+                                        <Link
+              href="/dashboard/settings"
+    className = "flex w-full items-center justify-between gap-5 text-text-regular-nav p-2.5 rounded-md hover:bg-bg-modal-hover"
+        >
+        Account Settings
+            < SettingsIcon />
+            </Link>
+            < button className = "flex w-full items-center justify-between gap-5 text-text-regular-nav p-2.5 rounded-md hover:bg-bg-modal-hover" >
+                Theme
+                < Switch />
+                </button>
+                < button
+    onClick = { handleLogout }
+    className = "flex w-full items-center justify-between gap-5 text-text-regular-nav p-2.5 rounded-md hover:bg-bg-modal-hover"
+        >
+        Log out
+            < LogoutIcon />
+            </button>
+            </nav>
+            </div>
+      )
+}
+</div>
+  );
+}
+
+
+
+'use client'
+
+import { useSessionWithUpdate } from '@/core/hooks/useSessionWithUpdate'
+import { ChevronRight, EyeIcon, EyeOffIcon } from 'lucide-react'
+import { signIn } from 'next-auth/react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { useFormState } from 'react-dom'
+import { toast } from 'react-hot-toast'
+
+import Logo from '@/components/base/logo'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import ProviderButton from './login-provider-button'
+
+import { loginUser } from '../actions'
+import { providers } from './providers'
+
+type LoginState = { loading: boolean; success: boolean; error: string | null }
+
+type AuthComponentProps = {
+    enabledProviders?: string[]
+    mode: 'login' | 'signup'
+}
+
+export default function AuthComponent({ enabledProviders = ['github', 'google'], mode }: AuthComponentProps) {
+    const [showPassword, setShowPassword] = useState(false)
+    const router = useRouter()
+    const { update } = useSessionWithUpdate()
+    const [state, formAction] = useFormState<LoginState, FormData>(loginUser, {
+        loading: false,
+        success: false,
+        error: null,
+    })
+
+    useEffect(() => {
+        if (state.success) {
+            toast.success(`${mode === 'login' ? 'Login' : 'Signup'} successful`)
+            update()  // Update the session
+            router.push('/dashboard')
+        } else if (state.error) {
+            toast.error(state.error)
+        }
+    }, [state, router, mode, update])
+
+    const handleProviderAuth = async (provider: string) => {
+        try {
+            const result = await signIn(provider, { redirect: false })
+            if (result?.error) {
+                toast.error(`Error signing in with ${provider}: ${result.error}`)
+            } else {
+                toast.success(`${mode === 'login' ? 'Login' : 'Signup'} successful`)
+                update()  // Update the session
+                router.push('/dashboard')
+            }
+        } catch (error) {
+            console.error(`Error signing in with ${provider}:`, error)
+            toast.error(`Error signing in with ${provider}`)
+        }
+    }
+
+    return (
+        <main className= "w-full min-h-screen flex flex-col items-center justify-center sm:px-4 relative" >
+        <div className="absolute pointer-events-none top-0 z-[0] h-screen w-screen bg-purple-950/10 bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
+            <Card className="w-full sm:max-w-md md:max-w-xl lg:max-w-xl" >
+                <CardHeader className="text-center" >
+                    <Logo />
+                    < CardTitle className = "text-2xl font-normal sm:text-3xl tracking-tighter font-geist mt-5" >
+                        { mode === 'login' ? 'Log in to your account' : 'Create an account'
+}
+</>
+    <CardDescription>
+{ mode === 'login' ? "Don't have an account? " : 'Already have an account? ' }
+<Link
+                            href={ mode === 'login' ? '/signup' : '/signin' }
+className = "font-medium text-purple-600 hover:text-purple-500"
+    >
+    { mode === 'login' ? 'Sign up' : 'Log in'}
+</Link>
+    </CardDescription>
+    </CardHeader>
+    < CardContent className = "space-y-8" >
+        <div className="grid grid-cols-3 gap-x-3" >
+        {
+            enabledProviders.map((providerKey) => {
+                const provider = providers[providerKey as keyof typeof providers]
+                if (provider) {
+                    return (
+                        <ProviderButton
+                                        key= { providerKey }
+                    provider = { provider }
+                    onClick = {() => handleProviderAuth(providerKey)
+                }
+                                    />
+                                )
+        }
+return null
+                        })}
+</div>
+    < div className = "relative" >
+        <span className="block w-full h-px bg-gray-300" />
+            <p className="inline-block w-fit text-sm bg-white px-2 absolute -top-2 inset-x-0 mx-auto" >
+                Or continue with
+                        </p>
+</div>
+< form action = { formAction } className = "space-y-4" >
+    <div className="space-y-2" >
+        <label htmlFor="usernameOrEmail" className = "text-sm font-medium text-gray-700" >
+            Email or Username
+                </label>
+                < Input id = "usernameOrEmail" name = "usernameOrEmail" required />
+                    </div>
+                    < div className = "space-y-2" >
+                        <label htmlFor="password" className = "text-sm font-medium text-gray-700" >
+                            Password
+                            </label>
+                            < div className = "relative" >
+                                <Input
+                                    id="password"
+name = "password"
+type = { showPassword? 'text': 'password' }
+required
+    />
+    <Button
+                                    type="button"
+variant = "ghost"
+size = "icon"
+className = "absolute right-2 top-1/2 -translate-y-1/2"
+onClick = {() => setShowPassword(!showPassword)}
+                                >
+    {
+        showPassword?(
+                                        <EyeOffIcon className = "h-4 w-4 text-gray-500" />
+                                    ): (
+                <EyeIcon className = "h-4 w-4 text-gray-500" />
+                                    )}
+</Button>
+    </div>
+    </div>
+    < Button type = "submit" className = "w-full group" >
+        { mode === 'login' ? 'Sign in' : 'Sign up'}
+<ChevronRight className="inline-flex justify-center items-center w-4 h-4 ml-2 group-hover:translate-x-1 duration-300" />
+    </Button>
+    </form>
+    </CardContent>
+    </Card>
+    </main>
+    )
+}
+import { db } from "@/db";
+import { users } from "@/db/schema";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import argon2 from "argon2";
+import { eq, or } from "drizzle-orm";
+import NextAuth, { NextAuthConfig } from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
+import GithubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
+
+export const authConfig: NextAuthConfig = {
+    adapter: DrizzleAdapter(db),
+    providers: [
+        CredentialsProvider({
+            name: "credentials",
+            credentials: {
+                usernameOrEmail: { label: "Username or Email", type: "text" },
+                password: { label: "Password", type: "password" },
+            },
+            async authorize(credentials) {
+                if (!credentials?.usernameOrEmail || !credentials?.password) {
+                    return null;
+                }
+
+                const user = await db
+                    .select()
+                    .from(users)
+                    .where(
+                        or(
+                            eq(users.username, credentials.usernameOrEmail),
+                            eq(users.email, credentials.usernameOrEmail)
+                        )
+                    )
+                    .get();
+
+                if (!user) {
+                    return null;
+                }
+
+                const passwordMatch = await argon2.verify(
+                    user.password as string,
+                    credentials.password as string
+                );
+
+                if (!passwordMatch) {
+                    return null;
+                }
+
+                return {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                    username: user.username,
+                };
+            },
+        }),
+        GithubProvider({
+            clientId: process.env.GITHUB_ID!,
+            clientSecret: process.env.GITHUB_SECRET!,
+        }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID!,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+        }),
+    ],
+    callbacks: {
+        async jwt({ token, user }) {
+            if (user) {
+                token.id = user.id;
+                token.name = user.name;
+                if ('username' in user) {
+                    token.username = user.username;
+                }
+            }
+            return token;
+        },
+        async session({ session, token }) {
+            if (token && session.user) {
+                session.user.id = token.id as string;
+                session.user.name = token.name as string;
+                // Removed the assignment for 'username' as it does not exist on the 'AdapterUser & User' type
+            }
+            return session;
+        },
+    },
+    pages: {
+        signIn: "/signin",
+    },
+    session: {
+        strategy: "jwt",
+    },
+    debug: process.env.NODE_ENV === "development",
+};
+
+export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
+
+export const authOptions: NextAuthConfig = authConfig;
+
+"use server";
+
+import { signIn } from "auth";
+import { AuthError } from "next-auth";
+
+export async function loginUser(
+    prevState: any,
+    formData: FormData,
+): Promise<{ success: boolean; error?: string }> {
+    const usernameOrEmail = formData.get("usernameOrEmail") as string;
+    const password = formData.get("password") as string;
+
+    try {
+        const result = await signIn("credentials", {
+            usernameOrEmail,
+            password,
+            redirect: false,
+        });
+
+        if (result?.error) {
+            console.error("Login error:", result.error);
+            return { success: false, error: "Invalid credentials" };
+        }
+
+        return { success: true };
+    } catch (error) {
+        console.error("Login error:", error);
+        if (error instanceof AuthError) {
+            switch (error.type) {
+                case "CredentialsSignin":
+                    return { success: false, error: "Invalid credentials" };
+                default:
+                    return { success: false, error: "Something went wrong" };
+            }
+        }
+        return { success: false, error: "An error occurred during login" };
+    }
+}
+'use client';
+
+import Flex from "@/components/atoms/Flex";
+import { GithubIcon, Sparkles } from "lucide-react";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { Suspense } from "react";
+import Logo from "../../logo";
+import SearchModal from "../search/search-modal";
+import { buttonLabels } from "./buttonConfig";
+
+const TooltipButton = dynamic(() => import("./TooltipButton"), { ssr: false });
+const HeaderDropdown = dynamic(() => import("./header-dropdown"), {
+    ssr: false,
+});
+
+export default function Header() {
+    return (
+        <header className= "bg-neutral-950 h-header border-outline-bottom text-white flex items-center justify-between p-3 min-h-14 mr-4" >
+        <nav className="flex items-center gap-2" >
+            <Link href="/" className = "hidden md:block" >
+                <Logo />
+                </Link>
+                < button className = "md:hidden" >
+                    <MenuIcon />
+                    </>
+                    </nav>
+
+                    < div className = "flex items-center gap-4" >
+                        <Suspense
+          fallback={
+        <div className="w-72 h-10 bg-neutral-800 animate-pulse rounded-md" />
+          }
+        >
+        <SearchModal />
+        </Suspense>
+        < Flex gap = "6" >
+            <Suspense
+            fallback={
+        <div className="w-6 h-6 bg-neutral-800 animate-pulse rounded-full" />
+            }
+          >
+        <TooltipButton
+              icon={ <GithubIcon size={ 24 } /> }
+    label = { buttonLabels.github }
+    onClick = {() =>
+    window.open("https://github.com/remcostoeten", "_blank")
+}
+className = "hidden md:block text-neutral-400 hover:text-neutral-200"
+    />
+    </Suspense>
+    < Suspense
+fallback = {
+              < div className = "w-6 h-6 bg-neutral-800 animate-pulse rounded-full" />
+            }
+          >
+    <TooltipButton
+              icon={ <Sparkles size={ 24 } /> }
+label = { buttonLabels.theme }
+onClick = {() => console.log("Theme toggle clicked")}
+className = "text-neutral-400 hover:text-neutral-200"
+    />
+    </>
+    < Suspense
+fallback = {
+              < div className = "w-32 h-8 bg-neutral-800 animate-pulse rounded-full" />
+            }
+          >
+    <HeaderDropdown />
+    </>
+    </Flex>
+    </div>
+    </header>
+  );
+}
+
+const MenuIcon = () => (
+    <svg
+    xmlns= "http://www.w3.org/2000/svg"
+width = { 20}
+height = { 20}
+fill = "currentColor"
+viewBox = "0 0 256 256"
+    >
+    <path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM40,56H80V200H40ZM216,200H96V56H216V200Z" />
+        </svg>
+);

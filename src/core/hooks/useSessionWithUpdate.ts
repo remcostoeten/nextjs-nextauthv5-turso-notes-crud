@@ -1,31 +1,20 @@
-"use client";
-
+'use client';
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect, useState } from "react";
 
 export function useSessionWithUpdate() {
-  const { data: session, status, update: originalUpdate } = useSession();
-  const [localSession, setLocalSession] = useState(session);
+  const { data: session, status, update } = useSession();
+  const [updatedSession, setUpdatedSession] = useState(session);
 
   useEffect(() => {
-    setLocalSession(session);
+    setUpdatedSession(session);
   }, [session]);
 
-  const update = useCallback(
-    async (data: any) => {
-      await originalUpdate(data);
-      setLocalSession((prev) => {
-        if (prev) {
-          return {
-            ...prev,
-            user: { ...prev?.user, ...data },
-          };
-        }
-        return prev;
-      });
-    },
-    [originalUpdate],
-  );
+  const updateSession = useCallback(async () => {
+    const updated = await update();
+    setUpdatedSession(updated);
+    return updated;
+  }, [update]);
 
-  return { data: localSession, status, update };
+  return { session: updatedSession, status, update: updateSession };
 }

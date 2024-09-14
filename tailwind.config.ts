@@ -1,4 +1,9 @@
 import type { Config } from "tailwindcss";
+const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
+const {
+  default: flattenColorPalette,
+} = require("tailwindcss/lib/util/flattenColorPalette");
 
 const config: Config = {
   darkMode: ["class"],
@@ -13,7 +18,6 @@ const config: Config = {
     container: {
       center: true,
       padding: "2rem",
-
       screens: {
         "2xl": "1400px",
       },
@@ -165,7 +169,6 @@ const config: Config = {
         "opacity-pulse": "opacityPulse 15s ease-in-out infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        // banner variants   'slide-in-from-top': 'slideInFromTop 0.5s ease-out',
         "slide-in-from-bottom": "slideInFromBottom 0.5s ease-out",
         "slide-in-from-left": "slideInFromLeft 0.5s ease-out",
         "slide-in-from-right": "slideInFromRight 0.5s ease-out",
@@ -176,7 +179,17 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [addVariablesForColors],
 };
+
+function addVariablesForColors({ addBase, theme }: any) {
+  let allColors = flattenColorPalette(theme("colors"));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+  addBase({
+    ":root": newVars,
+  });
+}
 
 export default config;

@@ -1,14 +1,24 @@
+'use client';
+
 import { BackgroundGradient, UI_CONFIG } from "@/core/config/hero-ui.config";
+import { useEffect, useState } from "react";
 import {
   ContactSalesButton,
   GetStartedButton,
   NewsButton,
 } from "./hero-buttons";
+
 function HeroContent() {
+  const [isSecondTextGenerated, setIsSecondTextGenerated] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setIsSecondTextGenerated(true), 1000); // Delay the second TextGenerateEffect by 1 second
+  }, []);
+
   return (
     <section>
       <div
-        className={`${UI_CONFIG.SPACING.SECTION} py-28 gap-12 text-${UI_CONFIG.COLORS.PRIMARY} overflow-hidden md:flex justify-center items-center`}
+        className={`${UI_CONFIG.SPACING.SECTION} py-4 sm:py-28 gap-12 text-${UI_CONFIG.COLORS.PRIMARY} overflow-hidden md:flex justify-center items-center`}
       >
         <div className="flex-none space-y-5 max-w-xl">
           <NewsButton />
@@ -18,8 +28,8 @@ function HeroContent() {
             Build your SAAS exactly how you want
           </h1>
           <p>
-            Sed ut perspiciatis unde omnis iste natus voluptatem accusantium
-            doloremque laudantium, totam rem aperiam, eaque ipsa quae.
+            {isSecondTextGenerated && <p>Sed ut perspiciatis unde omnis iste natus voluptatem accusantium
+              doloremque laudantium, totam rem aperiam, eaque ipsa quae.</p>}
           </p>
           <div className="flex items-center gap-x-3 sm:text-sm">
             <GetStartedButton />
