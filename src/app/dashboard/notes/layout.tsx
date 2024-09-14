@@ -1,7 +1,7 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import { getFolders } from "@/core/server/actions/folders";
 import { ReactNode, Suspense } from "react";
-import { FolderList } from "./_components/FolderList";
+import FolderList from "./_components/FolderList";
 
 export default async function NotesLayout({
   children,
@@ -16,7 +16,7 @@ export default async function NotesLayout({
       <div className="grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6">
         <aside className="md:border-r pr-6 px-4">
           <Suspense fallback={<FolderListSkeleton />}>
-            <FolderList initialFolders={folders} />
+            <FolderList />
           </Suspense>
         </aside>
         <main>{children}</main>

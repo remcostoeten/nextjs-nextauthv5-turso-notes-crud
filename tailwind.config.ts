@@ -13,19 +13,28 @@ const config: Config = {
     container: {
       center: true,
       padding: "2rem",
+
       screens: {
         "2xl": "1400px",
       },
     },
     extend: {
+      height: {
+        search: "40px",
+        header: "77px",
+      },
+      maxWidth: {
+        search: "var(--search-width)",
+      },
       colors: {
         // custom colors
         /* Background Colors */
         "bg-body": "var(--bg-body)",
         "bg-card": "var(--bg-card)",
-
+        brand: "var(--brand)",
+        avatar: "var(--avatar)",
         "bg-section": "var(--bg-section)",
-        "bg-section-lighter": "var(--bg-section-lighter)",
+        "section-lighter": "var(--bg-section-lighter)",
         "bg-input": "var(--bg-input)",
         "bg-dropdown": "var(--bg-dropdown)",
         "bg-modal": "var(--bg-modal)",
@@ -87,11 +96,11 @@ const config: Config = {
           foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
-          DEFAULT: "hsl(var(--popover))",
+          DEFAULT: "var(--bg-dropdown)",
           foreground: "hsl(var(--popover-foreground))",
         },
         card: {
-          DEFAULT: "hsl(var(--card))",
+          DEFAULT: "var(--bg-card)",
           foreground: "hsl(var(--card-foreground))",
         },
       },
@@ -101,6 +110,14 @@ const config: Config = {
         sm: "calc(var(--radius) - 4px)",
       },
       keyframes: {
+        gradientX: {
+          "0%, 100%": { backgroundPosition: "0% 50%", transform: "scale(1)" },
+          "50%": { backgroundPosition: "100% 50%", transform: "scale(1.1)" },
+        },
+        opacityPulse: {
+          "0%, 100%": { opacity: "0.8" },
+          "50%": { opacity: "1" },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -126,14 +143,36 @@ const config: Config = {
           "0%": { transform: "translateX(100%)", opacity: "0" },
           "100%": { transform: "translateX(0)", opacity: "1" },
         },
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        fadeOut: {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
+        },
+        zoomIn95: {
+          "0%": { opacity: "0", transform: "scale(0.95)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        zoomOut95: {
+          "0%": { opacity: "1", transform: "scale(1)" },
+          "100%": { opacity: "0", transform: "scale(0.95)" },
+        },
       },
       animation: {
+        "gradient-move": "gradientMove 15s ease infinite",
+        "opacity-pulse": "opacityPulse 15s ease-in-out infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         // banner variants   'slide-in-from-top': 'slideInFromTop 0.5s ease-out',
         "slide-in-from-bottom": "slideInFromBottom 0.5s ease-out",
         "slide-in-from-left": "slideInFromLeft 0.5s ease-out",
         "slide-in-from-right": "slideInFromRight 0.5s ease-out",
+        "fade-in": "fadeIn 0.3s ease-out",
+        "fade-out": "fadeOut 0.3s ease-in",
+        "zoom-in-95": "zoomIn95 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
+        "zoom-out-95": "zoomOut95 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
       },
     },
   },

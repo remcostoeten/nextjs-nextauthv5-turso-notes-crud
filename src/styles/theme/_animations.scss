@@ -1,0 +1,49 @@
+.scale-in {
+  animation: scale 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transform-origin: top right;
+}
+
+.menu-hide {
+  animation:
+    scale 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) reverse,
+    fade-out 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transform-origin: top right;
+  animation-fill-mode: forwards;
+}
+
+.initial-hidden {
+  opacity: 0;
+  transform: scale(0);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.total-hide {
+  animation: total-hide 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) !important;
+  animation-fill-mode: forwards !important;
+}
+
+@keyframes total-hide {
+  100% {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transform: translateX(-200px) scale(0);
+  }
+}
+
+@keyframes scale {
+  from {
+    transform: scale(0.5);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}

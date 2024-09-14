@@ -1,60 +1,26 @@
-import Header from '@/components/header'
-import type { Metadata } from 'next'
-import { SessionProvider } from 'next-auth/react'
-import { Inter } from 'next/font/google'
-import { Toaster } from 'react-hot-toast'
-import { Sidebar } from '../components/aside/sidebar'
-import './globals.css'
+import Layout from "@/components/base/layout/Layout";
+import Providers from "@/components/base/provider-wrapper";
+import { geistMono, geistSans } from "@/core/config/fonts/fonts";
+import { metadata } from "@/core/config/metadata/metadata.root-layout";
+import "@/styles/app.scss";
 
-const inter = Inter({ subsets: ['latin'] })
-
-export const metadata: Metadata = {
-  title: 'Your App Name',
-  description: 'A modern web application built with Next.js'
-}
+export { metadata };
 
 const BODY_CLASS =
-  'bg-gradient-to-br from-bg-body via-bg-bg-section-lighter to-bg-body'
+  "bg-gradient-to-br from-bg-body via-bg-section-lighter to-bg-body";
 
-export default function RootLayout({
-  children
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: PageProps) {
   return (
-    <SessionProvider>
-      <html lang="en" className="h-full">
-        <body
-          className={
-            `${inter.className} flex flex-col min-h-full text-white ` +
-            BODY_CLASS
-          }
-        >
-          <Header />
-          <div className="flex flex-1 pt-[60px]">
-            <Sidebar />
-            <main className="flex-grow pl-16">
-              <div className="max-w-7xl mx-auto p-6">{children}</div>
-            </main>
-          </div>
-          <footer className="mt-auto py-6 text-center text-sm text-gray-500">
-            © {new Date().getFullYear()} Your Company Name. All rights reserved.
-          </footer>
-          <Toaster
-            position="bottom-right"
-            toastOptions={{
-              style: {
-                background: 'rgba(0, 0, 0, 0.8)',
-                color: '#fff',
-                borderRadius: '8px',
-                padding: '12px 16px',
-                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-              },
-              duration: 5000
-            }}
-          />
-        </body>
-      </html>
-    </SessionProvider>
-  )
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className={`flex flex-col min-h-screen text-white ${BODY_CLASS}`}>
+        <Providers session={undefined}>
+          <Layout>{children}</Layout>
+        </Providers>
+      </body>
+    </html>
+  );
 }

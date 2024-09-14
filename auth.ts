@@ -57,35 +57,27 @@ export const authConfig: NextAuthConfig = {
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.username = user.username;
+        token.name = user.name;
       }
       return token;
     },
     async session({ session, token }) {
       if (token && session.user) {
         session.user.id = token.id as string;
-        session.user.username = token.username as string;
+        session.user.name = token.name as string;
       }
       return session;
     },
   },
   pages: {
-    signIn: "/login",
-    // Uncomment and add these if you have custom pages for them
-    // signOut: '/auth/signout',
-    // error: '/auth/error',
-    // verifyRequest: '/auth/verify-request',
-    // newUser: '/auth/new-user'
+    signIn: "/signin",
   },
   session: {
     strategy: "jwt",
   },
-  // Uncomment and set this if your app is not hosted at the root of the domain
-  // baseUrl: process.env.NEXTAUTH_URL,
   debug: process.env.NODE_ENV === "development",
 };
 
 export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
 
-// You can export a separate config without handlers if needed
 export const authOptions: NextAuthConfig = authConfig;

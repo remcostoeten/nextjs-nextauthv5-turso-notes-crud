@@ -28,9 +28,6 @@ export default async function DashboardPage() {
           <p>
             <strong>Email:</strong> {session.user.email}
           </p>
-          <p>
-            <strong>Username:</strong> {session.user.username}
-          </p>
         </div>
       </CardContent>
     </Card>
