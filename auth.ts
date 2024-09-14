@@ -71,21 +71,13 @@ export const authConfig: NextAuthConfig = {
   },
   pages: {
     signIn: "/login",
-    // Uncomment and add these if you have custom pages for them
-    // signOut: '/auth/signout',
-    // error: '/auth/error',
-    // verifyRequest: '/auth/verify-request',
-    // newUser: '/auth/new-user'
   },
   session: {
     strategy: "jwt",
   },
-  // Uncomment and set this if your app is not hosted at the root of the domain
-  // baseUrl: process.env.NEXTAUTH_URL,
   debug: process.env.NODE_ENV === "development",
 };
 
 export const { handlers, auth, signIn, signOut } = NextAuth(authConfig);
 
-// You can export a separate config without handlers if needed
 export const authOptions: NextAuthConfig = authConfig;

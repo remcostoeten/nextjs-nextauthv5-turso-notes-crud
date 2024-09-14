@@ -3,11 +3,12 @@
 import { db } from "@/db";
 import { users } from "@/db/schema";
 import argon2 from "argon2";
-import { eq } from "drizzle-orm";
-import getCurrentUser from "./user.actions";
+import { eq, and, not } from "drizzle-orm";
+import { auth } from "auth";
+
 export async function updateProfile(prevState: any, formData: FormData) {
-  const user = await getCurrentUser(prevState);
-  if (!user) {
+  const session = await auth();
+  if (!session?.user) {
     return { error: "Not authenticated" };
   }
 
@@ -21,7 +22,23 @@ export async function updateProfile(prevState: any, formData: FormData) {
       updateData.password = await argon2.hash(newPassword);
     }
 
-    await db.update(users).set(updateData).where(eq(users.id, user.id));
+    // Check if username already exists (excluding the current user)
+    const existingUser = await db
+      .select()
+      .from(users)
+      .where(
+        and(
+          eq(users.username, username),
+          not(eq(users.id, session.user.id))
+        )
+      )
+      .get();
+
+    if (existingUser) {
+      return { error: "Username already taken" };
+    }
+
+    await db.update(users).set(updateData).where(eq(users.id, session.user.id));
 
     return { success: true };
   } catch (error) {
