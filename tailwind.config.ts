@@ -23,6 +23,7 @@ const config: Config = {
         /* Background Colors */
         "bg-body": "var(--bg-body)",
         "bg-card": "var(--bg-card)",
+        "brand": "var(--brand)",
 
         "bg-section": "var(--bg-section)",
         "section-lighter": "var(--bg-section-lighter)",

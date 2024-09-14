@@ -11,11 +11,12 @@ const HeaderDropdown = dynamic(() => import("./header-dropdown"), {
   ssr: false,
 });
 
+import Flex from "@/components/atoms/Flex";
 import Logo from "../../logo";
 
 function Header() {
   return (
-    <header className="bg-neutral-950 text-white border-b flex items-center justify-between p-3 min-h-14">
+    <header className="bg-neutral-950 text-white border-b flex items-center justify-between p-3 min-h-14 mr-4">
       <nav className="flex items-center gap-2">
         <a
           href="/d293afa7-22d4-40ec-8c07-0bf6b3526589/"
@@ -37,7 +38,7 @@ function Header() {
         >
           <SearchButton />
         </Suspense>
-        <div className="flex items-center gap-2">
+        <Flex gap='6'>
           <Suspense
             fallback={
               <div className="w-6 h-6 bg-neutral-800 animate-pulse rounded-full" />
@@ -69,7 +70,7 @@ function Header() {
           >
             <HeaderDropdown />
           </Suspense>
-        </div>
+        </Flex>
       </div>
     </header>
   );
@@ -91,7 +92,6 @@ MenuIcon.displayName = "MenuIcon";
 const ProjectSelector = memo(() => (
   <button className="flex items-center gap-2.5 text-neutral-200 text-sm font-medium hover:bg-neutral-800 rounded-md p-2">
     <div className="h-5 w-40" />
-    <span>{buttonLabels.project}</span>
   </button>
 ));
 ProjectSelector.displayName = "ProjectSelector";
