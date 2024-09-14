@@ -6,7 +6,7 @@ import { AuthError } from "next-auth";
 export async function loginUser(
   prevState: any,
   formData: FormData,
-): Promise<{ success: boolean; error?: string }> {
+): Promise<{ loading: boolean; success: boolean; error: string | null }> {
   const usernameOrEmail = formData.get("usernameOrEmail") as string;
   const password = formData.get("password") as string;
 
@@ -19,20 +19,32 @@ export async function loginUser(
 
     if (result?.error) {
       console.error("Login error:", result.error);
-      return { success: false, error: "Invalid credentials" };
+      return { loading: false, success: false, error: "Invalid credentials" };
     }
-
-    return { success: true };
+    // Removed the redirect here
+    return { loading: false, success: true, error: null };
   } catch (error) {
     console.error("Login error:", error);
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":
-          return { success: false, error: "Invalid credentials" };
+          return {
+            loading: false,
+            success: false,
+            error: "Invalid credentials",
+          };
         default:
-          return { success: false, error: "Something went wrong" };
+          return {
+            loading: false,
+            success: false,
+            error: "Something went wrong",
+          };
       }
     }
-    return { success: false, error: "An error occurred during login" };
+    return {
+      loading: false,
+      success: false,
+      error: "An error occurred during login",
+    };
   }
 }

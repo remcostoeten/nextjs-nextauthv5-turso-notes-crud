@@ -5,7 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { auth } from "../../../auth";
+import { auth } from "auth";
 
 export default async function DashboardPage() {
   const session = await auth();

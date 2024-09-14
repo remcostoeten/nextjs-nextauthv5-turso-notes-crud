@@ -1,3 +1,4 @@
+import { TextHoverEffectDemo } from "@/components/landing/footer-effect";
 import Hero from "@/components/landing/hero";
 import { auth } from "auth";
 

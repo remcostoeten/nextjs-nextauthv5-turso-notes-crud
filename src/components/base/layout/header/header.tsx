@@ -4,17 +4,20 @@ import Flex from "@/components/atoms/Flex";
 import { GithubIcon, Sparkles } from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { memo, Suspense } from "react";
+import { Suspense } from "react";
 import Logo from "../../logo";
-import { buttonLabels } from "./buttonConfig";
 import SearchModal from "../search/search-modal";
+import { buttonLabels } from "./buttonConfig";
+import { useSessionWithUpdate } from "@/core/hooks/useSessionWithUpdate";
 
 const TooltipButton = dynamic(() => import("./TooltipButton"), { ssr: false });
 const HeaderDropdown = dynamic(() => import("./header-dropdown"), {
   ssr: false,
 });
 
-function Header() {
+export default function Header() {
+  const { session, status } = useSessionWithUpdate();
+
   return (
     <header className="bg-neutral-950 h-header border-outline-bottom text-white flex items-center justify-between p-3 min-h-14 mr-4">
       <nav className="flex items-center gap-2">
@@ -41,7 +44,7 @@ function Header() {
             }
           >
             <TooltipButton
-              icon={GithubIcon}
+              icon={<GithubIcon size={24} />}
               label={buttonLabels.github}
               onClick={() =>
                 window.open("https://github.com/remcostoeten", "_blank")
@@ -55,7 +58,7 @@ function Header() {
             }
           >
             <TooltipButton
-              icon={Sparkles}
+              icon={<Sparkles size={24} />}
               label={buttonLabels.theme}
               onClick={() => console.log("Theme toggle clicked")}
               className="text-neutral-400 hover:text-neutral-200"
@@ -74,7 +77,7 @@ function Header() {
   );
 }
 
-const MenuIcon = memo(() => (
+const MenuIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={20}
@@ -84,7 +87,4 @@ const MenuIcon = memo(() => (
   >
     <path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40ZM40,56H80V200H40ZM216,200H96V56H216V200Z" />
   </svg>
-));
-MenuIcon.displayName = "MenuIcon";
-
-export default memo(Header);
+);

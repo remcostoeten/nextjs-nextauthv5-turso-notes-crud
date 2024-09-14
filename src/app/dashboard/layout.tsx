@@ -19,7 +19,7 @@ function Sidebar({}: SidebarProps) {
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen">
       <Sidebar />
 
       <div className="flex flex-col flex-1 overflow-hidden">

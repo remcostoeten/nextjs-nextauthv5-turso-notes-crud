@@ -12,11 +12,6 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  experimental: {
-    reactCompiler: {
-      compilationMode: "annotation",
-    },
-  },
   images: {
     domains: ["cdn.builder.io"],
   },
