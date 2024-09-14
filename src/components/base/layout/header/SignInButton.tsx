@@ -6,38 +6,13 @@ import {
   LogoutIcon,
   SettingsIcon,
 } from "@/components/atoms/Icons";
-import { Button } from "@/components/ui";
 import { Switch } from "@/components/ui/switch";
+import { UI_CONFIG } from "@/core/config/hero-ui.config";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 
-type UserAvatarProps = {
-  name: string | null | undefined;
-  size?: "small" | "large";
-};
-
-const UserAvatar: React.FC<UserAvatarProps> = ({ name, size = "small" }) => {
-  const initials =
-    name
-      ?.split(" ")
-      .map((n) => n[0])
-      .join("")
-      .toUpperCase() || "";
-  const sizeClasses = size === "small" ? "w-7 h-7" : "w-9 h-9";
-
-  return (
-    <Flex
-      justify="center"
-      align="center"
-      className={`bg-avatar text-neutral-300 ${sizeClasses} overflow-hidden text-[12px] leading-[16px] font-semibold rounded-full`}
-    >
-      {initials}
-    </Flex>
-  );
-};
-
-export default function HeaderDropdown() {
+export default function SignInButton() {
   const { data: session, status } = useSession();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -46,15 +21,40 @@ export default function HeaderDropdown() {
   }
 
   const toggleDropdown = () => setIsOpen((prev) => !prev);
-
   const handleLogout = () => signOut();
+
+  const UserAvatar = ({
+    name,
+    size = "small",
+  }: {
+    name: string;
+    size: string;
+  }) => {
+    const initials =
+      name
+        ?.split(" ")
+        .map((n: string) => n[0])
+        .join("")
+        .toUpperCase() || "";
+    const sizeClasses = size === "small" ? "w-7 h-7" : "w-9 h-9";
+
+    return (
+      <Flex
+        justify="center"
+        align="center"
+        className={`bg-avatar text-neutral-300 ${sizeClasses} overflow-hidden text-[12px] leading-[16px] font-semibold rounded-full`}
+      >
+        {initials}
+      </Flex>
+    );
+  };
 
   return (
     <div className="relative">
       {session?.user ? (
         <button
           onClick={toggleDropdown}
-          className="bg-section-lighter pr-4 hover:bg-[#262626] duration-300 text-neutral-400 transition-all ease-in-out pl-0.5 pr-2 py-0.5 rounded-full"
+          className={`flex items-center justify-center gap-x-1 ${UI_CONFIG.SPACING.BUTTON} text-${UI_CONFIG.COLORS.PRIMARY} font-medium transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset] ${UI_CONFIG.BORDERS.ROUNDED} md:inline-flex`}
         >
           <Flex align="center" gap="1.5">
             <UserAvatar name={session.user.name} />
@@ -64,11 +64,14 @@ export default function HeaderDropdown() {
           </Flex>
         </button>
       ) : (
-        <Link href="/signin">
-          <Button>Login</Button>
+        <Link
+          href="/signin"
+          className={`flex items-center justify-center gap-x-1 ${UI_CONFIG.SPACING.BUTTON} text-${UI_CONFIG.COLORS.PRIMARY} font-medium transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset] ${UI_CONFIG.BORDERS.ROUNDED} md:inline-flex`}
+        >
+          Sign in
         </Link>
       )}
-      {session?.user && (
+      {session?.user && isOpen && (
         <div
           className={`absolute border-separator right-0 mt-2 w-64 rounded-xl bg-section-lighter border-default shadow-lg z-10 p-1.5 transition-all duration-300 
                 ${isOpen ? "scale-in animate-in fade-in-0 zoom-in-95" : "initial-hidden !total-hide"}`}

@@ -27,10 +27,7 @@ export async function updateProfile(prevState: any, formData: FormData) {
       .select()
       .from(users)
       .where(
-        and(
-          eq(users.username, username),
-          not(eq(users.id, session.user.id))
-        )
+        and(eq(users.username, username), not(eq(users.id, session.user.id))),
       )
       .get();
 

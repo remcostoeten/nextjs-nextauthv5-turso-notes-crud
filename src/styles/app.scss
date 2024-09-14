@@ -2,11 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "./theme/_generic.css";
-@import "./theme/_utilities.css";
-@import "./theme/_animations.css";
+@import "./theme/_generic.scss";
+@import "./theme/_utilities.scss";
+@import "./theme/_animations.scss";
 
 :root {
+  /* miscelaneous */
+  --header-height: 77px;
+  --search-height: 40px;
+  --sidebar-width: 100px;
+  --sidebar-plus-aside-width: 280px;
+
+  /* colors */
   --white: #fff;
   --brand: #ff6c00;
   --green: green;
@@ -19,6 +26,7 @@
   --bg-dropdown: #171616;
   --bg-modal: #161616;
   --bg-modal-hover: #1a1b1a;
+  --avatar: #404040;
 
   /* Border & Outline Colors */
   --border-default: #404141;
@@ -108,4 +116,10 @@
 
 * {
   border: var(--border);
+}
+
+a {
+  &:hover {
+    color: inherit !important;
+  }
 }

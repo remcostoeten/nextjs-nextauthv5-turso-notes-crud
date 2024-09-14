@@ -1,5 +1,5 @@
 export const buttonLabels = {
-  help: "Help",
+  github: "Github",
   theme: "Toggle Theme",
   user: "User Menu",
   search: "Search",

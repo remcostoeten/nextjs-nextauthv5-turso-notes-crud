@@ -1,33 +1,29 @@
 "use client";
 
-import { HelpCircle, Sparkles } from "lucide-react";
+import Flex from "@/components/atoms/Flex";
+import { GithubIcon, Sparkles } from "lucide-react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { memo, Suspense } from "react";
+import Logo from "../../logo";
 import { buttonLabels } from "./buttonConfig";
+import SearchModal from "../search/search-modal";
 
-const SearchButton = dynamic(() => import("./SearchButton"), { ssr: false });
 const TooltipButton = dynamic(() => import("./TooltipButton"), { ssr: false });
 const HeaderDropdown = dynamic(() => import("./header-dropdown"), {
   ssr: false,
 });
 
-import Flex from "@/components/atoms/Flex";
-import Logo from "../../logo";
-
 function Header() {
   return (
-    <header className="bg-neutral-950 text-white border-b flex items-center justify-between p-3 min-h-14 mr-4">
+    <header className="bg-neutral-950 h-header border-outline-bottom text-white flex items-center justify-between p-3 min-h-14 mr-4">
       <nav className="flex items-center gap-2">
-        <a
-          href="/d293afa7-22d4-40ec-8c07-0bf6b3526589/"
-          className="hidden md:block"
-        >
+        <Link href="/" className="hidden md:block">
           <Logo />
-        </a>
+        </Link>
         <button className="md:hidden">
           <MenuIcon />
         </button>
-        <ProjectSelector />
       </nav>
 
       <div className="flex items-center gap-4">
@@ -36,18 +32,20 @@ function Header() {
             <div className="w-72 h-10 bg-neutral-800 animate-pulse rounded-md" />
           }
         >
-          <SearchButton />
+          <SearchModal />
         </Suspense>
-        <Flex gap='6'>
+        <Flex gap="6">
           <Suspense
             fallback={
               <div className="w-6 h-6 bg-neutral-800 animate-pulse rounded-full" />
             }
           >
             <TooltipButton
-              icon={HelpCircle}
-              label={buttonLabels.help}
-              onClick={() => console.log("Help clicked")}
+              icon={GithubIcon}
+              label={buttonLabels.github}
+              onClick={() =>
+                window.open("https://github.com/remcostoeten", "_blank")
+              }
               className="hidden md:block text-neutral-400 hover:text-neutral-200"
             />
           </Suspense>
@@ -88,12 +86,5 @@ const MenuIcon = memo(() => (
   </svg>
 ));
 MenuIcon.displayName = "MenuIcon";
-
-const ProjectSelector = memo(() => (
-  <button className="flex items-center gap-2.5 text-neutral-200 text-sm font-medium hover:bg-neutral-800 rounded-md p-2">
-    <div className="h-5 w-40" />
-  </button>
-));
-ProjectSelector.displayName = "ProjectSelector";
 
 export default memo(Header);

@@ -8,15 +8,8 @@ body {
 }
 
 p,
-span {
-  color: var(--text-regular-nav);
-}
-
-input {
-  border: 1px solid var(--border-separator);
-  color: var(--text-regular-nav);
-}
-
+span,
+input,
 input::placeholder {
   color: var(--text-regular-nav);
 }
