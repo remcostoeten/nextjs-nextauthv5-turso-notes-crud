@@ -1,5 +1,6 @@
 "use server";
 
+import { NoteSchema } from "@/core/models/notes-schema.z ";
 import { notes } from "@/db/schema";
 import { auth } from "auth";
 import { db } from "db";
@@ -9,7 +10,7 @@ import { revalidatePath } from "next/cache";
 export async function getNotes(folderId: number) {
   const session = await auth();
   if (!session?.user?.id) {
-    throw new Error("Unauthorized");
+    return { message: "Unauthorized" };
   }
 
   return db
@@ -23,7 +24,7 @@ export async function getNotes(folderId: number) {
 export async function getNote(id: number) {
   const session = await auth();
   if (!session?.user?.id) {
-    throw new Error("Unauthorized");
+    return { message: "Unauthorized" };
   }
 
   const [note] = await db
@@ -41,7 +42,7 @@ export async function getNote(id: number) {
 export async function createNote(formData: FormData) {
   const session = await auth();
   if (!session?.user?.id) {
-    throw new Error("Unauthorized");
+    return { message: "Unauthorized" };
   }
 
   const validatedFields = NoteSchema.parse({
@@ -65,7 +66,7 @@ export async function createNote(formData: FormData) {
 export async function updateNote(formData: FormData) {
   const session = await auth();
   if (!session?.user?.id) {
-    throw new Error("Unauthorized");
+    return { message: "Unauthorized" };
   }
 
   const id = formData.get("id");
@@ -98,7 +99,7 @@ export async function updateNote(formData: FormData) {
 export async function deleteNote(formData: FormData) {
   const session = await auth();
   if (!session?.user?.id) {
-    throw new Error("Unauthorized");
+    return { message: "Unauthorized" };
   }
 
   const id = formData.get("id");

@@ -2,18 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "./theme/_generic.scss";
+@import "./theme/_utilities.scss";
+@import "./theme/_animations.scss";
+
 :root {
+  /* miscelaneous */
+  --header-height: 77px;
+  --search-height: 40px;
+  --sidebar-width: 100px;
+  --sidebar-plus-aside-width: 280px;
+
+  /* colors */
   --white: #fff;
+  --brand: #ff6c00;
   --green: green;
   --bg-body: #0b0a0b;
   --bg-card: #111110;
   --bg-card-hover: #171616;
   --bg-section: #111110;
   --bg-section-lighter: #171616;
-  --bg-input: #171616;
+  --bg-iput: #171616;
   --bg-dropdown: #171616;
   --bg-modal: #161616;
   --bg-modal-hover: #1a1b1a;
+  --avatar: #404040;
 
   /* Border & Outline Colors */
   --border-default: #404141;
@@ -105,47 +118,8 @@
   border: var(--border);
 }
 
-body {
-  background-color: var(--background);
-  color: var(--foreground);
-}
-
-.white {
-  background-color: var(--white);
-}
-
-.box {
-  width: 100px;
-  height: 100px;
-  border: 1px solid lightgrey;
-  border-radius: 1rem;
-
-  &.t {
-    background: var(--bg-card);
+a {
+  &:hover {
+    color: inherit !important;
   }
-
-  &.tr {
-    background: var(--white);
-  }
-
-  &.f {
-  }
-
-  background: var(--green);
-}
-
-.one {
-  background: var(--green);
-}
-
-.tw {
-  background: var(--bg-card);
-}
-
-.th {
-  background: var(--bg-section);
-}
-
-.fo {
-  background: var(--color-suscess);
 }

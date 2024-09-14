@@ -1,0 +1,63 @@
+// Define border styles with their corresponding color variables
+$border-styles: (
+  regular: var(--border-default),
+  outline: var(--border-outline),
+  separator: var(--border-separator),
+);
+
+// Define border positions
+$border-positions: left, right, top, bottom;
+
+// Generate border classes for each style and position
+@each $style, $color in $border-styles {
+  .border-#{$style} {
+    border: 1px solid $color;
+
+    @each $position in $border-positions {
+      &-#{$position} {
+        border: none;
+        border-#{$position}: 1px solid $color;
+      }
+    }
+  }
+}
+
+// Examples of generated classes:
+//
+// .border-regular { border: 1px solid var(--border-default); }
+// .border-regular-left { border: none; border-left: 1px solid var(--border-default); }
+// .border-regular-right { border: none; border-right: 1px solid var(--border-default); }
+// .border-regular-top { border: none; border-top: 1px solid var(--border-default); }
+// .border-regular-bottom { border: none; border-bottom: 1px solid var(--border-default); }
+//
+// .border-outline { border: 1px solid var(--border-outline); }
+// .border-outline-left { border: none; border-left: 1px solid var(--border-outline); }
+// .border-outline-right { border: none; border-right: 1px solid var(--border-outline); }
+// .border-outline-top { border: none; border-top: 1px solid var(--border-outline); }
+// .border-outline-bottom { border: none; border-bottom: 1px solid var(--border-outline); }
+//
+// .border-separator { border: 1px solid var(--border-separator); }
+// .border-separator-left { border: none; border-left: 1px solid var(--border-separator); }
+// .border-separator-right { border: none; border-right: 1px solid var(--border-separator); }
+// .border-separator-top { border: none; border-top: 1px solid var(--border-separator); }
+// .border-separator-bottom { border: none; border-bottom: 1px solid var(--border-separator); }
+//
+// Usage in HTML:
+// <div class="border-regular">All sides border</div>
+// <div class="border-outline-left">Left border only</div>
+// <div class="border-separator-top">Top border only</div>
+
+.line {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    top: 20px;
+    left: -10%;
+    width: calc(100% + 20%);
+    height: 1px;
+    background-color: var(--border-outline);
+  }
+}
