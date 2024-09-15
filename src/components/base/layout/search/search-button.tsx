@@ -35,7 +35,7 @@ export default function SearchModal() {
     <>
       <button
         onClick={toggleModal}
-        className="bg-section-lighter text-xs hover:bg-bg-modal max-h-search h-search hover:cursor-pointer text-placeholder border-outline hover:border-regular transition-colors duration-300 hidden lg:flex items-center justify-center w-72 gap-2 rounded-md p-2 absolute left-1/2 -translate-x-1/2 cursor-text focus:outline-offset-2 animate-fadeIn group ease-in-out"
+        className="bg-section-lighter text-xs hover:bg-modal max-h-search h-search hover:cursor-pointer text-placeholder border-outline hover:border-regular transition-colors duration-300 hidden lg:flex items-center justify-center w-72 gap-2 rounded-md p-2 absolute left-1/2 -translate-x-1/2 cursor-text focus:outline-offset-2 animate-fadeIn group ease-in-out"
       >
         <Search size={16} />
         <span>Search your base...</span>
@@ -45,7 +45,7 @@ export default function SearchModal() {
       </button>
       {isOpen && (
         <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-center justify-center">
-          <div className="w-full max-w-lg bg-bg-modal rounded-lg shadow-lg overflow-hidden border border-regular">
+          <div className="w-full max-w-lg bg-modal rounded-lg shadow-lg overflow-hidden border border-regular">
             <div className="p-4 border-b border-regular">
               <div className="relative">
                 <Search
@@ -55,7 +55,7 @@ export default function SearchModal() {
                 <input
                   type="text"
                   placeholder="Search your base..."
-                  className="w-full pl-10 pr-4 py-2 bg-transparent text-text-title placeholder-text-muted border border-regular rounded-md focus:outline-none focus:border-regular text-lg"
+                  className="w-full pl-10 pr-4 py-2 bg-transparent text-title placeholder-text-muted border border-regular rounded-md focus:outline-none focus:border-regular text-lg"
                 />
               </div>
             </div>
@@ -64,12 +64,10 @@ export default function SearchModal() {
                 <Button
                   key={index}
                   variant="ghost"
-                  className="w-full justify-start text-base py-2 px-3 hover:bg-bg-modal-hover rounded-md border border-outline mb-1 last:mb-0"
+                  className="w-full justify-start text-base py-2 px-3 hover:bg-modal-hover rounded-md border border-outline mb-1 last:mb-0"
                 >
                   <span className="mr-3 text-xl">{action.icon}</span>
-                  <span className="flex-grow text-text-title">
-                    {action.label}
-                  </span>
+                  <span className="flex-grow text-title">{action.label}</span>
                   <div className="flex items-center">
                     <kbd className="bg-button-default text-text-muted rounded px-1.5 py-0.5 text-xs mr-1 border border-separator">
                       ⌥

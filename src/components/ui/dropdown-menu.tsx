@@ -6,6 +6,25 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 
+// Styling constants
+const BORDER_RADIUS = "rounded-md";
+const BORDER_COLOR = "border-outline";
+const BACKGROUND_COLOR = "bg-modal";
+
+const TEXT_COLOR = "text-text-dropdown-item";
+const HOVER_STYLES = "focus:bg-button-hover ";
+
+// Simplified animation constants
+const FADE_IN_OUT =
+  "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0";
+const ZOOM_IN_OUT =
+  "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95";
+const SLIDE_IN =
+  "data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2";
+
+// Combined animation styles
+const DROPDOWN_ANIMATION = `${FADE_IN_OUT} ${ZOOM_IN_OUT} ${SLIDE_IN}`;
+
 const DropdownMenu = DropdownMenuPrimitive.Root;
 
 const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
@@ -27,7 +46,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
   <DropdownMenuPrimitive.SubTrigger
     ref={ref}
     className={cn(
-      "flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent",
+      `flex cursor-default select-none items-center ${BORDER_RADIUS} px-2 py-1.5 text-sm outline-none ${HOVER_STYLES}`,
       inset && "pl-8",
       className,
     )}
@@ -47,7 +66,7 @@ const DropdownMenuSubContent = React.forwardRef<
   <DropdownMenuPrimitive.SubContent
     ref={ref}
     className={cn(
-      "z-50 min-w-[8rem] rounded-md border border-white bg-bg-dropdown p-1 text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+      `z-50 min-w-[8rem] ${BORDER_RADIUS} border ${BORDER_COLOR} ${BACKGROUND_COLOR} p-1 ${TEXT_COLOR} shadow-lg ${DROPDOWN_ANIMATION}`,
       className,
     )}
     {...props}
@@ -65,7 +84,7 @@ const DropdownMenuContent = React.forwardRef<
       ref={ref}
       sideOffset={sideOffset}
       className={cn(
-        "z-50 min-w-[8rem] overflow-hidden rounded-md bg-bg-dropdown text-text-title border-2 border-white p-1 shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+        `z-50 min-w-[8rem] overflow-hidden ${BORDER_RADIUS} ${BACKGROUND_COLOR} text-title border-2 ${BORDER_COLOR} p-1 shadow-md ${DROPDOWN_ANIMATION}`,
         className,
       )}
       {...props}
@@ -83,7 +102,7 @@ const DropdownMenuItem = React.forwardRef<
   <DropdownMenuPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      `relative flex cursor-default select-none items-center ${BORDER_RADIUS} px-2 py-1.5 text-sm outline-none transition-colors ${HOVER_STYLES} data-[disabled]:pointer-events-none data-[disabled]:opacity-50`,
       inset && "pl-8",
       className,
     )}
@@ -99,7 +118,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
   <DropdownMenuPrimitive.CheckboxItem
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      `relative flex cursor-default select-none items-center ${BORDER_RADIUS} py-1.5 pl-8 pr-2 text-sm outline-none transition-colors ${HOVER_STYLES} data-[disabled]:pointer-events-none data-[disabled]:opacity-50`,
       className,
     )}
     checked={checked}
@@ -123,7 +142,7 @@ const DropdownMenuRadioItem = React.forwardRef<
   <DropdownMenuPrimitive.RadioItem
     ref={ref}
     className={cn(
-      "relative flex cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      `relative flex cursor-default select-none items-center ${BORDER_RADIUS} py-1.5 pl-8 pr-2 text-sm outline-none transition-colors ${HOVER_STYLES} data-[disabled]:pointer-events-none data-[disabled]:opacity-50`,
       className,
     )}
     {...props}

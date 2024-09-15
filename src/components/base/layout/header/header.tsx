@@ -1,6 +1,7 @@
 "use client";
 
 import Flex from "@/components/atoms/Flex";
+import { useSessionWithUpdate } from "@/core/hooks/useSessionWithUpdate";
 import { GithubIcon, Sparkles } from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
@@ -8,7 +9,6 @@ import { Suspense } from "react";
 import Logo from "../../logo";
 import SearchModal from "../search/search-modal";
 import { buttonLabels } from "./buttonConfig";
-import { useSessionWithUpdate } from "@/core/hooks/useSessionWithUpdate";
 
 const TooltipButton = dynamic(() => import("./TooltipButton"), { ssr: false });
 const HeaderDropdown = dynamic(() => import("./header-dropdown"), {
@@ -19,7 +19,7 @@ export default function Header() {
   const { session, status } = useSessionWithUpdate();
 
   return (
-    <header className="bg-neutral-950 h-header border-outline-bottom text-white flex items-center justify-between p-3 min-h-14 mr-4">
+    <header className="bg-neutral-950 h-header border-outline-bottom text-white flex items-center justify-between p-3 min-h-14 pr-6">
       <nav className="flex items-center gap-2">
         <Link href="/" className="hidden md:block">
           <Logo />

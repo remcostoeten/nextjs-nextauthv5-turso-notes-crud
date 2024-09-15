@@ -46,14 +46,14 @@ export default function SearchModal() {
         event.preventDefault();
         toggleModal();
       }
-      if (event.key === "Escape") {
-        event.preventDefault();
-        toggleModal();
-      }
       if (isOpen) {
         const action = actions.find(
           (a) => a.shortcut.toLowerCase() === event.key.toLowerCase(),
         );
+        if (event.key === "Escape") {
+          event.preventDefault();
+          toggleModal();
+        }
         if (action) {
           event.preventDefault();
           handleAction(action.action);
@@ -74,7 +74,7 @@ export default function SearchModal() {
     <>
       <button
         onClick={toggleModal}
-        className="bg-section-lighter text-xs hover:bg-bg-modal max-h-search h-search hover:cursor-pointer text-placeholder border-outline hover:border-regular transition-all duration-300 hidden lg:flex items-center justify-center w-72 gap-2 rounded-md p-2 absolute left-1/2 -translate-x-1/2 cursor-text focus:outline-offset-2 animate-in fade-in zoom-in duration-300 ease-in-out"
+        className="bg-section-lighter text-xs hover:bg-modal max-h-search h-search hover:cursor-pointer text-placeholder border-outline hover:border-regular transition-all duration-300 hidden lg:flex items-center justify-center w-72 gap-2 rounded-md p-2 absolute left-1/2 -translate-x-1/2 cursor-text focus:outline-offset-2 animate-in fade-in zoom-in duration-300 ease-in-out"
       >
         <Search size={16} />
         <span>Search your base...</span>
@@ -89,7 +89,7 @@ export default function SearchModal() {
           }`}
         >
           <div
-            className={`scale-in origin-center w-full max-w-xl h-[450px] grid place-items-center border-outline rounded-xl w-full bg-bg-modal rounded-lg shadow-lg overflow-hidden animate-in zoom-in-95 duration-300 ease-out ${
+            className={`scale-in origin-center w-full max-w-xl h-[450px] grid place-items-center border-outline rounded-xl w-full bg-modal rounded-lg shadow-lg overflow-hidden animate-in zoom-in-95 duration-300 ease-out ${
               isClosing
                 ? "animate-out zoom-out-95 duration-300 ease-in-out"
                 : ""
@@ -104,7 +104,7 @@ export default function SearchModal() {
                 <input
                   type="text"
                   placeholder="Search your base..."
-                  className="w-full pl-10 pr-4 py-2 bg-transparent text-text-title placeholder-text-muted  rounded-lg focus:outline-none text-lg"
+                  className="w-full pl-10 pr-4 py-2 bg-transparent text-title placeholder-text-muted  rounded-lg focus:outline-none text-lg"
                 />
                 <div className="line" />
               </div>
@@ -114,7 +114,7 @@ export default function SearchModal() {
                 <Button
                   key={index}
                   variant="ghost"
-                  className="w-full justify-between text-base font-normal text-placeholder py-2 px-3 hover:bg-bg-modal-hover rounded-md"
+                  className="w-full justify-between text-base font-normal text-placeholder py-2 px-3 hover:bg-modal-hover rounded-md"
                   onClick={() => handleAction(action.action)}
                 >
                   <Flex align="center" gap="2">

@@ -123,7 +123,7 @@ export default function LoginForm({
                 Email or Username
               </label>
               <Input
-                className="border-outline-bottom"
+                className="border-outline-bottom bg-[rgba(17,17,17,0.5)]"
                 id="usernameOrEmail"
                 name="usernameOrEmail"
                 required
@@ -142,9 +142,11 @@ export default function LoginForm({
                   name="password"
                   type={showPassword ? "text" : "password"}
                   required
+                  className="border-outline-bottom bg-[rgba(17,17,17,0.5)]"
+                  className="border-outline-bottom bg-[rgba(17,17,17,0.5)]"
                 />
                 <Button
-                  type="button"
+                  typee="button"
                   variant="ghost"
                   size="icon"
                   className="absolute right-2 top-1/2 -translate-y-1/2"

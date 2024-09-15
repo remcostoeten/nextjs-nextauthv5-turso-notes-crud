@@ -4,13 +4,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Note } from "schema";
 import Link from "next/link";
+import { Note } from "schema";
 
 export function NoteItem({ note }: { note: Note }) {
   return (
     <Link href={`/dashboard/notes/folder/${note.folderId}/note/${note.id}`}>
-      <Card className="hover:bg-accent transition-colors">
+      <Card className="hover:bg-button-hover hover:border-outline  transition-colors">
         <CardHeader>
           <CardTitle>{note.title}</CardTitle>
           <CardDescription>

@@ -81,7 +81,7 @@ export default function RegisterForm({
 
   return (
     <main className="w-full min-h-screen flex flex-col items-center justify-center px-4">
-      <Card className="w-full sm:max-w-md md:max-w-xl lg:max-w-xl overflow-hidden relative">
+      <Card className="w-full sm:max-w-md md:max-w-xl lg:max-w-xl overflow-hidden relative !bg-[rgba(17,17,17,0.5)]">
         <div className="absolute pointer-events-none top-0 z-[0] h-screen w-screen bg-purple-950/10 bg-[radial-gradient(ellipse_20%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]" />
         <CardHeader className="text-center">
           <Logo />
@@ -124,7 +124,7 @@ export default function RegisterForm({
                 Full Name
               </label>
               <Input
-                className="border-outline-bottom"
+                className="border-outline-bottom bg-[rgba(17,17,17,0.5)]"
                 id="name"
                 name="name"
                 required
@@ -138,7 +138,7 @@ export default function RegisterForm({
                 Email
               </label>
               <Input
-                className="border-outline-bottom"
+                className="border-outline-bottom bg-[rgba(17,17,17,0.5)]"
                 id="email"
                 name="email"
                 type="email"
@@ -153,7 +153,7 @@ export default function RegisterForm({
                 Username
               </label>
               <Input
-                className="border-outline-bottom"
+                className="border-outline-bottom bg-[rgba(17,17,17,0.5)]"
                 id="username"
                 name="username"
                 required
@@ -172,6 +172,7 @@ export default function RegisterForm({
                   name="password"
                   type={showPassword ? "text" : "password"}
                   required
+                  className="border-outline-bottom bg-[rgba(17,17,17,0.5)]"
                 />
                 <Button
                   type="button"
@@ -201,6 +202,7 @@ export default function RegisterForm({
                   name="confirmPassword"
                   type={showPassword ? "text" : "password"}
                   required
+                  className="border-outline-bottom bg-[rgba(17,17,17,0.5)]"
                 />
               </div>
             </div>
@@ -219,7 +221,7 @@ export function OrContinueWith() {
   return (
     <div className="relative">
       <span className="block w-full h-px bg-border-outline" />
-      <p className="inline-block w-fit text-sm bg-border-outline px-2 absolute -top-2 inset-x-0 mx-auto">
+      <p className="inline-block w-fit text-sm bg-[rgba(17,17,17,0.5)] px-2 absolute -top-2 inset-x-0 mx-auto">
         Or continue with
       </p>
     </div>

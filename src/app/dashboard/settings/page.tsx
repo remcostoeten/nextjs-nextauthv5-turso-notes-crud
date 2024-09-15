@@ -89,7 +89,7 @@ export default function UserSettingsPage() {
   }
 
   return (
-    <div className="min-h-screen p-8 text-text-title">
+    <div className="min-h-screen p-8 text-title">
       <div className="max-w-4xl mx-auto border-regular p-8 rounded-lg">
         <h1 className="text-3xl font-bold mb-8">Account Settings</h1>
 

@@ -1,15 +1,13 @@
-import React from "react";
-
 type SpinnerSize = "sm" | "md" | "lg" | "xl";
 type SpinnerColor = "primary" | "secondary" | "success" | "danger";
 type SpinnerThickness = "thin" | "normal" | "thick";
 
-interface SpinnerProps {
+type SpinnerProps = {
   size?: SpinnerSize;
   color?: SpinnerColor;
   thickness?: SpinnerThickness;
   className?: string;
-}
+};
 
 const sizeClasses: Record<SpinnerSize, string> = {
   sm: "w-3 h-3",

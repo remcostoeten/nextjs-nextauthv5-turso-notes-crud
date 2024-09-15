@@ -2,11 +2,11 @@ import { Button } from "@/components/ui/button"; // Import Button component
 import { Skeleton } from "@/components/ui/skeleton";
 import { getFoldersWithNotesCount } from "@/core/server/actions";
 import { auth } from "auth";
+import Link from "next/link";
 import { Suspense } from "react";
 import { Folder } from "schema";
 import { CreateFolderForm } from "./CreateFolderForm";
-import { FolderItem } from "./FolderItem";
-import Link from "next/link";
+import FolderItem from "./FolderItem";
 
 type FolderWithCount = {
   folder: Folder;
@@ -40,7 +40,7 @@ async function FolderListContent(): Promise<JSX.Element> {
     <>
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">Folders</h2>
-        <span className="text-sm text-gray-500">Total: {totalCount}</span>
+        <span className="text-sm text-subtitle">Total: {totalCount}</span>
       </div>
       <CreateFolderForm
         folders={foldersWithCount.map(({ folder }) => folder)}
