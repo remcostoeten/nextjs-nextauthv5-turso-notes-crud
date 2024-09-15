@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button"; // Import Button component
 import { Skeleton } from "@/components/ui/skeleton";
 import { getFoldersWithNotesCount } from "@/core/server/actions";
-import { Folder } from "@/db/schema";
-import { auth } from "auth"; // Import the auth function
-import Link from "next/link"; // Import Link component
+import { auth } from "auth";
 import { Suspense } from "react";
+import { Folder } from "schema";
 import { CreateFolderForm } from "./CreateFolderForm";
 import { FolderItem } from "./FolderItem";
+import Link from "next/link";
 
 type FolderWithCount = {
   folder: Folder;

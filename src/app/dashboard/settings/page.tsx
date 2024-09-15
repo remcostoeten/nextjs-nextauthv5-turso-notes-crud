@@ -134,7 +134,6 @@ export default function UserSettingsPage() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       readOnly={!isEditing}
-                      className={!isEditing ? "bg-gray-100" : ""}
                     />
                   </div>
                   <div>
@@ -144,7 +143,6 @@ export default function UserSettingsPage() {
                       name="email"
                       value={session?.user?.email || ""}
                       readOnly
-                      className="bg-gray-100"
                     />
                   </div>
                   <div>
@@ -155,7 +153,6 @@ export default function UserSettingsPage() {
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
                       readOnly={!isEditing}
-                      className={!isEditing ? "bg-gray-100" : ""}
                     />
                   </div>
                   {isEditing && (

@@ -1,8 +1,8 @@
 "use server";
 
 import { db } from "@/db";
-import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { users } from "schema";
 
 export default async function getCurrentUser({ session }: { session: any }) {
   if (!session?.user) {

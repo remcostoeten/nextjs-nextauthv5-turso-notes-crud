@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/dialog";
 import { deleteFolder } from "@/core/server/actions/folders";
 import { createNote } from "@/core/server/actions/notes";
-import { Folder } from "@/db/schema";
+import { Folder } from "schema";
 import { FolderIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

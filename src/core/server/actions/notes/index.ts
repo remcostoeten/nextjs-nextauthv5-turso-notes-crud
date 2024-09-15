@@ -1,11 +1,11 @@
 "use server";
 
 import { NoteSchema } from "@/core/models/notes-schema.z ";
-import { notes } from "@/db/schema";
 import { auth } from "auth";
 import { db } from "db";
 import { and, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import { notes } from "schema";
 
 export async function getNotes(folderId: number) {
   const session = await auth();
