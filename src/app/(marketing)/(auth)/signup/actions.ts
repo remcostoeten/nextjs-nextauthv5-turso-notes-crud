@@ -1,9 +1,9 @@
 "use server";
 
 import { db } from "@/db";
-import { users } from "@/db/schema";
 import argon2 from "argon2";
 import { eq } from "drizzle-orm";
+import { users } from "schema";
 
 export type RegisterState = {
   loading: boolean;

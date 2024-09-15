@@ -2,11 +2,11 @@
 
 import { FolderSchema } from "@/core/models/folder-schema.z";
 import { db } from "@/db";
-import { Folder, folders, notes } from "@/db/schema";
 import { auth } from "auth";
 import { and, eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { notFound } from "next/navigation";
+import { Folder, folders, notes } from "schema";
 
 export async function getFolder(id: number) {
   const session = await auth();

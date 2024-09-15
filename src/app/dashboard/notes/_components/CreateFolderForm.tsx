@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { createFolder } from "@/core/server/actions/folders";
-import { Folder } from "@/db/schema";
+import { Folder } from "@/db/folders";
 import { PlusIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

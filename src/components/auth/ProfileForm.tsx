@@ -46,7 +46,6 @@ export default function ProfileForm({ user }: { user: any }) {
             defaultValue={user.name || ""}
             required
             readOnly={!isEditing}
-            className={!isEditing ? "bg-gray-100" : ""}
           />
         </div>
         <div>
@@ -57,7 +56,6 @@ export default function ProfileForm({ user }: { user: any }) {
             name="email"
             defaultValue={user.email || ""}
             disabled
-            className="bg-gray-100"
           />
         </div>
         <div>
@@ -69,7 +67,6 @@ export default function ProfileForm({ user }: { user: any }) {
             defaultValue={user.username || ""}
             required
             readOnly={!isEditing}
-            className={!isEditing ? "bg-gray-100" : ""}
           />
         </div>
         {isEditing && (

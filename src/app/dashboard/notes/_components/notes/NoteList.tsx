@@ -1,4 +1,4 @@
-import { Note } from "@/db/schema";
+import { Note } from "schema";
 import { NoteItem } from "./NoteItem";
 
 export function NoteList({ notes }: { notes: Note[] }) {

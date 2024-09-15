@@ -1,5 +1,4 @@
-import { db } from "@/db";
-import { users } from "@/db/schema";
+import { db } from "db";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import argon2 from "argon2";
 import { eq, or } from "drizzle-orm";
@@ -7,6 +6,7 @@ import NextAuth, { NextAuthConfig } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import { users } from "schema";
 
 export const authConfig: NextAuthConfig = {
   adapter: DrizzleAdapter(db),

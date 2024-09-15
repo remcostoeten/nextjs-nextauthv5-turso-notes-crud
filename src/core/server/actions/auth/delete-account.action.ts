@@ -1,8 +1,8 @@
 "use server";
 
-import { db } from "@/db";
-import { User, users } from "@/db/schema";
+import { db } from "db";
 import { eq } from "drizzle-orm";
+import { User, users } from "schema";
 
 export default async function deleteAccount({ user }: { user: User }) {
   if (!user) {

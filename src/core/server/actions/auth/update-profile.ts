@@ -1,10 +1,10 @@
 "use server";
 
-import { db } from "@/db";
-import { users } from "@/db/schema";
 import argon2 from "argon2";
-import { eq, and, not } from "drizzle-orm";
 import { auth } from "auth";
+import { db } from "db";
+import { and, eq, not } from "drizzle-orm";
+import { users } from "schema";
 
 export async function updateProfile(prevState: any, formData: FormData) {
   const session = await auth();

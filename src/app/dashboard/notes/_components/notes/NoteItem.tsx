@@ -4,7 +4,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Note } from "@/db/schema";
+import { Note } from "schema";
 import Link from "next/link";
 
 export function NoteItem({ note }: { note: Note }) {
