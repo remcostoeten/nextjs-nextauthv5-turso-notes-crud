@@ -1,11 +1,9 @@
-
 import Providers from "@/components/base/provider-wrapper";
 import { geistMono, geistSans } from "@/core/config/fonts/fonts";
 import "@/styles/app.scss";
 import { metadata } from "./(marketing)/layout";
 
 export { metadata };
-
 
 export default function RootLayout({ children }: PageProps) {
   return (
@@ -15,9 +13,7 @@ export default function RootLayout({ children }: PageProps) {
       suppressHydrationWarning
     >
       <body>
-        <Providers session={undefined}>
-          {children}
-        </Providers>
+        <Providers session={undefined}>{children}</Providers>
       </body>
     </html>
   );

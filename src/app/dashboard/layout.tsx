@@ -10,23 +10,38 @@ type DashboardLayoutProps = {
   children: ReactNode;
 };
 
-function Sidebar({ }: SidebarProps) {
+function Sidebar({}: SidebarProps) {
   return (
     <aside className="w-64 bg-white shadow-md">
       <nav className="mt-5">
-        <Link href="/dashboard" className="block px-4 py-2 text-gray-600 hover:bg-gray-200">
+        <Link
+          href="/dashboard"
+          className="block px-4 py-2 text-gray-600 hover:bg-gray-200"
+        >
           Dashboard Home
         </Link>
-        <Link href="/dashboard/roles" className="block px-4 py-2 text-gray-600 hover:bg-gray-200">
+        <Link
+          href="/dashboard/roles"
+          className="block px-4 py-2 text-gray-600 hover:bg-gray-200"
+        >
           Role Management
         </Link>
-        <Link href="/dashboard/relationships" className="block px-4 py-2 text-gray-600 hover:bg-gray-200">
+        <Link
+          href="/dashboard/relationships"
+          className="block px-4 py-2 text-gray-600 hover:bg-gray-200"
+        >
           User Relationships
         </Link>
-        <Link href="/dashboard/activity" className="block px-4 py-2 text-gray-600 hover:bg-gray-200">
+        <Link
+          href="/dashboard/activity"
+          className="block px-4 py-2 text-gray-600 hover:bg-gray-200"
+        >
           User Activity
         </Link>
-        <Link href="/dashboard/settings" className="block px-4 py-2 text-gray-600 hover:bg-gray-200">
+        <Link
+          href="/dashboard/settings"
+          className="block px-4 py-2 text-gray-600 hover:bg-gray-200"
+        >
           User Settings
         </Link>
       </nav>
