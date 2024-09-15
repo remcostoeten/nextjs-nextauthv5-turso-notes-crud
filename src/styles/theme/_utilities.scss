@@ -1,8 +1,35 @@
-// Define border styles with their corresponding color variables
+// I got in my app.scss the followin: just a comment reminder
+// --header-height: 77px;
+// --search-height: 40px;
+// --sidebar-width: 88px;
+// --sidebar-sub-width: 230px;
+// --sidebar-plus-aside-width: calc(var(--sidebar-width) + var(--sidebar-sub-width));
+
+.height-no-header {
+  height: calc(100dvh - 77px);
+}
+
+.max-h-no-header {
+  max-height: calc(100dvh - 77px);
+}
+
+.width-no-sidebar {
+  width: calc(100% - 240px);
+}
+
+.margin-top-header {
+  margin-top: 77px;
+}
+
+.padding-top-header {
+  padding-top: 77px;
+}
+
 $border-styles: (
   regular: var(--border-default),
   outline: var(--border-outline),
   separator: var(--border-separator),
+  transparent: transparent,
 );
 
 // Define border positions
@@ -19,6 +46,14 @@ $border-positions: left, right, top, bottom;
         border-#{$position}: 1px solid $color;
       }
     }
+  }
+}
+
+.border {
+  transition: border 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &:hover {
+    border: 1px solid var(--border-outline) !important;
   }
 }
 
@@ -61,3 +96,51 @@ $border-positions: left, right, top, bottom;
     background-color: var(--border-outline);
   }
 }
+
+// // General input and textarea focus styles
+input,
+textarea {
+  &:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 2px var(--border-outline) !important;
+    transition: box-shadow 0.2s ease-in-out;
+  }
+}
+
+// // Color picker specific styles
+// input[type="color"] {
+//   -webkit-appearance: none;
+//   appearance: none;
+//   width: 40px;
+//   height: 40px;
+//   background-color: transparent;
+//   border: none;
+//   cursor: pointer;
+// }
+
+// input[type="color"]::-webkit-color-swatch-wrapper {
+//   padding: 0;
+// }
+
+// input[type="color"]::-webkit-color-swatch,
+// input[type="color"]::-moz-color-swatch {
+//   border: 2px solid #555;
+//   border-radius: 4px;
+// }
+
+// input[type="color"]:focus {
+//   outline: none;
+//   box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.6);
+// }
+
+// /* Optional: Style for the container */
+// .color-picker-container {
+//   display: flex;
+//   align-items: center;
+//   gap: 10px;
+// }
+
+// .color-picker-container label {
+//   font-size: 14px;
+//   color: #fff;
+// }

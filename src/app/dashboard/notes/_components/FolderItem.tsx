@@ -1,5 +1,11 @@
 "use client";
 
+import { createNote, deleteFolder } from "@/core/server/actions";
+import { FolderIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
+import { toast } from "react-hot-toast";
+import { Folder } from "schema";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -9,46 +15,48 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import {
+  Button,
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { deleteFolder } from "@/core/server/actions/folders";
-import { createNote } from "@/core/server/actions/notes";
-import { Folder } from "schema";
-import { FolderIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import toast from "react-hot-toast";
+} from "ui";
 import { EditFolderForm } from "./EditFolderForm";
 import { FolderMenu } from "./FolderMenu";
 
-export function FolderItem({
+type DialogState = "closed" | "edit" | "delete" | "createNote";
+
+export default function FolderItem({
   folder,
   notesCount,
 }: {
   folder: Folder;
   notesCount: number;
 }) {
-  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-  const [isCreateNoteDialogOpen, setIsCreateNoteDialogOpen] = useState(false);
+  const [dialogState, setDialogState] = useState<DialogState>("closed");
   const router = useRouter();
 
-  const handleFolderClick = () => {
-    if (notesCount === 0) {
-      setIsCreateNoteDialogOpen(true);
-    } else {
+  const handleFolderClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (notesCount === 0 && dialogState === "closed") {
+      setDialogState("createNote");
+    } else if (dialogState === "closed") {
       router.push(`/dashboard/notes/folder/${folder.id}`);
     }
   };
 
-  const handleEdit = () => {
-    setIsEditDialogOpen(true);
+  const handleEdit = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setDialogState("edit");
+  };
+
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setDialogState("delete");
+  };
+
+  const handleCloseDialog = () => {
+    setDialogState("closed");
   };
 
   async function deleteAction(formData: FormData) {
@@ -58,6 +66,8 @@ export function FolderItem({
       router.refresh();
     } catch (error) {
       toast.error("Failed to delete folder");
+    } finally {
+      handleCloseDialog();
     }
   }
 
@@ -69,12 +79,14 @@ export function FolderItem({
       router.push(`/dashboard/notes/folder/${folder.id}/note/${result.noteId}`);
     } catch (error) {
       toast.error("Failed to create note");
+    } finally {
+      handleCloseDialog();
     }
   }
 
   return (
     <li
-      className="flex items-center justify-between p-2 rounded-md hover:bg-accent transition-colors cursor-pointer"
+      className="flex items-center justify-between px-4 py-2 rounded-md hover:bg-bg-card hover:border-outline border hover:border hover:border-border-outline border-transparent transition-colors cursor-pointer"
       onClick={handleFolderClick}
     >
       <div className="flex items-center space-x-2">
@@ -84,20 +96,19 @@ export function FolderItem({
         />
         <span className="font-medium">{folder.name}</span>
       </div>
-      <FolderMenu
-        onEdit={handleEdit}
-        onDelete={() => setIsDeleteDialogOpen(true)}
-      />
+      <FolderMenu onEdit={handleEdit} onDelete={handleDelete} />
 
-      <EditFolderForm
-        isOpen={isEditDialogOpen}
-        onClose={() => setIsEditDialogOpen(false)}
-        folder={folder}
-      />
+      {dialogState === "edit" && (
+        <EditFolderForm
+          isOpen={true}
+          onClose={handleCloseDialog}
+          folder={folder}
+        />
+      )}
 
       <AlertDialog
-        open={isDeleteDialogOpen}
-        onOpenChange={setIsDeleteDialogOpen}
+        open={dialogState === "delete"}
+        onOpenChange={handleCloseDialog}
       >
         <AlertDialogContent>
           <AlertDialogHeader>
@@ -110,7 +121,9 @@ export function FolderItem({
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel onClick={handleCloseDialog}>
+              Cancel
+            </AlertDialogCancel>
             <form action={deleteAction}>
               <input type="hidden" name="id" value={folder.id} />
               <AlertDialogAction type="submit">Delete</AlertDialogAction>
@@ -120,8 +133,8 @@ export function FolderItem({
       </AlertDialog>
 
       <Dialog
-        open={isCreateNoteDialogOpen}
-        onOpenChange={setIsCreateNoteDialogOpen}
+        open={dialogState === "createNote"}
+        onOpenChange={handleCloseDialog}
       >
         <DialogContent>
           <DialogHeader>
@@ -139,7 +152,7 @@ export function FolderItem({
               <Button
                 type="button"
                 variant="outline"
-                onClick={() => setIsCreateNoteDialogOpen(false)}
+                onClick={handleCloseDialog}
               >
                 Cancel
               </Button>

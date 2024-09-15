@@ -7,17 +7,20 @@
 @import "./theme/_animations.scss";
 
 :root {
-  /* miscelaneous */
+  /* heights; */
   --header-height: 77px;
   --search-height: 40px;
-  --sidebar-width: 100px;
-  --sidebar-plus-aside-width: 280px;
+  --sidebar-width: 88px;
+  --sidebar-sub-width: 230px;
+  --sidebar-plus-aside-width: calc(
+    var(--sidebar-width) + var(--sidebar-sub-width)
+  );
 
   /* colors */
   --white: #fff;
-  --brand: #ff6c00;
+  --brand: rgb(255, 108, 0);
   --green: green;
-  --bg-body: #0b0a0b;
+  --bg-body: #0a0a0a;
   --bg-card: #111110;
   --bg-card-hover: #171616;
   --bg-section: #111110;
@@ -53,6 +56,9 @@
   --color-menu-icon: #545454;
   --color-placeholder: #727373;
   --color-input-focus: #535253;
+
+  --focus-ring: #4a90e2;
+  --focus-ring-shadow: rgba(74, 144, 226, 0.3);
 
   /* Badge Colors */
   --badge-default: #272627;

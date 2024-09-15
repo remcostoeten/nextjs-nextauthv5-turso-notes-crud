@@ -1,27 +1,27 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { useSessionWithUpdate } from "@/core/hooks/useSessionWithUpdate";
+import { ChevronDown, LogOut, Settings, User } from "lucide-react";
+import { signOut } from "next-auth/react";
+import Link from "next/link";
+import { useState } from "react";
 import {
+  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Switch } from "@/components/ui/switch";
-import { useSessionWithUpdate } from "@/core/hooks/useSessionWithUpdate";
-import { ChevronDown, LogOut, Settings, User } from "lucide-react";
-import { signOut } from "next-auth/react";
-import Link from "next/link";
-import { useState } from "react";
+  Switch,
+} from "ui";
 
 type UserAvatarProps = {
   name: string | null | undefined;
   size?: "small" | "large";
 };
 
-const UserAvatar: React.FC<UserAvatarProps> = ({ name, size = "small" }) => {
+const UserAvatar = ({ name, size = "small" }: UserAvatarProps) => {
   const initials =
     name
       ?.split(" ")
@@ -49,6 +49,11 @@ export default function HeaderDropdown() {
 
   const handleLogout = () => signOut();
 
+  const handleSwitchClick = (e: MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
   return (
     <div className="relative">
       {session?.user ? (
@@ -61,12 +66,18 @@ export default function HeaderDropdown() {
               <div className="flex items-center gap-2">
                 <UserAvatar name={session.user.name} />
                 <ChevronDown
-                  className={`h-4 w-4 text-muted-foreground transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                  className={`h-4 w-4 text-muted-foreground transition-transform duration-200 ${
+                    isOpen ? "rotate-180" : ""
+                  }`}
                 />
               </div>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-64" align="end">
+          <DropdownMenuContent
+            className="w-64 dropdown-content"
+            align="end"
+            sideOffset={5}
+          >
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
                 <p className="text-sm font-medium leading-none">
@@ -100,7 +111,7 @@ export default function HeaderDropdown() {
             <DropdownMenuItem>
               <div className="flex w-full items-center justify-between">
                 <span>Dark Mode</span>
-                <Switch />
+                <Switch onClick={handleSwitchClick} />
               </div>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
@@ -119,5 +130,32 @@ export default function HeaderDropdown() {
         </Link>
       )}
     </div>
+  );
+}
+
+const styles = `
+  .dropdown-content {
+    position: relative;
+  }
+  .dropdown-content::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    right: 10px;
+    width: 10px;
+    height: 10px;
+    background-color: hsl(var(--background));
+    transform: rotate(45deg);
+    border-left: 1px solid hsl(var(--border));
+    border-top: 1px solid hsl(var(--border));
+    z-index: -1;
+  }
+`;
+
+export function HeaderDropdownStyles() {
+  return (
+    <style jsx global>
+      {styles}
+    </style>
   );
 }

@@ -64,10 +64,7 @@ export default function SignInButton() {
           </Flex>
         </button>
       ) : (
-        <Link
-          href="/signin"
-          className={`flex items-center justify-center gap-x-1 ${UI_CONFIG.SPACING.BUTTON} text-${UI_CONFIG.COLORS.PRIMARY} font-medium transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset] ${UI_CONFIG.BORDERS.ROUNDED} md:inline-flex`}
-        >
+        <Link href="/signin" className={`fx`}>
           Sign in
         </Link>
       )}
@@ -80,11 +77,11 @@ export default function SignInButton() {
           <header className="p-2.5">
             <Flex align="center" gap="3" className="pr-3">
               <UserAvatar name={session.user.name} size="large" />
-              <div className="text-text-subtitle pl-4">
-                <p className="font-medium m-0 text-text-title">
+              <div className="text-subtitle pl-4">
+                <p className="font-medium m-0 text-title">
                   {session.user.name}
                 </p>
-                <i className="leading-[16px] opacity-80 m-0 text-text-title">
+                <i className="leading-[16px] opacity-80 m-0 text-title">
                   {session.user.email}
                 </i>
               </div>
@@ -94,18 +91,18 @@ export default function SignInButton() {
           <nav>
             <Link
               href="/dashboard/settings"
-              className="flex w-full items-center justify-between gap-5 text-text-regular-nav p-2.5 rounded-md hover:bg-bg-modal-hover"
+              className="flex w-full items-center justify-between gap-5 text-text-regular-nav p-2.5 rounded-md hover:bg-modal-hover"
             >
               Account Settings
               <SettingsIcon />
             </Link>
-            <button className="flex w-full items-center justify-between gap-5 text-text-regular-nav p-2.5 rounded-md hover:bg-bg-modal-hover">
+            <button className="flex w-full items-center justify-between gap-5 text-text-regular-nav p-2.5 rounded-md hover:bg-modal-hover">
               Theme
               <Switch />
             </button>
             <button
               onClick={handleLogout}
-              className="flex w-full items-center justify-between gap-5 text-text-regular-nav p-2.5 rounded-md hover:bg-bg-modal-hover"
+              className="flex w-full items-center justify-between gap-5 text-text-regular-nav p-2.5 rounded-md hover:bg-modal-hover"
             >
               Log out
               <LogoutIcon />

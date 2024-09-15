@@ -1,5 +1,4 @@
-"use client";
-
+import { GradientPicker } from "@/components/elements/Color-picker-demo";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -8,26 +7,12 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { updateFolder } from "@/core/server/actions/folders";
 import { Folder } from "@/db/folders";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-
-const colorOptions = [
-  { value: "#FF5733", label: "Red" },
-  { value: "#33FF57", label: "Green" },
-  { value: "#3357FF", label: "Blue" },
-  { value: "#FFFF33", label: "Yellow" },
-];
 
 export function EditFolderForm({
   isOpen,
@@ -39,12 +24,14 @@ export function EditFolderForm({
   folder: Folder;
 }) {
   const [isPending, setIsPending] = useState(false);
+  const [background, setBackground] = useState(folder.color || "#B4D455");
   const router = useRouter();
 
   async function action(formData: FormData) {
     setIsPending(true);
     try {
       formData.append("id", folder.id.toString());
+      formData.append("color", background);
       const result = await updateFolder(formData);
       toast.success(result.message);
       onClose();
@@ -74,24 +61,13 @@ export function EditFolderForm({
             placeholder="Description (optional)"
             defaultValue={folder.description || ""}
           />
-          <Select name="color" defaultValue={folder.color}>
-            <SelectTrigger>
-              <SelectValue placeholder="Select a color" />
-            </SelectTrigger>
-            <SelectContent>
-              {colorOptions.map((option) => (
-                <SelectItem key={option.value} value={option.value}>
-                  <div className="flex items-center">
-                    <div
-                      className="w-4 h-4 rounded-full mr-2"
-                      style={{ backgroundColor: option.value }}
-                    />
-                    {option.label}
-                  </div>
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Folder Color</label>
+            <GradientPicker
+              background={background}
+              setBackground={setBackground}
+            />
+          </div>
           <div className="flex justify-end space-x-2">
             <Button type="button" variant="outline" onClick={onClose}>
               Cancel

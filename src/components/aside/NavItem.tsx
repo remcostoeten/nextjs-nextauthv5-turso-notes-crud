@@ -28,8 +28,8 @@ export function NavItem({ icon, label, href, isActive }: NavItemProps) {
         className={`flex w-10 h-10 cursor-pointer items-center justify-center rounded-xl transition-all duration-200 ease-in-out
           ${
             isActive
-              ? "bg-neutral-800 text-white"
-              : "text-neutral-400 hover:text-white hover:bg-neutral-800"
+              ? "bg-body border-outline text-white"
+              : "text-neutral-400 hover:text-white hover:bg-body hover:border-outline"
           }`}
       >
         {IconComponent ? <IconComponent className="w-6 h-6" /> : icon}

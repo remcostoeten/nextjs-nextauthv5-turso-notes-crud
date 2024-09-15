@@ -33,7 +33,7 @@ const config: Config = {
       colors: {
         // custom colors
         /* Background Colors */
-        "bg-body": "var(--bg-body)",
+        body: "var(--bg-body)",
         "bg-card": "var(--bg-card)",
         brand: "var(--brand)",
         avatar: "var(--avatar)",
@@ -41,8 +41,8 @@ const config: Config = {
         "section-lighter": "var(--bg-section-lighter)",
         "bg-input": "var(--bg-input)",
         "bg-dropdown": "var(--bg-dropdown)",
-        "bg-modal": "var(--bg-modal)",
-        "bg-modal-hover": "var(--bg-modal-hover)",
+        modal: "var(--bg-modal)",
+        "modal-hover": "var(--bg-modal-hover)",
 
         /* Border & Outline Colors */
         "border-default": "var(--border-default)",
@@ -50,8 +50,8 @@ const config: Config = {
         "border-separator": "var(--border-separator)",
 
         /* Text Colors */
-        "text-title": "var(--text-title)",
-        "text-subtitle": "var(--text-subtitle)",
+        title: "var(--text-title)",
+        subtitle: "var(--text-subtitle)",
         "text-muted": "var(--text-muted)",
         "text-regular-nav": "var(--text-regular-nav)",
         "text-button": "var(--text-button)",
