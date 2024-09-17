@@ -1,18 +1,18 @@
 import { GradientPicker } from "@/components/elements/Color-picker-demo";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { updateFolder } from "@/core/server/actions/folders";
 import { Folder } from "@/db/folders";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import {
+  Button,
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  Input,
+  Textarea,
+} from "ui";
 
 export function EditFolderForm({
   isOpen,

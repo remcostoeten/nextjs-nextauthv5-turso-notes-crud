@@ -5,43 +5,8 @@
     {
       "idx": 0,
       "version": "6",
-      "when": 1726238948812,
-      "tag": "0000_lively_nightmare",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1726240856689,
-      "tag": "0001_rich_molecule_man",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1726250355912,
-      "tag": "0002_public_hammerhead",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "6",
-      "when": 1726349456062,
-      "tag": "0003_lumpy_stark_industries",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "6",
-      "when": 1726349667597,
-      "tag": "0004_melodic_lady_vermin",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "6",
-      "when": 1726357593659,
-      "tag": "0005_low_thor_girl",
+      "when": 1726433480777,
+      "tag": "0000_medical_hellion",
       "breakpoints": true
     }
   ]

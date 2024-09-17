@@ -1,8 +1,8 @@
 "use server";
 
 import { FolderSchema } from "@/core/models/folder-schema.z";
-import { db } from "@/db";
 import { auth } from "auth";
+import { db } from "db";
 import { and, eq, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { notFound } from "next/navigation";

@@ -1,10 +1,10 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import deleteAccount from "@/core/server/actions/auth/delete-account.action";
+import { deleteAccount } from "@/core/server/actions";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { Button } from "ui";
 
 export default function DeleteAccountButton({
   user,

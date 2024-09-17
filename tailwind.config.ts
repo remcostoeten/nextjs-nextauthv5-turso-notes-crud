@@ -33,8 +33,9 @@ const config: Config = {
       colors: {
         // custom colors
         /* Background Colors */
+        destructive: "var(--destructive)",
         body: "var(--bg-body)",
-        "bg-card": "var(--bg-card)",
+        card: "var(--bg-card)",
         brand: "var(--brand)",
         avatar: "var(--avatar)",
         "bg-section": "var(--bg-section)",
@@ -179,7 +180,22 @@ const config: Config = {
       },
     },
   },
-  plugins: [addVariablesForColors],
+  plugins: [
+    function ({ matchUtilities, theme }: any) {
+      matchUtilities(
+        {
+          "bg-grid": (value: string) => ({
+            backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='${value}'><path d='M0 .5H31.5V32'/></svg>")`,
+          }),
+        },
+        {
+          values: flattenColorPalette(theme("backgroundColor")),
+          type: "color",
+        },
+      );
+    },
+    addVariablesForColors,
+  ],
 };
 
 function addVariablesForColors({ addBase, theme }: any) {

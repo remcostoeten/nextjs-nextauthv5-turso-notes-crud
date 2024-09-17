@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/button";
+import { Edit, MoreVertical, Trash } from "lucide-react";
 import {
+  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Edit, MoreVertical, Trash } from "lucide-react";
+  DropdownMenuTrigger
+} from "ui";
 
 export function FolderMenu({
   onEdit,

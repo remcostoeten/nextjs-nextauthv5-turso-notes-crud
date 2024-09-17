@@ -6,7 +6,7 @@ import {
   LogoutIcon,
   SettingsIcon,
 } from "@/components/atoms/Icons";
-import { Switch } from "@/components/ui/switch";
+import { Switch } from "@/components/ui";
 import { UI_CONFIG } from "@/core/config/hero-ui.config";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
@@ -70,10 +70,12 @@ export default function SignInButton() {
       )}
       {session?.user && isOpen && (
         <div
-          className={`absolute border-separator right-0 mt-2 w-64 rounded-xl bg-section-lighter border-default shadow-lg z-10 p-1.5 transition-all duration-300 
-                ${isOpen ? "scale-in animate-in fade-in-0 zoom-in-95" : "initial-hidden !total-hide"}`}
+          className={`triangle-border-indicator absolute border-separator right-0 mt-2 w-64 rounded-xl bg-section-lighter border-default shadow-lg z-10 p-1.5 transition-all duration-300 
+          ${isOpen ? "scale-in animate-in fade-in-0 zoom-in-95" : "initial-hidden !total-hide"}`}
         >
-          <div className="absolute -top-2 right-[18px] w-4 h-4 bg-section-lighter rotate-45 transform origin-center"></div>
+          <div className="absolute -top-2 right-[18px] w-4 h-4 bg-section-lighter rotate-45 transform origin-center">
+            <div className="absolute inset-[-1px] border-t border-l border-separator"></div>
+          </div>
           <header className="p-2.5">
             <Flex align="center" gap="3" className="pr-3">
               <UserAvatar name={session.user.name} size="large" />

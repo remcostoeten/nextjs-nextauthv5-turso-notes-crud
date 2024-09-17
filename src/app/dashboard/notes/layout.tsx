@@ -1,6 +1,6 @@
-import { Skeleton } from "@/components/ui/skeleton";
 import { getFolders } from "@/core/server/actions/folders";
 import { ReactNode, Suspense } from "react";
+import { Skeleton } from "ui";
 import FolderList from "./_components/FolderList";
 
 export default async function NotesLayout({

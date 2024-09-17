@@ -1,5 +1,11 @@
 "use client";
 
+import { deleteNote } from "actions";
+import { TrashIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { Button } from "ui";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -9,13 +15,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { deleteNote } from "actions";
-import { TrashIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import toast from "react-hot-toast";
+} from "ui/alert-dialog";
 
 export function DeleteNoteButton({
   noteId,

@@ -1,13 +1,11 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { updateNote } from "actions";
-import { Note } from "schema";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { Note } from "schema";
+import { Button, Input, Textarea } from "ui";
 
 export function NoteEditor({ note }: { note: Note }) {
   const [title, setTitle] = useState(note.title);

@@ -1,9 +1,16 @@
+'use client'
+
 import { motion } from "framer-motion";
 import { Bell, Cog, CreditCard, HelpCircle, Shield, User } from "lucide-react";
 import React from "react";
 
+type MenuItem = {
+  icon: React.ComponentType;
+  text: string;
+};
+
 const SettingsSidebar: React.FC = () => {
-  const menuItems = [
+  const menuItems: MenuItem[] = [
     { icon: User, text: "Account" },
     { icon: Bell, text: "Notifications" },
     { icon: Shield, text: "Privacy & Security" },
@@ -32,9 +39,9 @@ const SettingsSidebar: React.FC = () => {
             >
               <a
                 href="#"
-                className="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-700 transition-colors duration-200"
+                className="flex items-center space-x-3 p-2 rounded-md hover:bg-card border-outline transition-colors duration-200"
               >
-                <item.icon size={20} className="text-gray-400" />
+                <item.icon size={20} height={20} className="text-gray-400" />
                 <span>{item.text}</span>
               </a>
             </motion.li>
@@ -45,7 +52,7 @@ const SettingsSidebar: React.FC = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
-        className="mt-8 p-4 bg-gray-700 rounded-md shadow-md"
+        className="mt-8 p-4 bg-card border-outline rounded-md shadow-md"
       >
         <div className="flex items-center mb-2">
           <HelpCircle size={20} className="text-blue-400 mr-2" />

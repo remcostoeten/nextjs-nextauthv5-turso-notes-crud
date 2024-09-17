@@ -9,6 +9,7 @@ export default function RootLayout({ children }: PageProps) {
   return (
     <html
       lang="en"
+      color-scheme="dark"
       className={`${geistSans.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >

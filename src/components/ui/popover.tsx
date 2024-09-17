@@ -5,9 +5,9 @@ import * as PopoverPrimitive from "@radix-ui/react-popover";
 import * as React from "react";
 
 const COLORS = {
-  CONTENT_BG: "bg-red-400",
-  CONTENT_BORDER: "border-gray-200",
-  TEXT: "text-popover-foreground",
+  CONTENT_BG: "bg-modal",
+  CONTENT_BORDER: "border-outline",
+  TEXT: "text-regular-nav",
   SHADOW: "shadow-md",
 };
 

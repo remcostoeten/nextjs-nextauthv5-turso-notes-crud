@@ -39,5 +39,4 @@ export type NewFolder = typeof folders.$inferInsert;
 export type Note = typeof notes.$inferSelect;
 export type NewNote = typeof notes.$inferInsert;
 
-// Re-export all user-related schemas
 export * from "./users";

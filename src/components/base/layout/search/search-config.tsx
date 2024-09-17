@@ -1,4 +1,4 @@
-import { signOut } from "@/core/constants";
+import { signOut } from "@/core/constants/helper.sign-out";
 
 export const actions = [
   {

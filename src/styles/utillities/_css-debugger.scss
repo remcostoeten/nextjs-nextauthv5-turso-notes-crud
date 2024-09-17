@@ -1,0 +1,23 @@
+// // Debugging element (comment out or remove for production)
+// body::before {
+//     content: "Sidebar width: #{$sidebar-width}, Header height: #{$header-height}";
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     background: black;
+//     color: white;
+//     padding: 5px;
+//     z-index: 9999;
+// }
+
+// // Alternative debugging method using SASS maps (comment out or remove for production)
+// @each $key, $value in $debug-values {
+//     body::after {
+//         content: "#{$key}: #{$value}";
+//         display: block;
+//         background: black;
+//         color: white;
+//         padding: 5px;
+//         margin-top: 5px;
+//     }
+// }

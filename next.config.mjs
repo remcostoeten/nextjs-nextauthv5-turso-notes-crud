@@ -1,5 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies, import/extensions */
-
 const nextConfig = {
   eslint: {
     dirs: ["."],
@@ -13,7 +11,10 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    domains: ["cdn.builder.io"],
+    domains: ["cdn.builder.io", "randomuser.me", "api.uifaces.co"],
+  },
+  env: {
+    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
   },
 };
 

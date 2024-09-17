@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
+import { Button } from "ui";
 import { actions } from "./search-config";
 
 export default function SearchModal() {

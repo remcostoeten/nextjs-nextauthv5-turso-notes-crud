@@ -1,10 +1,9 @@
-import { Button } from "@/components/ui/button"; // Import Button component
-import { Skeleton } from "@/components/ui/skeleton";
 import { getFoldersWithNotesCount } from "@/core/server/actions";
 import { auth } from "auth";
 import Link from "next/link";
 import { Suspense } from "react";
 import { Folder } from "schema";
+import { Button, Skeleton } from "ui"; // Import Button component
 import { CreateFolderForm } from "./CreateFolderForm";
 import FolderItem from "./FolderItem";
 

@@ -10,15 +10,12 @@ import { useFormState } from "react-dom";
 import { toast } from "react-hot-toast";
 
 import Logo from "@/components/base/logo";
-import { Button } from "@/components/ui/button";
 import {
-  Card,
+  Button, Card,
   CardContent,
   CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+  CardHeader, CardTitle, Input
+} from "ui";
 import ProviderButton from "./login-provider-button";
 
 import { loginUser } from "../actions";

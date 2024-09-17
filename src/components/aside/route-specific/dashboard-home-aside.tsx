@@ -3,7 +3,7 @@ import { PlusCircle, Search } from "lucide-react";
 import React from "react";
 
 const DashboardSidebar: React.FC = () => (
-  <div className="text-white p-4 h-full w-[230px] overflow-y-auto">
+  <div className="text-white p-4 h-full w-[230px] overflow-y-auto -z-10">
     <motion.h2
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
@@ -21,7 +21,7 @@ const DashboardSidebar: React.FC = () => (
       <input
         type="text"
         placeholder="Search queries"
-        className="w-full p-2 pl-10 bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full p-2 pl-10 bg-card border-outline rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
       <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
     </motion.div>
@@ -29,7 +29,7 @@ const DashboardSidebar: React.FC = () => (
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
-      className="bg-gray-700 p-4 rounded-md mb-6 shadow-md"
+      className="bg-card border-outline p-4 rounded-md mb-6 shadow-md"
     >
       <div className="flex items-center mb-2">
         <PlusCircle className="text-blue-400 mr-2" size={24} />
@@ -46,7 +46,7 @@ const DashboardSidebar: React.FC = () => (
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}
-      className="bg-gray-700 p-4 rounded-md shadow-md"
+      className="bg-card border-outline p-4 rounded-md shadow-md"
     >
       <div className="flex items-center justify-between mb-2">
         <span className="font-semibold">Explorer Plan</span>

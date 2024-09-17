@@ -61,10 +61,13 @@ export default function FolderItem({
 
   async function deleteAction(formData: FormData) {
     try {
+      console.log("Deleting folder:", formData.get("id"));
       const result = await deleteFolder(formData);
+      console.log("Delete result:", result);
       toast.success(result.message);
       router.refresh();
     } catch (error) {
+      console.error("Delete error:", error);
       toast.error("Failed to delete folder");
     } finally {
       handleCloseDialog();
@@ -86,15 +89,15 @@ export default function FolderItem({
 
   return (
     <li
-      className="flex items-center justify-between px-4 py-2 rounded-md hover:bg-bg-card hover:border-outline border hover:border hover:border-border-outline border-transparent transition-colors cursor-pointer"
+      className="flex items-center justify-between px-4 py-2 rounded-md hover:bg-card border-outline hover:border-outline border hover:border hover:border-border-outline border-transparent transition-colors cursor-pointer"
       onClick={handleFolderClick}
     >
       <div className="flex items-center space-x-2">
         <FolderIcon
           className="h-5 w-5"
-          style={{ color: folder.color || "currentColor" }}
+          style={{ fill: folder.color || "currentColor" }}
         />
-        <span className="font-medium">{folder.name}</span>
+        <span className="font-normal">{folder.name}</span>
       </div>
       <FolderMenu onEdit={handleEdit} onDelete={handleDelete} />
 
@@ -126,7 +129,12 @@ export default function FolderItem({
             </AlertDialogCancel>
             <form action={deleteAction}>
               <input type="hidden" name="id" value={folder.id} />
-              <AlertDialogAction type="submit">Delete</AlertDialogAction>
+              <AlertDialogAction
+                className="bg-destructive hover:bg-destructive hover:bg-opacity-80 text-white"
+                type="submit"
+              >
+                Delete
+              </AlertDialogAction>
             </form>
           </AlertDialogFooter>
         </AlertDialogContent>

@@ -1,14 +1,17 @@
 {
   "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
+    "moduleResolution": "node",
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
@@ -18,14 +21,41 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"],
-      "auth": ["./auth.ts"],
-      "db": ["./src/db/index.ts"],
-      "schema": ["./src/core/server/schema/schema.ts"],
-      "actions": ["./src/core/server/actions/index.ts"],
-      "ui": ["./src/components/ui/index.ts"]
-    }
+      "@/*": [
+        "./src/*"
+      ],
+      "auth": [
+        "./auth.ts"
+      ],
+      "db": [
+        "./src/db/index.ts"
+      ],
+      "schema": [
+        "./src/core/server/schema/schema.ts"
+      ],
+      "actions": [
+        "./src/core/server/actions/index.ts"
+      ],
+      "ui": [
+        "./src/components/ui/index.ts"
+      ],
+      "stores": [
+        "./src/core/stores/index.ts"
+      ],
+      "~/*": [
+        "./*"
+      ]
+    },
+    "resolveJsonModule": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/core/config/metadata/dashboard.root-layout ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

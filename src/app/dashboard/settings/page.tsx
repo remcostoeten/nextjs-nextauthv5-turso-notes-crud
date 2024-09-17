@@ -3,7 +3,6 @@
 import Flex from "@/components/atoms/Flex";
 import DeleteAccountButton from "@/components/auth/DeleteAccountButton";
 import { useSessionWithUpdate } from "@/core/hooks/useSessionWithUpdate";
-import { updateProfile } from "@/core/server/actions/auth/update-profile";
 import { Session } from "next-auth";
 import { useCallback, useEffect, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
