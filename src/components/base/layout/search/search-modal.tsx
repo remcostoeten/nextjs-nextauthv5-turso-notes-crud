@@ -1,10 +1,10 @@
 "use client";
 
 import Flex from "@/components/atoms/Flex";
-import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import { Button } from "ui";
 import { actions } from "./search-config";
 
 export default function SearchModal() {

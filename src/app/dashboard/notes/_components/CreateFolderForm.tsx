@@ -3,7 +3,6 @@
 import Flex from "@/components/atoms/Flex";
 import Spacer from "@/components/atoms/Spacer";
 import { ColorPicker } from "@/components/elements/color-picker";
-import {} from "@/components/ui/button";
 import { createFolder } from "@/core/server/actions/folders";
 import { Folder } from "@/db/folders";
 import { PlusIcon } from "lucide-react";

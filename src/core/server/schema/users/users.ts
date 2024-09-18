@@ -13,7 +13,7 @@ export const users = sqliteTable("users", {
   avatar: text("avatar"),
   bio: text("bio"),
   location: text("location"),
-  website: text("website"),
+  websitae: text("website"),
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()
     .$defaultFn(() => new Date()),

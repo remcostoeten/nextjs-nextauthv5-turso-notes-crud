@@ -5,7 +5,7 @@ export const FolderSchema = z.object({
   description: z.string().max(1000).optional(),
   color: z
     .string()
-    .regex(/^#[0-9A-Fa-f]{6}$/, "Invalid color format")
+    .regex(/^#?([0-9A-Fa-f]{3}){1,2}$/, "Invalid color format")
     .optional(),
   parentId: z.number().int().positive().optional(),
 });

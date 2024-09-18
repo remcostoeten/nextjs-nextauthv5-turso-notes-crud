@@ -2,12 +2,12 @@ import DashboardSidebar from "@/components/aside/route-specific/dashboard-home-a
 import NotesSidebar from "@/components/aside/route-specific/notes-aside";
 import SettingsSidebar from "@/components/aside/route-specific/settings-aside";
 import {
-  HelpCircle,
+  Edit,
   Home,
   LayoutDashboard,
   LucideIcon,
-  NotebookTabs,
-  Settings,
+  Mail,
+  Settings2,
   User,
 } from "lucide-react";
 
@@ -16,6 +16,7 @@ export type SidebarItem = {
   path: string;
   icon: LucideIcon;
   hasAlert?: boolean;
+  className?: string;
   alertCount?: number;
 };
 
@@ -29,9 +30,9 @@ export const sidebarItems: SidebarItem[] = [
     alertCount: 3,
   },
   { name: "Profile", path: "/dashboard/profile", icon: User },
-  { name: "Notes", path: "/dashboard/notes", icon: NotebookTabs },
-  { name: "Settings", path: "/settings", icon: Settings },
-  { name: "Help", path: "#", icon: HelpCircle },
+  { name: "Notes", path: "/dashboard/notes", icon: Edit },
+  { name: "Inbox", path: "/dashboard/inbox", icon: Mail },
+  { name: "Settings", path: "/dashboard/settings", icon: Settings2 },
 ];
 
 type SubSidebarConfig = {

@@ -5,7 +5,7 @@ export function NewsButton() {
   return (
     <Link
       href="/news"
-      className={`inline-flex gap-x-6 bg-white/5 items-center justify-center ${UI_CONFIG.BORDERS.ROUNDED} p-1 pr-2 pl-4sm:pr-6 border ${UI_CONFIG.FONTS.SIZES.SMALL} font-medium duration-150 ${UI_CONFIG.ANIMATIONS.HOVER}`}
+      className={`inline-flex border-transparent trans-all-400-swift gap-x-6 bg-white/5 items-center justify-center ${UI_CONFIG.BORDERS.ROUNDED} p-1 pr-2 pl-4sm:pr-6  ${UI_CONFIG.FONTS.SIZES.SMALL} font-medium  hover:trans-all-500 ${UI_CONFIG.ANIMATIONS.HOVER} hover:bg-white/10`}
     >
       <span
         className={`inline-block ${UI_CONFIG.BORDERS.ROUNDED} px-3 hidden sm:block py-1 bg-${UI_CONFIG.COLORS.ACCENT} text-${UI_CONFIG.COLORS.PRIMARY}`}
@@ -35,7 +35,7 @@ export function GetStartedButton() {
   return (
     <Link
       href="/dashboard"
-      className={`flex items-center justify-center gap-x-1 ${UI_CONFIG.SPACING.BUTTON} text-${UI_CONFIG.COLORS.PRIMARY} font-medium transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset] ${UI_CONFIG.BORDERS.ROUNDED} md:inline-flex`}
+      className={`flex items-center trans-all-400-swift  justify-center gap-x-1 ${UI_CONFIG.SPACING.BUTTON} text-${UI_CONFIG.COLORS.PRIMARY} font-medium transform-gpu dark:[border:1px_solid_rgba(255,255,255,.1)] dark:[box-shadow:0_-20px_80px_-20px_#8686f01f_inset] ${UI_CONFIG.BORDERS.ROUNDED} md:inline-flex hover:shadow-lg`}
     >
       Go to dashboard
       <svg
@@ -58,7 +58,7 @@ export function ContactSalesButton() {
   return (
     <Link
       href="/signup"
-      className={`flex items-center justify-center gap-x-1 py-4 px-4 text-${UI_CONFIG.COLORS.PRIMARY} hover:text-${UI_CONFIG.COLORS.PRIMARY} font-medium duration-150 md:inline-flex`}
+      className={`flex items-center justify-center gap-x-1 py-4 px-4 text-${UI_CONFIG.COLORS.PRIMARY} hover:text-${UI_CONFIG.COLORS.PRIMARY} font-medium duration-150 md:inline-flex hover:bg-white/10`}
     >
       Register
     </Link>

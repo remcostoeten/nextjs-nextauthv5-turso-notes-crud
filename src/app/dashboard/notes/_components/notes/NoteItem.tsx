@@ -1,11 +1,6 @@
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import Link from "next/link";
 import { Note } from "schema";
+import { Card, CardDescription, CardHeader, CardTitle } from "ui";
 
 export function NoteItem({ note }: { note: Note }) {
   return (

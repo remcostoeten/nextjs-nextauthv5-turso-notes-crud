@@ -2,7 +2,14 @@
 
 import { SidebarItem, sidebarItems } from "@/core/config/sidebar-config";
 import { motion } from "framer-motion";
-import { Edit, LucideIcon } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  HelpCircle,
+  LucideIcon,
+  PanelLeftClose,
+  PanelLeftOpen,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -12,12 +19,19 @@ type SidebarIconProps = {
   isActive: boolean;
 };
 
+type MainSidebarProps = {
+  isSubSidebarOpen: boolean;
+  toggleSubSidebar: () => void;
+  isCollapsed: boolean;
+  toggleCollapse: () => void;
+};
+
 function SidebarIcon({ item, isActive }: SidebarIconProps) {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
   return (
     <motion.div
-      className={`relative flex items-center justify-center w-8 h-8 mb-4 rounded-md transition-colors duration-200 border ${
+      className={`relative z-50 flex items-center justify-center size-10 mb-2 rounded-md transition-colors duration-200 border ${
         isActive
           ? "bg-body border-outline text-white"
           : "!border-transparent text-zinc-400 hover:text-title hover:bg-body hover:border-outline"
@@ -38,7 +52,7 @@ function SidebarIcon({ item, isActive }: SidebarIconProps) {
       )}
       {isHovered && (
         <motion.div
-          className="absolute left-full ml-2 px-2 py-1 bg-body border border-outline text-white text-xs font-medium rounded-md whitespace-nowrap"
+          className="absolute left-full -z-10 ml-2 px-2 py-1 bg-body border border-outline text-white text-xs font-medium rounded-md whitespace-nowrap !pointer-events-none"
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -10 }}
@@ -50,8 +64,12 @@ function SidebarIcon({ item, isActive }: SidebarIconProps) {
     </motion.div>
   );
 }
-
-export function MainSidebar() {
+export function MainSidebar({
+  isSubSidebarOpen,
+  toggleSubSidebar,
+  isCollapsed,
+  toggleCollapse,
+}: MainSidebarProps) {
   const pathname = usePathname();
   const [activePath, setActivePath] = useState<string>("");
 
@@ -64,18 +82,73 @@ export function MainSidebar() {
   }, [pathname]);
 
   return (
-    <aside className="fixed left-0 top-0 bottom-0 w-12 bg-body  border-outline-right margin-top-header max-h-no-header flex flex-col items-center py-4">
-      {sidebarItems.map((item) => (
-        <Link key={item.path} href={item.path}>
-          <SidebarIcon item={item} isActive={activePath === item.path} />
-        </Link>
-      ))}
-      <div className="mt-auto">
-        <SidebarIcon
-          item={{ name: "Edit", path: "/edit", icon: Edit as LucideIcon }}
-          isActive={false}
-        />
-      </div>
-    </aside>
+    <motion.aside
+      initial={{ width: 0, opacity: 0 }}
+      animate={{
+        width: isCollapsed ? 0 : "var(--sidebar-width)",
+        opacity: isCollapsed ? 0 : 1,
+      }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+      className={`fixed left-0 top-[var(--header-height)] bottom-0 flex items-center transition-all duration-300 ease-in-out z-10`}
+    >
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isCollapsed ? 0 : 1 }}
+        transition={{ duration: 0.3, delay: 0.1 }}
+        className={`h-full bg-body border-r border-outline flex flex-col items-center py-4 z-40 transition-all duration-300 ease-in-out ${
+          isCollapsed ? "w-0" : "w-full"
+        }`}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.2 }}
+          className="flex gap-2 flex-col items-center flex-grow"
+        >
+          {sidebarItems.map((item, index) => (
+            <motion.div
+              key={item.path}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3, delay: 0.1 * (index + 1) }}
+            >
+              <Link href={item.path}>
+                <SidebarIcon item={item} isActive={activePath === item.path} />
+              </Link>
+            </motion.div>
+          ))}
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.4 }}
+          className="flex flex-col items-center mt-auto"
+        >
+          <SidebarIcon
+            item={{ name: "Help", path: "#s", icon: HelpCircle as LucideIcon }}
+            isActive={false}
+          />
+          <button
+            onClick={toggleSubSidebar}
+            className="size-[55px] opacity-50 flex items-center justify-center text-zinc-400 hover:text-title mt-2"
+          >
+            {isSubSidebarOpen ? (
+              <PanelLeftClose className="w-6 h-6" />
+            ) : (
+              <PanelLeftOpen className="w-6 h-6" />
+            )}
+          </button>
+        </motion.div>
+      </motion.div>
+      <motion.button
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.3, delay: 0.5 }}
+        onClick={toggleCollapse}
+        className={`absolute -right-4 top-1/2 transform -translate-y-1/2 p-1 rounded-full bg-body border border-outline text-white hover:bg-opacity-80 z-10`}
+      >
+        {isCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
+      </motion.button>
+    </motion.aside>
   );
 }

@@ -14,9 +14,9 @@ type NavigationItem = {
 
 const navigation: NavigationItem[] = [
   { title: "Features", path: "#features" },
-  { title: "Integrations", path: "#integrations" },
-  { title: "Customers", path: "#customers" },
-  { title: "Pricing", path: "#pricing" },
+  { title: "Dashboard", path: "/dashboard" },
+  { title: "Design system", path: "/design-system" },
+  { title: "Design system", path: "/design-system" },
 ];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -40,7 +40,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative mt-8">
       <div
-        className="absolute -mt-8 inset-0 blur-[100px] h-[710px] animate-gradient-move animate-opacity-pulse"
+        className="absolute -mt-8 inset-0 blur-[100px] h-[710px] animate-opacity-pulse z-10"
         style={{ background: UI_CONFIG.COLORS.BACKGROUND[selectedGradient] }}
       />
       <header
@@ -83,7 +83,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
       )}
-      <div className="relative pt-20">{children}</div>
+      <div className="relative ">{children}</div>
     </div>
   );
 }

@@ -33,7 +33,7 @@ const NotesSidebar: React.FC = () => {
         <input
           type="text"
           placeholder="Search notes"
-          className="w-full p-2 pl-10 bg-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full p-2 pl-10 bg-card border-outline rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -50,7 +50,7 @@ const NotesSidebar: React.FC = () => {
             >
               <a
                 href="#"
-                className="flex items-center space-x-3 p-2 rounded-md hover:bg-gray-700 transition-colors duration-200"
+                className="flex items-center space-x-3 p-2 rounded-md hover:bg-card border-outline transition-colors duration-200"
               >
                 <item.icon size={20} className="text-gray-400" />
                 <span>{item.text}</span>
@@ -74,7 +74,7 @@ const NotesSidebar: React.FC = () => {
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.6 + index * 0.1 }}
-                className="text-sm hover:bg-gray-700 p-2 rounded-md cursor-pointer transition-colors duration-200"
+                className="text-sm hover:bg-card border-outline p-2 rounded-md cursor-pointer transition-colors duration-200"
               >
                 {note}
               </motion.li>
