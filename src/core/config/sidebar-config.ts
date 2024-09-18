@@ -6,6 +6,7 @@ import {
   Home,
   LayoutDashboard,
   LucideIcon,
+  Mail,
   Settings2,
   User,
 } from "lucide-react";
@@ -30,7 +31,8 @@ export const sidebarItems: SidebarItem[] = [
   },
   { name: "Profile", path: "/dashboard/profile", icon: User },
   { name: "Notes", path: "/dashboard/notes", icon: Edit },
-  { name: "Settings", path: "/settings", icon: Settings2 },
+  { name: "Inbox", path: "/dashboard/inbox", icon: Mail },
+  { name: "Settings", path: "/dashboard/settings", icon: Settings2 },
 ];
 
 type SubSidebarConfig = {

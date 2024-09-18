@@ -65,7 +65,6 @@ export default function Providers({ children, session }: ProviderProps) {
               },
             }}
           />
-
         </TooltipProvider>
       </ThemeProvider>
     </SessionProvider>

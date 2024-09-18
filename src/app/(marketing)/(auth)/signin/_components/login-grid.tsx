@@ -11,10 +11,13 @@ import { toast } from "react-hot-toast";
 
 import Logo from "@/components/base/logo";
 import {
-  Button, Card,
+  Button,
+  Card,
   CardContent,
   CardDescription,
-  CardHeader, CardTitle, Input
+  CardHeader,
+  CardTitle,
+  Input,
 } from "ui";
 import ProviderButton from "./login-provider-button";
 

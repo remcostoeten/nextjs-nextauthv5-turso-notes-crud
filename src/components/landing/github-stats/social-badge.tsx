@@ -1,15 +1,15 @@
-import React from 'react'
+import React from "react";
 
 type SocialBadgeProps = {
-  number?: number
-  text: string
-  className?: string
-}
+  number?: number;
+  text: string;
+  className?: string;
+};
 
 const SocialBadge: React.FC<SocialBadgeProps> = ({
   number,
   text,
-  className = ''
+  className = "",
 }) => {
   return (
     <div
@@ -17,7 +17,7 @@ const SocialBadge: React.FC<SocialBadgeProps> = ({
       role="status"
     >
       <span aria-hidden="true" className="text-sm leading-6">
-        {number.toString().padStart(2, '0')}
+        {number.toString().padStart(2, "0")}
       </span>
       <span
         className="bg-[rgba(255,255,255,0.2)] h-3.5 w-px mx-3"
@@ -27,7 +27,7 @@ const SocialBadge: React.FC<SocialBadgeProps> = ({
         {text}
       </span>
     </div>
-  )
-}
+  );
+};
 
-export default SocialBadge
+export default SocialBadge;

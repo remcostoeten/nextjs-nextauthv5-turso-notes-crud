@@ -11,10 +11,10 @@ export default async function Home() {
     <Layout>
       <Hero />
       <div className="flex justify-between items-center max-w-screen-xl mx-auto px-4 md:px-8">
-        <Badge title='My github stats' number={""} />
+        <Badge title="My github stats" number={""} />
         <GitHubStats />
       </div>
       <pre>{JSON.stringify(session, null, 2)}</pre>
-    </Layout >
+    </Layout>
   );
 }

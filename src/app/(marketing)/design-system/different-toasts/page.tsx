@@ -363,8 +363,6 @@ const deleteItem = (id) => {
             "// Click on a toast button or delete an item to see its code"}
         </CodeHighlight>
       </div>
-
-   
     </DesignSystemWrapper>
   );
 }

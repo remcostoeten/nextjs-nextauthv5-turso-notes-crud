@@ -31,10 +31,11 @@ function SidebarIcon({ item, isActive }: SidebarIconProps) {
 
   return (
     <motion.div
-      className={`relative z-50 flex items-center justify-center w-8 h-8 mb-2 rounded-md transition-colors duration-200 border ${isActive
-        ? "bg-body border-outline text-white"
-        : "!border-transparent text-zinc-400 hover:text-title hover:bg-body hover:border-outline"
-        }`}
+      className={`relative z-50 flex items-center justify-center size-10 mb-2 rounded-md transition-colors duration-200 border ${
+        isActive
+          ? "bg-body border-outline text-white"
+          : "!border-transparent text-zinc-400 hover:text-title hover:bg-body hover:border-outline"
+      }`}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
       whileHover={{ scale: 1.1 }}
@@ -51,7 +52,7 @@ function SidebarIcon({ item, isActive }: SidebarIconProps) {
       )}
       {isHovered && (
         <motion.div
-          className="absolute left-full z-[9999] ml-2 px-2 py-1 bg-body border border-outline text-white text-xs font-medium rounded-md whitespace-nowrap"
+          className="absolute left-full -z-10 ml-2 px-2 py-1 bg-body border border-outline text-white text-xs font-medium rounded-md whitespace-nowrap !pointer-events-none"
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -10 }}
@@ -88,13 +89,15 @@ export function MainSidebar({
         opacity: isCollapsed ? 0 : 1,
       }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
-      className={`fixed left-0 top-[var(--header-height)] bottom-0 flex items-center transition-all duration-300 ease-in-out`}
+      className={`fixed left-0 top-[var(--header-height)] bottom-0 flex items-center transition-all duration-300 ease-in-out z-10`}
     >
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: isCollapsed ? 0 : 1 }}
         transition={{ duration: 0.3, delay: 0.1 }}
-        className={`h-full bg-body border-r border-outline flex flex-col items-center py-4 overflow-hidden transition-all duration-300 ease-in-out ${isCollapsed ? "w-0" : "w-full"}`}
+        className={`h-full bg-body border-r border-outline flex flex-col items-center py-4 z-40 transition-all duration-300 ease-in-out ${
+          isCollapsed ? "w-0" : "w-full"
+        }`}
       >
         <motion.div
           initial={{ opacity: 0, y: 20 }}

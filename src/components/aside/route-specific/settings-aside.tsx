@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { motion } from "framer-motion";
 import { Bell, Cog, CreditCard, HelpCircle, Shield, User } from "lucide-react";

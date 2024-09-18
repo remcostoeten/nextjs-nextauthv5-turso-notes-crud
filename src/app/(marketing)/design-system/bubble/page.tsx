@@ -26,7 +26,10 @@ export default function BubbleVariants() {
         <div className="h-64 bg-gray-900 relative">
           <Bubble size={150} backgroundColor="rgb(100, 0, 100)" />
         </div>
-        <CodeHighlight language="tsx" title="Custom Size and Color Bubble Usage">
+        <CodeHighlight
+          language="tsx"
+          title="Custom Size and Color Bubble Usage"
+        >
           {`<Bubble size={150} backgroundColor="rgb(100, 0, 100)" />`}
         </CodeHighlight>
       </DesignSystemWrapper>
@@ -63,9 +66,27 @@ export default function BubbleVariants() {
         description="Multiple bubbles with different properties."
       >
         <div className="h-64 bg-gray-900 relative">
-          <Bubble size={100} position="absolute" top={10} left={10} backgroundColor="rgb(255, 0, 0)" />
-          <Bubble size={75} position="absolute" bottom={10} right={10} backgroundColor="rgb(0, 255, 0)" />
-          <Bubble size={50} position="absolute" top="50%" left="50%" backgroundColor="rgb(0, 0, 255)" />
+          <Bubble
+            size={100}
+            position="absolute"
+            top={10}
+            left={10}
+            backgroundColor="rgb(255, 0, 0)"
+          />
+          <Bubble
+            size={75}
+            position="absolute"
+            bottom={10}
+            right={10}
+            backgroundColor="rgb(0, 255, 0)"
+          />
+          <Bubble
+            size={50}
+            position="absolute"
+            top="50%"
+            left="50%"
+            backgroundColor="rgb(0, 0, 255)"
+          />
         </div>
         <CodeHighlight language="tsx" title="Multiple Bubbles Usage">
           {`<Bubble size={100} position="absolute" top={10} left={10} backgroundColor="rgb(255, 0, 0)" />
@@ -82,6 +103,7 @@ export default function BubbleVariants() {
         <div className="h-64 bg-gray-900 relative overflow-hidden">
           <Bubble
             size={400}
+            e
             position="absolute"
             top="50%"
             left="50%"
@@ -95,12 +117,12 @@ export default function BubbleVariants() {
           </div>
         </div>
         <CodeHighlight language="tsx" title="Background Bubble Usage">
-          {`<Bubble 
-  size={400} 
-  position="absolute" 
-  top="50%" 
-  left="50%" 
-  backgroundColor="rgb(30, 30, 30)" 
+          {`<Bubble
+  size={400}
+  position="absolute"
+  top="50%"
+  left="50%"
+  backgroundColor="rgb(30, 30, 30)"
   floatDistance={-10}
   floatSpeed={5000}
   zIndex={-1}
@@ -108,5 +130,5 @@ export default function BubbleVariants() {
         </CodeHighlight>
       </DesignSystemWrapper>
     </div>
-  )
+  );
 }

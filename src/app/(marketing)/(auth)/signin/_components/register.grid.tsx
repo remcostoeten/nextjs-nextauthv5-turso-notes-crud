@@ -17,7 +17,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-  Input
+  Input,
 } from "ui";
 import { RegisterState, registerUser } from "../../sign-up/actions";
 import ProviderButton from "./login-provider-button";

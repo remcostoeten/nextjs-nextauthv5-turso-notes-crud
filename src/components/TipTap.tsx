@@ -19,6 +19,9 @@ export default function Tiptap({
   });
 
   return (
-    <EditorContent editor={editor} className="prose prose-invert max-w-none" />
+    <EditorContent
+      editor={editor}
+      className="prose border-outline rou p-4 prose-invert max-w-none"
+    />
   );
 }

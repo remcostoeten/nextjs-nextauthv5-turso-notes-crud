@@ -1,3 +1,4 @@
+import Spinner from "@/components/ui/Spinner";
 import { users, userSettings } from "@/core/server/schema/users";
 import { auth } from "auth";
 import { db } from "db";
@@ -5,7 +6,6 @@ import { eq } from "drizzle-orm";
 import { Suspense } from "react";
 import { ProfileForm } from "./_components/ProfileForm";
 import { ProfileHeader } from "./_components/ProfileHeader";
-import Spinner from "@/components/ui/Spinner";
 
 export default async function ProfilePage() {
   const session = await auth();

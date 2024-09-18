@@ -1,5 +1,4 @@
-'use client';
-
+"use client";
 
 import { BackgroundGradient, UI_CONFIG } from "@/core/config/hero-ui.config";
 import { Menu, X } from "lucide-react";
@@ -15,8 +14,8 @@ type NavigationItem = {
 
 const navigation: NavigationItem[] = [
   { title: "Features", path: "#features" },
-  { title: "Integrations", path: "#integrations" },
-  { title: "Customers", path: "#customers" },
+  { title: "Dashboard", path: "/dashboard" },
+  { title: "Design system", path: "/design-system" },
   { title: "Design system", path: "/design-system" },
 ];
 
@@ -41,18 +40,20 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative mt-8">
       <div
-        className="absolute -mt-8 inset-0 blur-[100px] h-[710px] animate-gradient-move animate-opacity-pulse"
+        className="absolute -mt-8 inset-0 blur-[100px] h-[710px] animate-opacity-pulse z-10"
         style={{ background: UI_CONFIG.COLORS.BACKGROUND[selectedGradient] }}
       />
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 hover:scale-100 ease-in-out ${isSticky
-          ? "scale-[.9] bg-background/80 backdrop-blur-sm"
-          : "bg-transparent"
-          }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 hover:scale-100 ease-in-out ${
+          isSticky
+            ? "scale-[.9] bg-background/80 backdrop-blur-sm"
+            : "bg-transparent"
+        }`}
       >
         <nav
-          className={`${UI_CONFIG.FONTS.SIZES.SMALL} ${isSticky ? "py-2" : "py-5"
-            } transition-all duration-300 ease-in-out`}
+          className={`${UI_CONFIG.FONTS.SIZES.SMALL} ${
+            isSticky ? "py-2" : "py-5"
+          } transition-all duration-300 ease-in-out`}
         >
           <div
             className={`flex justify-between items-center ${UI_CONFIG.SPACING.SECTION}`}

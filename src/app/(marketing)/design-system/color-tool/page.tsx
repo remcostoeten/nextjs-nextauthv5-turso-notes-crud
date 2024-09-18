@@ -179,9 +179,9 @@ export default function ColorToolPage() {
       prevFolders.map((folder) =>
         folder.name === folderName
           ? {
-            ...folder,
-            colors: folder.colors.filter((c) => c !== colorToDelete),
-          }
+              ...folder,
+              colors: folder.colors.filter((c) => c !== colorToDelete),
+            }
           : folder,
       ),
     );
@@ -199,11 +199,11 @@ export default function ColorToolPage() {
         prevFolders.map((folder) =>
           folder.name === activeFolder
             ? {
-              ...folder,
-              colors: folder.colors.map((c) =>
-                c === editingColor ? { ...c, cssVar: editedCssVar } : c,
-              ),
-            }
+                ...folder,
+                colors: folder.colors.map((c) =>
+                  c === editingColor ? { ...c, cssVar: editedCssVar } : c,
+                ),
+              }
             : folder,
         ),
       );
@@ -438,8 +438,6 @@ export default function ColorToolPage() {
           </div>
         </PopoverContent>
       </Popover>
-
-
     </div>
   );
 }

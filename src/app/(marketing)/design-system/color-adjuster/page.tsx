@@ -189,9 +189,7 @@ export default function Component() {
                   updateRow(row.id, { adjustment: value })
                 }
               >
-                <SelectTrigger
-                  id={`adjustment-${row.id}`}
-                >
+                <SelectTrigger id={`adjustment-${row.id}`}>
                   <SelectValue placeholder="Select adjustment" />
                 </SelectTrigger>
                 <SelectContent>

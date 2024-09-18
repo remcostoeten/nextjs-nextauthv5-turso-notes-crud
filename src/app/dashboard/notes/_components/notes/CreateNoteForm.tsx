@@ -13,7 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
   Input,
-  Textarea
+  Textarea,
 } from "ui";
 
 export default async function CreateNoteForm({

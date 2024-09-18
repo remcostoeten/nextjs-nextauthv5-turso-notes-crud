@@ -4,7 +4,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from "ui";
 
 export function FolderMenu({

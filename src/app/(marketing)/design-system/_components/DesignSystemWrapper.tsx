@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { Button, Card } from "ui";
 import { DesignSystemWrapperProps } from "../design-system.types";

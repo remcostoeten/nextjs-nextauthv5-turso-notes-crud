@@ -1,11 +1,14 @@
-'use client';
+"use client";
 
 import GridBeamParent from "@/components/effects/grid-beam-parent";
 import { DesignSystemWrapper } from "../_components/DesignSystemWrapper";
 
 export default function GridBeamPage() {
   return (
-    <DesignSystemWrapper title="Grid Beam" description='A grid with animated bemas across the page'>
+    <DesignSystemWrapper
+      title="Grid Beam"
+      description="A grid with animated bemas across the page"
+    >
       <div className="w-full h-[400px] dark:bg-grid-white/[0.05] bg-grid-black/[0.07]">
         <GridBeamParent className="sm:pl-16 pt-28 pl-4 flex items-start justify-start">
           <div className="grid gap-2">
@@ -19,5 +22,5 @@ export default function GridBeamPage() {
         </GridBeamParent>
       </div>
     </DesignSystemWrapper>
-  )
+  );
 }

@@ -2,6 +2,7 @@
 
 import Flex from "@/components/atoms/Flex";
 import DeleteAccountButton from "@/components/auth/DeleteAccountButton";
+import SettingsPageSkeleton from "@/components/effects/loaders/settings-page.skeleton";
 import { useSessionWithUpdate } from "@/core/hooks/useSessionWithUpdate";
 import { Session } from "next-auth";
 import { useCallback, useEffect, useState } from "react";
@@ -80,7 +81,7 @@ export default function UserSettingsPage() {
   const [state, formAction] = useFormState(handleProfileUpdate, null);
 
   if (status === "loading") {
-    return <div>Loading...</div>;
+    return <SettingsPageSkeleton />;
   }
 
   if (status === "unauthenticated") {

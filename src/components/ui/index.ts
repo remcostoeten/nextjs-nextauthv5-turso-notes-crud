@@ -3,6 +3,7 @@ export * from "./avatar";
 export * from "./button";
 export * from "./card";
 export * from "./CodeHighlight/CodeHighlight";
+export * from "./command";
 export * from "./dialog";
 export * from "./dropdown-menu";
 export * from "./input";
@@ -18,4 +19,3 @@ export * from "./switch";
 export * from "./tabs";
 export * from "./textarea";
 export * from "./tooltip";
-

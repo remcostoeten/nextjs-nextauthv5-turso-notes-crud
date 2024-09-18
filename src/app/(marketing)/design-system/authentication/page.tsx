@@ -1,16 +1,19 @@
-'use client'
+"use client";
 
-import Logo from '@/components/base/logo'
-import { Input, Separator } from '@/components/ui'
-import Image from 'next/image'
-import Link from 'next/link'
-import React, { useState } from 'react'
-import { useFormState } from 'react-dom'
-import { loginUser } from '../../(auth)/signin/actions'
+import Logo from "@/components/base/logo";
+import { Input, Separator } from "@/components/ui";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useState } from "react";
+import { useFormState } from "react-dom";
+import { loginUser } from "../../(auth)/signin/actions";
+import { TwitterIcon } from "lucide-react";
+import { GoogleIcon } from "../../(auth)/signin/_components/providers";
+import { GitHubIcon } from "../../../../components/atoms/Icons";
 
 const SocialButton: React.FC<{
-  icon: React.ReactNode
-  onClick: () => void
+  icon: React.ReactNode;
+  onClick: () => void;
 }> = ({ icon, onClick }) => (
   <button
     onClick={onClick}
@@ -20,12 +23,12 @@ const SocialButton: React.FC<{
       {icon}
     </div>
   </button>
-)
+);
 
 const FormInput: React.FC<{ label: string; type: string; name: string }> = ({
   label,
   type,
-  name
+  name,
 }) => (
   <div>
     <label className="font-medium text-gray-100/50 font-geist">{label}</label>
@@ -36,37 +39,37 @@ const FormInput: React.FC<{ label: string; type: string; name: string }> = ({
       className="w-full mt-2 px-3 py-5 text-gray-500 bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg"
     />
   </div>
-)
+);
 
 export default function FUISignUpWithLeftBackground() {
   const [state, formAction] = useFormState(loginUser, {
     loading: false,
     success: false,
     error: null,
-  })
-  const [isLoggingIn, setIsLoggingIn] = useState(false)
+  });
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
 
   const handleSocialButtonClick = () => {
     // Implement social login logic here
-    console.log('Social login clicked')
-  }
+    console.log("Social login clicked");
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsLoggingIn(true)
-    const formData = new FormData(e.currentTarget)
-    formAction(formData)
-  }
+    e.preventDefault();
+    setIsLoggingIn(true);
+    const formData = new FormData(e.currentTarget);
+    formAction(formData);
+  };
 
   React.useEffect(() => {
     if (state.success) {
       // Handle successful login (e.g., redirect)
-      console.log('Login successful')
+      console.log("Login successful");
     } else if (state.error) {
-      console.error('Login error:', state.error)
+      console.error("Login error:", state.error);
     }
-    setIsLoggingIn(false)
-  }, [state])
+    setIsLoggingIn(false);
+  }, [state]);
 
   return (
     <main className="w-full min-h-screen flex overflow-y-hidden">
@@ -130,7 +133,7 @@ export default function FUISignUpWithLeftBackground() {
               Sign up now <br /> Start your journey
             </h3>
             <p className="text-gray-400">
-              Already have an account?{' '}
+              Already have an account?{" "}
               <Link
                 href="/sign-in"
                 className="font-medium text-indigo-600 hover:text-indigo-500"
@@ -158,14 +161,18 @@ export default function FUISignUpWithLeftBackground() {
           <Separator className="h-px bg-white/20" />
 
           <form onSubmit={handleSubmit} className="space-y-5 z-20">
-            <FormInput label="Username or Email" type="text" name="usernameOrEmail" />
+            <FormInput
+              label="Username or Email"
+              type="text"
+              name="usernameOrEmail"
+            />
             <FormInput label="Password" type="password" name="password" />
             <button
               type="submit"
               disabled={isLoggingIn}
               className="w-full font-geist tracking-tighter text-center rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-lg text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 ring-offset-zinc-950 transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70 flex items-center justify-center gap-2"
             >
-              {isLoggingIn ? 'Logging in...' : 'Log in'}
+              {isLoggingIn ? "Logging in..." : "Log in"}
             </button>
             {state.error && (
               <p className="text-red-500 text-sm mt-2">{state.error}</p>
@@ -174,5 +181,5 @@ export default function FUISignUpWithLeftBackground() {
         </div>
       </div>
     </main>
-  )
+  );
 }

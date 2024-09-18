@@ -33,7 +33,7 @@ const kbdVariants = cva(
 
 export interface KbdProps
   extends React.HTMLAttributes<HTMLSpanElement>,
-  VariantProps<typeof kbdVariants> {
+    VariantProps<typeof kbdVariants> {
   children: React.ReactNode;
   combination?: string[];
 }
