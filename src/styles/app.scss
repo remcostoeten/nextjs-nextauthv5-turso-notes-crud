@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './themes/_regular.scss';
+// @import './variables/_sizes';
+// @import './utillities/_menu-triangle.scss';
+// @import './utillities/_width-no-sidebar.scss';
+// @import './utillities/_transitions.scss';
+// @import './theme/_generic.scss';
+// @import './theme/_utilities.scss';
+// @import './theme/_animations.scss';
+
+* {
+  border: var(--border);
+}
+
+a {
+  &:hover {
+    color: inherit !important;
+  }
+}
+g
