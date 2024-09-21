@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 @import "./themes/_regular.scss";
-// @import './variables/_sizes';
+@import "./components/card-spotlight/_card-spotlight.scss";
+@import "./components/_card-outline.scss"; // @import './variables/_sizes';
 // @import './utillities/_menu-triangle.scss';
 // @import './utillities/_width-no-sidebar.scss';
 // @import './utillities/_transitions.scss';
