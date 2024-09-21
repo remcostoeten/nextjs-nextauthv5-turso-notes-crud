@@ -1,7 +1,7 @@
 import { UserInfoButton } from "@/components/_development/user-info-modal-btn/fixed-user-button";
 import Providers from "@/components/base/provider-wrapper";
+import { DropdownNavigation } from "@/components/elements/DropdownNavigation";
 import "@/styles/app.scss";
-import Navbar from "../components/landing/navbar/navbar";
 import { roboto_mono } from "../core/config/fonts/fonts";
 import { metadata } from "../core/config/metadata/metadata.root-layout";
 
@@ -21,7 +21,7 @@ export default function RootLayout({
     >
       <body className="dark:bg-body">
         <Providers>
-          <Navbar />
+          <DropdownNavigation />
           {children}
           <UserInfoButton />
         </Providers>
