@@ -1,29 +1,34 @@
-import Link from "next/link";
-import React from "react";
+'use client'
+
+import { motion } from 'framer-motion'
+import Link from 'next/link'
+import React from 'react'
 
 type LogoProps = {
-  width?: string;
-  height?: string;
-  fill?: string;
-  className?: string;
-  isLink?: boolean;
-};
+  width?: string
+  height?: string
+  fill?: string
+  className?: string
+  isLink?: boolean
+}
 
 const LogoIcon: React.FC<LogoProps> = ({
-  width = "46",
-  height = "46",
-  fill = "#fff",
-  className = "",
+  width = '46',
+  height = '46',
+  fill = '#fff',
+  className = '',
   isLink = false,
   ...props
 }) => {
   const logo = (
-    <svg
+    <motion.svg
       xmlns="http://www.w3.org/2000/svg"
       xmlSpace="preserve"
       width={width}
       height={height}
       className={`logo ${className}`}
+      whileHover={{ rotate: 10 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 10 }}
       {...props}
     >
       <style>{`.st0 { fill: ${fill}; }`}</style>
@@ -35,10 +40,10 @@ const LogoIcon: React.FC<LogoProps> = ({
         d="M20.499 29.92c-1.426-3.025-4.432-5.156-7.95-5.316-.14.005-.28.005-.426.005V21.37c.14 0 .286.005.426.005a9.175 9.175 0 0 0 6.118-2.697 9.204 9.204 0 0 0 2.707-6.554h3.219c0 3.335-1.296 6.467-3.654 8.825a12.464 12.464 0 0 1-2.673 2.045 12.559 12.559 0 0 1 3.842 3.392A13.93 13.93 0 0 0 20.5 29.92z"
         className="st0 svg-elem-2 logo__icon-left"
       />
-    </svg>
-  );
+    </motion.svg>
+  )
 
-  return isLink ? <Link href="/">{logo}</Link> : logo;
-};
+  return isLink ? <Link href="/">{logo}</Link> : logo
+}
 
-export default LogoIcon;
+export default LogoIcon
