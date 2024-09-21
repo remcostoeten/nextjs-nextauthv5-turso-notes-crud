@@ -1,22 +1,22 @@
-"use client";
+'use client'
 
-import React, { useEffect, useRef, useState } from "react";
-import useMousePosition from "./useMousePosition";
+import React, { useEffect, useRef, useState } from 'react'
+import useMousePosition from './useMousePosition'
 
 type SpotlightProps = {
-    children: React.ReactNode;
-    className?: string;
-};
+    children: React.ReactNode
+    className?: string
+}
 
 export default function Spotlight({
     children,
-    className = "",
+    className = '',
 }: SpotlightProps) {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const mousePosition = useMousePosition();
-    const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
-    const containerSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
-    const [boxes, setBoxes] = useState<Array<HTMLElement>>([]);
+    const containerRef = useRef<HTMLDivElement>(null)
+    const mousePosition = useMousePosition()
+    const mouse = useRef<{ x: number; y: number }>({ x: 0, y: 0 })
+    const containerSize = useRef<{ w: number; h: number }>({ w: 0, h: 0 })
+    const [boxes, setBoxes] = useState<Array<HTMLElement>>([])
 
     useEffect(() => {
         containerRef.current &&
@@ -24,66 +24,68 @@ export default function Spotlight({
                 Array.from(containerRef.current.children).map(
                     (el) => el as HTMLElement,
                 ),
-            );
-    }, []);
+            )
+    }, [])
 
     useEffect(() => {
-        initContainer();
-        window.addEventListener("resize", initContainer);
+        initContainer()
+        window.addEventListener('resize', initContainer)
 
         return () => {
-            window.removeEventListener("resize", initContainer);
-        };
-    }, [boxes]);
+            window.removeEventListener('resize', initContainer)
+        }
+    }, [boxes])
 
     useEffect(() => {
-        onMouseMove();
-    }, [mousePosition]);
+        onMouseMove()
+    }, [mousePosition])
 
     const initContainer = () => {
         if (containerRef.current) {
-            containerSize.current.w = containerRef.current.offsetWidth;
-            containerSize.current.h = containerRef.current.offsetHeight;
+            containerSize.current.w = containerRef.current.offsetWidth
+            containerSize.current.h = containerRef.current.offsetHeight
         }
-    };
+    }
 
     const onMouseMove = () => {
         if (containerRef.current) {
-            const rect = containerRef.current.getBoundingClientRect();
-            const { w, h } = containerSize.current;
-            const x = mousePosition.x - rect.left;
-            const y = mousePosition.y - rect.top;
-            const inside = x < w && x > 0 && y < h && y > 0;
+            const rect = containerRef.current.getBoundingClientRect()
+            const { w, h } = containerSize.current
+            const x = mousePosition.x - rect.left
+            const y = mousePosition.y - rect.top
+            const inside = x < w && x > 0 && y < h && y > 0
             if (inside) {
-                mouse.current.x = x;
-                mouse.current.y = y;
+                mouse.current.x = x
+                mouse.current.y = y
                 boxes.forEach((box) => {
                     const boxX =
-                        -(box.getBoundingClientRect().left - rect.left) + mouse.current.x;
+                        -(box.getBoundingClientRect().left - rect.left) +
+                        mouse.current.x
                     const boxY =
-                        -(box.getBoundingClientRect().top - rect.top) + mouse.current.y;
-                    box.style.setProperty("--mouse-x", `${boxX}px`);
-                    box.style.setProperty("--mouse-y", `${boxY}px`);
-                });
+                        -(box.getBoundingClientRect().top - rect.top) +
+                        mouse.current.y
+                    box.style.setProperty('--mouse-x', `${boxX}px`)
+                    box.style.setProperty('--mouse-y', `${boxY}px`)
+                })
             }
         }
-    };
+    }
 
     return (
         <div className={className} ref={containerRef}>
             {children}
         </div>
-    );
+    )
 }
 
 type SpotlightCardProps = {
-    children: React.ReactNode;
-    className?: string;
-};
+    children: React.ReactNode
+    className?: string
+}
 
 export function SpotlightCard({
     children,
-    className = "",
+    className = '',
 }: SpotlightCardProps) {
     return (
         <div
@@ -91,5 +93,5 @@ export function SpotlightCard({
         >
             {children}
         </div>
-    );
+    )
 }

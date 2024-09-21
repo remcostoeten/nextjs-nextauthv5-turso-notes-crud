@@ -1,30 +1,30 @@
-import { cookies } from "next/headers";
-import { cache } from "react";
-import { lucia } from "../server/lucia";
+import { cookies } from 'next/headers'
+import { cache } from 'react'
+import { lucia } from '../server/lucia'
 
 export const validateRequest = cache(async () => {
-  const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null;
-  if (!sessionId) {
-    return { user: null, session: null };
-  }
-  const { user, session } = await lucia.validateSession(sessionId);
-  try {
-    if (session && session.fresh) {
-      const sessionCookie = lucia.createSessionCookie(session.id);
-      cookies().set(
-        sessionCookie.name,
-        sessionCookie.value,
-        sessionCookie.attributes,
-      );
+    const sessionId = cookies().get(lucia.sessionCookieName)?.value ?? null
+    if (!sessionId) {
+        return { user: null, session: null }
     }
-    if (!session) {
-      const sessionCookie = lucia.createBlankSessionCookie();
-      cookies().set(
-        sessionCookie.name,
-        sessionCookie.value,
-        sessionCookie.attributes,
-      );
-    }
-  } catch {}
-  return { user, session };
-});
+    const { user, session } = await lucia.validateSession(sessionId)
+    try {
+        if (session && session.fresh) {
+            const sessionCookie = lucia.createSessionCookie(session.id)
+            cookies().set(
+                sessionCookie.name,
+                sessionCookie.value,
+                sessionCookie.attributes,
+            )
+        }
+        if (!session) {
+            const sessionCookie = lucia.createBlankSessionCookie()
+            cookies().set(
+                sessionCookie.name,
+                sessionCookie.value,
+                sessionCookie.attributes,
+            )
+        }
+    } catch {}
+    return { user, session }
+})

@@ -4,4 +4,4 @@
  */
 
 // All schemas (3) regarding users (profile, sessions, user)
-export * from "./users";
+export * from './users'

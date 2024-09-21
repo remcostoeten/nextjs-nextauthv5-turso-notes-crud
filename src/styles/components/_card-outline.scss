@@ -24,7 +24,7 @@
 }
 
 .card {
-    &:hover>.inner {
+    &:hover > .inner {
         background: rgba(26, 26, 26, 0.6);
         backdrop-filter: blur(80px);
     }

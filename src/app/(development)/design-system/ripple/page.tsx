@@ -1,4 +1,4 @@
-import Ripple from "@/components/effects/ripple";
+import Ripple from '@/components/effects/ripple'
 
 export default function RippleDemo() {
     return (
@@ -8,11 +8,9 @@ export default function RippleDemo() {
             </p>
             <Ripple />
         </div>
-    );
+    )
 }
-
 
 export function SingleRipple() {
-    return <Ripple />;
+    return <Ripple />
 }
-

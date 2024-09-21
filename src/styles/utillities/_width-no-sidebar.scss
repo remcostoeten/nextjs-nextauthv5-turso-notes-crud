@@ -1,52 +1,52 @@
 // Debugging methods
-@debug "Sidebar width: #{$sidebar-width}";
-@debug "Header height: #{$header-height}";
+@debug 'Sidebar width: #{$sidebar-width}';
+@debug 'Header height: #{$header-height}';
 
 :root {
-  --debug-sidebar-width: #{$sidebar-width};
-  --debug-header-height: #{$header-height};
-  --debug-sidebar-sub-width: #{$sidebar-sub-width};
-  --debug-sidebar-plus-aside-width: #{$sidebar-plus-aside-width};
+    --debug-sidebar-width: #{$sidebar-width};
+    --debug-header-height: #{$header-height};
+    --debug-sidebar-sub-width: #{$sidebar-sub-width};
+    --debug-sidebar-plus-aside-width: #{$sidebar-plus-aside-width};
 }
 
 $debug-values: (
-  sidebar-width: $sidebar-width,
-  header-height: $header-height,
-  sidebar-sub-width: $sidebar-sub-width,
-  sidebar-plus-aside-width: $sidebar-plus-aside-width,
+    sidebar-width: $sidebar-width,
+    header-height: $header-height,
+    sidebar-sub-width: $sidebar-sub-width,
+    sidebar-plus-aside-width: $sidebar-plus-aside-width,
 );
 
 // Sidebar-related widths
 .aside-width {
-  width: $sidebar-width;
+    width: $sidebar-width;
 }
 
 .sub-aside-width {
-  width: $sidebar-sub-width;
+    width: $sidebar-sub-width;
 }
 
 .aside-plus-sub-width {
-  width: $sidebar-plus-aside-width;
+    width: $sidebar-plus-aside-width;
 }
 
 // Header-related dimensions
 .height-no-header {
-  height: calc(100dvh - #{$header-height});
+    height: calc(100dvh - #{$header-height});
 }
 
 .max-h-no-header {
-  max-height: calc(100dvh - #{$header-height});
+    max-height: calc(100dvh - #{$header-height});
 }
 
 .margin-top-header {
-  margin-top: $header-height;
+    margin-top: $header-height;
 }
 
 .padding-top-header {
-  padding-top: $header-height;
+    padding-top: $header-height;
 }
 
 // Main content width
 .width-no-sidebar {
-  width: calc(100% - #{$sidebar-plus-aside-width});
+    width: calc(100% - #{$sidebar-plus-aside-width});
 }

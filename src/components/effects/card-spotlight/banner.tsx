@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
-import { useState } from "react";
+import { useState } from 'react'
 
 interface BannerProps {
-    tutorialUrl: string;
-    downloadUrl: string;
+    tutorialUrl: string
+    downloadUrl: string
 }
 
 export default function Banner({ tutorialUrl, downloadUrl }: BannerProps) {
-    const [bannerOpen, setBannerOpen] = useState<boolean>(true);
+    const [bannerOpen, setBannerOpen] = useState<boolean>(true)
 
     return (
         <>
@@ -56,5 +56,5 @@ export default function Banner({ tutorialUrl, downloadUrl }: BannerProps) {
                 </div>
             )}
         </>
-    );
+    )
 }

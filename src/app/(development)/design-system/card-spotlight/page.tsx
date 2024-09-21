@@ -1,21 +1,24 @@
-'use client';
+'use client'
 
-import { Icons } from "@/components/base/icons";
-import Banner from "@/components/effects/card-spotlight/banner";
-import Spotlight, { SpotlightCard } from "@/components/effects/card-spotlight/card-spotlight";
-import Ripple from "@/components/effects/ripple";
+import { Icons } from '@/components/base/icons'
+import Banner from '@/components/effects/card-spotlight/banner'
+import Spotlight, {
+    SpotlightCard,
+} from '@/components/effects/card-spotlight/card-spotlight'
+import Ripple from '@/components/effects/ripple'
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/components/ui/select";
-import Image from "next/image";
-import { useState } from 'react';
-import Card01 from "/public/card-01.png";
-import Card02 from "/public/card-02.png";
-import Card03 from "/public/card-03.png";
+} from '@/components/ui/select'
+import Image from 'next/image'
+import { useState } from 'react'
+import { DesignSystemWrapper } from '../_components/DesignSystemWrapper'
+import Card01 from '/public/card-01.png'
+import Card02 from '/public/card-02.png'
+import Card03 from '/public/card-03.png'
 
 const themes = {
     light: {
@@ -153,10 +156,22 @@ const themes = {
         borderColor: 'border-[#cccccc]',
         blurColor: 'bg-[#e6e6e6]',
     },
-};
+}
 
-const SpotlightCardContent = ({ image, title, description, ripple, theme }) => {
-    const [isHovered, setIsHovered] = useState(false);
+const SpotlightCardContent = ({
+    image,
+    title,
+    description,
+    ripple,
+    theme,
+}: {
+    image: string
+    title: string
+    description: string
+    ripple: boolean
+    theme: any
+}) => {
+    const [isHovered, setIsHovered] = useState(false)
 
     return (
         <div
@@ -164,8 +179,13 @@ const SpotlightCardContent = ({ image, title, description, ripple, theme }) => {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <div className="pointer-events-none absolute bottom-0 left-1/2 -z-10 aspect-square w-1/2 -translate-x-1/2 translate-y-1/2" aria-hidden="true">
-                <div className={`translate-z-0 absolute inset-0 rounded-full ${theme.blurColor} blur-[80px]`}></div>
+            <div
+                className="pointer-events-none absolute bottom-0 left-1/2 -z-10 aspect-square w-1/2 -translate-x-1/2 translate-y-1/2"
+                aria-hidden="true"
+            >
+                <div
+                    className={`translate-z-0 absolute inset-0 rounded-full ${theme.blurColor} blur-[80px]`}
+                ></div>
             </div>
 
             {ripple && (
@@ -178,40 +198,65 @@ const SpotlightCardContent = ({ image, title, description, ripple, theme }) => {
 
             <div className="flex h-full flex-col items-center text-center">
                 <div className="relative inline-flex">
-                    <Image className="inline-flex" src={image} width={200} height={200} alt={title} />
+                    <Image
+                        className="inline-flex"
+                        src={image}
+                        width={200}
+                        height={200}
+                        alt={title}
+                    />
                 </div>
                 <div className="mb-5 grow">
-                    <h2 className={`mb-1 text-xl font-bold ${theme.textPrimary}`}>{title}</h2>
-                    <p className={`text-sm ${theme.textSecondary}`}>{description}</p>
+                    <h2
+                        className={`mb-1 text-xl font-bold ${theme.textPrimary}`}
+                    >
+                        {title}
+                    </h2>
+                    <p className={`text-sm ${theme.textSecondary}`}>
+                        {description}
+                    </p>
                 </div>
-                <a className={`inline-flex items-center justify-center whitespace-nowrap rounded-lg border ${theme.borderColor} ${theme.buttonBg} ${theme.buttonText} px-3 py-1.5 text-sm font-medium transition-colors duration-150 ${theme.buttonHover} focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 dark:focus-visible:ring-slate-600`} href="#0">
+                <a
+                    className={`inline-flex items-center justify-center whitespace-nowrap rounded-lg border ${theme.borderColor} ${theme.buttonBg} ${theme.buttonText} px-3 py-1.5 text-sm font-medium transition-colors duration-150 ${theme.buttonHover} focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 dark:focus-visible:ring-slate-600`}
+                    href="#0"
+                >
                     <Icons.connect />
                     <span>Connect</span>
                 </a>
             </div>
         </div>
-    );
-};
+    )
+}
 
 export default function SpotlightPage() {
-    const [currentTheme, setCurrentTheme] = useState('techDark');
-    const theme = themes[currentTheme];
+    const [currentTheme, setCurrentTheme] = useState<string>('techDark')
+    const theme = themes[currentTheme as keyof typeof themes]
 
     return (
-        <>
-            <main className={`relative flex min-h-screen flex-col justify-center overflow-hidden ${theme.bgMain}`}>
+        <DesignSystemWrapper
+            title="Spotlight Page"
+            description="Explore our spotlight features."
+            actionButtons={[]}
+        >
+            <main
+                className={`relative flex min-h-screen flex-col  overflow-hidden ${theme.bgMain}`}
+            >
                 <div className="mx-auto w-full max-w-6xl px-4 py-24 md:px-6">
                     <div className="mb-8 flex justify-end">
                         <Select
                             value={currentTheme}
                             onValueChange={setCurrentTheme}
                         >
-                            <SelectTrigger className={`w-[200px] ${theme.bgCard} ${theme.textPrimary} ${theme.borderColor}`}>
+                            <SelectTrigger
+                                className={`w-[200px] ${theme.bgCard} ${theme.textPrimary} ${theme.borderColor}`}
+                            >
                                 <SelectValue placeholder="Select a theme" />
                             </SelectTrigger>
                             <SelectContent>
                                 {Object.entries(themes).map(([key, value]) => (
-                                    <SelectItem key={key} value={key}>{value.name}</SelectItem>
+                                    <SelectItem key={key} value={key}>
+                                        {value.name}
+                                    </SelectItem>
                                 ))}
                             </SelectContent>
                         </Select>
@@ -252,6 +297,6 @@ export default function SpotlightPage() {
                 tutorialUrl="https://cruip.com/how-to-create-a-spotlight-card-hover-effect-with-tailwind-css/"
                 downloadUrl="https://github.com/cruip/cruip-tutorials-next/blob/main/components/spotlight.tsx"
             />
-        </>
-    );
+        </DesignSystemWrapper>
+    )
 }
