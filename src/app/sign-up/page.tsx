@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { signUpAction } from "./sign-up.action";
 
@@ -17,9 +17,13 @@ export default function SignUpPage() {
     setLoading(false);
 
     if (result.error) {
-      toast.error(result.error);
+      toast.custom(result.error, {
+        icon: "confused",
+      });
     } else if (result.success) {
-      toast.success("Signed up successfully!");
+      toast.custom("Signed up successfully!", {
+        icon: "fire",
+      });
       router.push("/dashboard");
     }
   };

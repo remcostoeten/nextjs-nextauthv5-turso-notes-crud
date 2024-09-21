@@ -38,10 +38,10 @@ const config: Config = {
         card: "var(--bg-card)",
         brand: "var(--brand)",
         avatar: "var(--avatar)",
-        "bg-section": "var(--bg-section)",
+        section: "var(--bg-section)",
         "section-lighter": "var(--bg-section-lighter)",
-        "bg-input": "var(--bg-input)",
-        "bg-dropdown": "var(--bg-dropdown)",
+        input: "var(--bg-input)",
+        dropdown: "var(--bg-dropdown)",
         modal: "var(--bg-modal)",
         "modal-hover": "var(--bg-modal-hover)",
 
@@ -76,7 +76,6 @@ const config: Config = {
 
         // shadcn colors
         border: "var(--border-default)",
-        input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "var(--bg-section)",
         foreground: "hsl(var(--foreground))",

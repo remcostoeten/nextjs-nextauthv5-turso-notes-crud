@@ -1,12 +1,14 @@
 "use client";
 
+"use client";
+
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { getUserInfo } from "@/core/server/actions/auth/get-user-info";
+import { getUserInfo } from "@/core/server/actions";
 import { useEffect, useState } from "react";
 
 interface User {

@@ -19,7 +19,7 @@ export default function RootLayout({
       className={`${roboto_mono.className}`}
       suppressHydrationWarning
     >
-      <body>
+      <body className="dark:bg-body">
         <Providers>
           <Navbar />
           {children}

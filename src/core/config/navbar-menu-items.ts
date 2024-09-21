@@ -3,6 +3,6 @@ export const navItems = [
   { name: "Design System", href: "/design-system" },
   { name: "Hash & UUID", href: "/hash" },
   { name: "Blog", href: "/blog" },
-  { name: "Sign up", href: "/sign-up" },
+  { name: "Dashboard", href: "/dashboard" },
   { name: "Sign in", href: "/sign-in" },
 ];
