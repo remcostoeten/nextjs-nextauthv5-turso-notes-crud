@@ -8,6 +8,13 @@
       "when": 1726879516273,
       "tag": "0000_gifted_power_pack",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1726925174603,
+      "tag": "0001_robust_maverick",
+      "breakpoints": true
     }
   ]
 }
