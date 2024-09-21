@@ -1,35 +1,35 @@
-@import 'regular';
-@import 'orange-themes';
-@import 'purple-dark';
+@import "regular";
+@import "orange-themes";
+@import "purple-dark";
 
 @mixin apply-theme($theme-name) {
-    @if map-has-key($themes, $theme-name) {
-        $theme: map-get($themes, $theme-name);
+  @if map-has-key($themes, $theme-name) {
+    $theme: map-get($themes, $theme-name);
 
-        @layer base {
-            :root {
-                @each $key, $value in $theme {
-                    --#{$key}: #{$value};
-                }
-            }
+    @layer base {
+      :root {
+        @each $key, $value in $theme {
+          --#{$key}: #{$value};
         }
-    } @else {
-        @error "Unknown theme: #{$theme-name}";
+      }
     }
+  } @else {
+    @error "Unknown theme: #{$theme-name}";
+  }
 }
 
 @mixin apply-dark-theme($theme-name) {
-    @if map-has-key($themes, $theme-name) {
-        $theme: map-get($themes, $theme-name);
+  @if map-has-key($themes, $theme-name) {
+    $theme: map-get($themes, $theme-name);
 
-        @layer base {
-            .dark {
-                @each $key, $value in $theme {
-                    --#{$key}: #{$value};
-                }
-            }
+    @layer base {
+      .dark {
+        @each $key, $value in $theme {
+          --#{$key}: #{$value};
         }
-    } @else {
-        @error "Unknown theme: #{$theme-name}";
+      }
     }
+  } @else {
+    @error "Unknown theme: #{$theme-name}";
+  }
 }

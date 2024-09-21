@@ -1,21 +1,21 @@
-'use client'
+"use client";
 
-import { useAuthCheck } from '@/core/hooks/use-auth'
+import { useAuthCheck } from "@/core/hooks/use-auth";
 
 const ShowUserInfo = () => {
-  const { user, loading } = useAuthCheck()
+  const { user, loading } = useAuthCheck();
 
-  if (loading) return <div>Loading...</div>
+  if (loading) return <div>Loading...</div>;
   if (!user)
     return (
       <p>
-        Please{' '}
+        Please{" "}
         <a href="/sign-in" className="text-secondary-foreground underline">
           log in
-        </a>{' '}
+        </a>{" "}
         to view your information.
       </p>
-    )
+    );
 
   return (
     <div className="info-container">
@@ -24,7 +24,7 @@ const ShowUserInfo = () => {
       <p>Currency: {user.currency}</p>
       <p>Role: {user.role}</p>
     </div>
-  )
-}
+  );
+};
 
-export default ShowUserInfo
+export default ShowUserInfo;

@@ -1,40 +1,40 @@
 // Easing function map
 $easing-functions: (
-    'ease': ease,
-    'linear': linear,
-    'ease-in': ease-in,
-    'ease-out': ease-out,
-    'ease-in-out': ease-in-out,
-    // Custom cubic-bezier easings
-    'swift': cubic-bezier(0.55, 0, 0.1, 1),
-    'bounce': cubic-bezier(0.68, -0.55, 0.265, 1.55),
-    'smooth': cubic-bezier(0.25, 0.1, 0.25, 1),
-    'snappy': cubic-bezier(0.7, 0, 0.3, 1),
+  "ease": ease,
+  "linear": linear,
+  "ease-in": ease-in,
+  "ease-out": ease-out,
+  "ease-in-out": ease-in-out,
+  // Custom cubic-bezier easings
+  "swift": cubic-bezier(0.55, 0, 0.1, 1),
+  "bounce": cubic-bezier(0.68, -0.55, 0.265, 1.55),
+  "smooth": cubic-bezier(0.25, 0.1, 0.25, 1),
+  "snappy": cubic-bezier(0.7, 0, 0.3, 1),
 );
 
 // Mixin for transition with optional easing
 @mixin trans-all($duration, $easing: ease-in-out) {
-    transition: all #{$duration}ms $easing;
+  transition: all #{$duration}ms $easing;
 }
 
 // Generate classes from 100ms to 2000ms with default easing
 @for $i from 1 through 20 {
-    $duration: $i * 100;
+  $duration: $i * 100;
 
-    .trans-all-#{$duration} {
-        @include trans-all($duration);
-    }
+  .trans-all-#{$duration} {
+    @include trans-all($duration);
+  }
 }
 
 // Generate classes with specific easing functions
 @each $easing-name, $easing-value in $easing-functions {
-    @for $i from 1 through 20 {
-        $duration: $i * 100;
+  @for $i from 1 through 20 {
+    $duration: $i * 100;
 
-        .trans-all-#{$duration}-#{$easing-name} {
-            @include trans-all($duration, $easing-value);
-        }
+    .trans-all-#{$duration}-#{$easing-name} {
+      @include trans-all($duration, $easing-value);
     }
+  }
 }
 
 // Usage examples:

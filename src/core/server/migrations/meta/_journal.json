@@ -1,41 +1,41 @@
 {
-    "version": "7",
-    "dialect": "sqlite",
-    "entries": [
-        {
-            "idx": 0,
-            "version": "6",
-            "when": 1726879516273,
-            "tag": "0000_gifted_power_pack",
-            "breakpoints": true
-        },
-        {
-            "idx": 1,
-            "version": "6",
-            "when": 1726925174603,
-            "tag": "0001_robust_maverick",
-            "breakpoints": true
-        },
-        {
-            "idx": 2,
-            "version": "6",
-            "when": 1726927053705,
-            "tag": "0002_crazy_wild_child",
-            "breakpoints": true
-        },
-        {
-            "idx": 3,
-            "version": "6",
-            "when": 1726927388483,
-            "tag": "0003_overconfident_apocalypse",
-            "breakpoints": true
-        },
-        {
-            "idx": 4,
-            "version": "6",
-            "when": 1726931123985,
-            "tag": "0004_familiar_shinobi_shaw",
-            "breakpoints": true
-        }
-    ]
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1726879516273,
+      "tag": "0000_gifted_power_pack",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1726925174603,
+      "tag": "0001_robust_maverick",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1726927053705,
+      "tag": "0002_crazy_wild_child",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1726927388483,
+      "tag": "0003_overconfident_apocalypse",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1726931123985,
+      "tag": "0004_familiar_shinobi_shaw",
+      "breakpoints": true
+    }
+  ]
 }
