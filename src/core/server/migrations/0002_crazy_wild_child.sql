@@ -10,3 +10,4 @@ CREATE TABLE `user_profile` (
 	`app_theme` text DEFAULT 'system',
 	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE no action
 );
+

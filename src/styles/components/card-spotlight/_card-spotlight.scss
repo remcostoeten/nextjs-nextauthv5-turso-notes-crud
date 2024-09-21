@@ -1,0 +1,72 @@
+:root {
+    --primary-font: "Inter", sans-serif, -apple-system, ui-sans-serif, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, monospace;
+    --secondary-font: "Space Grotesk", monospace;
+    --black-0: #000;
+    --black-1: #131516;
+    --black-2: #212121;
+    --grey-1: #818080;
+    --grey-2: #1c1c1c;
+    --grey-3: #1b1a1a;
+    --white-1: #fff;
+    --white-2: #aaa;
+}
+
+.card-spotlight {
+    /* Styles from constants.ts are applied inline */
+}
+
+.cell-content {
+    @apply p-5 flex flex-col gap-2 w-full h-full;
+}
+
+.cell-body {
+    @apply flex flex-col gap-2;
+}
+
+.cell-title {
+    @apply font-bold;
+    font-family: var(--secondary-font);
+}
+
+.cell-subtitle {
+    @apply opacity-80 text-sm;
+}
+
+.card-header,
+.card-footer {
+    @apply p-4 bg-gray-800;
+}
+
+.card-body {
+    @apply p-4;
+}
+
+@media screen and (max-width: 1020px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 490px) {
+    html {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    html {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    html {
+        font-size: 11px;
+    }
+}
