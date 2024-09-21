@@ -4,61 +4,61 @@ This Python script is designed to update import statements in `.tsx` files withi
 
 ## Features
 
-- Recursively searches for `.tsx` files in the `src/app` and `src/components` directories.
-- Consolidates imports from `@/components/ui/*` into a single import from `@/components/ui/`.
-- Can also be run on a specific file using command-line arguments.
+-   Recursively searches for `.tsx` files in the `src/app` and `src/components` directories.
+-   Consolidates imports from `@/components/ui/*` into a single import from `@/components/ui/`.
+-   Can also be run on a specific file using command-line arguments.
 
 Thus it refactors files with such imports:
 
 ```tsx
-import { useState } from "react";
-import { DesignSystemWrapper } from "@/components/DesignSystemWrapper";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { useState } from 'react'
+import { DesignSystemWrapper } from '@/components/DesignSystemWrapper'
+import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
-import { PlusCircle, Clipboard } from "lucide-react";
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select'
+import { Switch } from '@/components/ui/switch'
+import { PlusCircle, Clipboard } from 'lucide-react'
 ```
 
 to
 
 ```tsx
-import { DesignSystemWrapper } from "@/components/DesignSystemWrapper";
+import { DesignSystemWrapper } from '@/components/DesignSystemWrapper'
 import {
-  Button,
-  Input,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Switch,
-} from "@/components/ui/";
-import { useState } from "react";
+    Button,
+    Input,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+    Switch,
+} from '@/components/ui/'
+import { useState } from 'react'
 ```
 
 ## Requirements
 
-- Have a index.ts file in your ui folder like so:
+-   Have a index.ts file in your ui folder like so:
 
 ```tsx
 //src/components/ui/index.ts
-//... export everyy individual ui file 
+//... export everyy individual ui file
 
-export * from "./switch";
-export * from "./tabs";
-export * from "./text-shimmer";
-export * from "./textarea";
-export * from "./tooltip";
+export * from './switch'
+export * from './tabs'
+export * from './text-shimmer'
+export * from './textarea'
+export * from './tooltip'
 ```
 
-- Python 3.x
+-   Python 3.x
 
 ### Running the Script
 

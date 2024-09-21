@@ -7,23 +7,23 @@ import { metadata } from '../core/config/metadata/metadata.root-layout'
 export { metadata }
 
 export default function RootLayout({
-  children
+    children,
 }: {
-  children: React.ReactNode
+    children: React.ReactNode
 }) {
-  return (
-    <html
-      lang="en"
-      color-scheme="dark"
-      className={`${roboto_mono.className}`}
-      suppressHydrationWarning
-    >
-      <body>
-        <Providers>
-          <Navbar />
-          {children}
-        </Providers>
-      </body>
-    </html>
-  )
+    return (
+        <html
+            lang="en"
+            color-scheme="dark"
+            className={`${roboto_mono.className}`}
+            suppressHydrationWarning
+        >
+            <body>
+                <Providers>
+                    <Navbar />
+                    {children}
+                </Providers>
+            </body>
+        </html>
+    )
 }
