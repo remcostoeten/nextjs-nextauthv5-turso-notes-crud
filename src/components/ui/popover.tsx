@@ -1,7 +1,7 @@
 'use client'
 
+import { cn } from '@/core/utils/tw-cn'
 import * as PopoverPrimitive from '@radix-ui/react-popover'
-import { cn } from 'cn'
 import * as React from 'react'
 
 const COLORS = {

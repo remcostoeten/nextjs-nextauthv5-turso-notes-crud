@@ -1,4 +1,4 @@
-import { cn } from 'cn'
+import { cn } from '@/core/utils/tw-cn'
 
 function Skeleton({
   className,

@@ -1,4 +1,4 @@
-import { cn } from 'cn'
+import { cn } from '@/core/utils/tw-cn'
 import * as React from 'react'
 
 export interface InputProps

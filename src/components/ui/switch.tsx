@@ -1,7 +1,7 @@
 'use client'
 
+import { cn } from '@/core/utils/tw-cn'
 import * as SwitchPrimitives from '@radix-ui/react-switch'
-import { cn } from 'cn'
 import * as React from 'react'
 
 const Switch = React.forwardRef<

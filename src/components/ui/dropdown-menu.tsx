@@ -4,7 +4,7 @@ import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu'
 import { Check, ChevronRight, Circle } from 'lucide-react'
 import * as React from 'react'
 
-import { cn } from 'cn'
+import { cn } from '@/core/utils/tw-cn'
 
 // Styling constants
 const BORDER_RADIUS = 'rounded-md'

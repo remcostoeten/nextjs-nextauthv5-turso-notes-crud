@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import * as React from 'react'
 import { forwardRef } from 'react'
 
-import { cn } from 'cn'
+import { cn } from '@/core/utils/tw-cn'
 import { ArrowLeftIcon, ArrowRightIcon } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipTrigger } from '.'
 
