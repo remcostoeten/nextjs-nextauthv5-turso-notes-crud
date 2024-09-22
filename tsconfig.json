@@ -1,40 +1,40 @@
 {
-  "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
-    "paths": {
-      "@/*": ["./src/*"],
-      "auth": ["./src/core/server/lucia.ts"],
-      "db": ["./src/core/server/db/index.ts"],
-      "actions": ["./src/core/server/actions/index.ts"],
-      "ui": ["./src/components/ui/index.ts"],
-      "stores": ["./src/core/stores/index.ts"],
-      "cn": ["./src/core/utils/tw-cn.ts"],
-      "schema": ["./src/core/server/schema/index.ts"],
-      "env": ["./src/core/utils/env.mjs"]
+    "compilerOptions": {
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "noEmit": true,
+        "esModuleInterop": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "isolatedModules": true,
+        "jsx": "preserve",
+        "incremental": true,
+        "plugins": [
+            {
+                "name": "next"
+            }
+        ],
+        "paths": {
+            "@/*": ["./src/*"],
+            "auth": ["./src/core/server/lucia.ts"],
+            "db": ["./src/core/server/db/index.ts"],
+            "actions": ["./src/core/server/actions/index.ts"],
+            "ui": ["./src/components/ui/index.ts"],
+            "stores": ["./src/core/stores/index.ts"],
+            "cn": ["./src/core/utils/tw-cn.ts"],
+            "schema": ["./src/core/server/schema/index.ts"],
+            "env": ["./src/core/utils/env.mjs"]
+        },
+        "resolveJsonModule": true
     },
-    "resolveJsonModule": true
-  },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/core/config/metadata/dashboard.root-layout ts"
-  ],
-  "exclude": ["node_modules"]
+    "include": [
+        "next-env.d.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        ".next/types/**/*.ts",
+        "src/core/config/metadata/dashboard.root-layout ts"
+    ],
+    "exclude": ["node_modules"]
 }
