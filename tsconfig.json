@@ -1,6 +1,10 @@
 {
     "compilerOptions": {
-        "lib": ["dom", "dom.iterable", "esnext"],
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
         "allowJs": true,
         "skipLibCheck": true,
         "strict": true,
@@ -17,15 +21,33 @@
             }
         ],
         "paths": {
-            "@/*": ["./src/*"],
-            "auth": ["./src/core/server/lucia.ts"],
-            "db": ["./src/core/server/db/index.ts"],
-            "actions": ["./src/core/server/actions/index.ts"],
-            "ui": ["./src/components/ui/index.ts"],
-            "stores": ["./src/core/stores/index.ts"],
-            "cn": ["./src/core/utils/tw-cn.ts"],
-            "schema": ["./src/core/server/schema/index.ts"],
-            "env": ["./src/core/utils/env.mjs"]
+            "@/*": [
+                "./src/*"
+            ],
+            "auth": [
+                "./src/core/server/lucia.ts"
+            ],
+            "db": [
+                "./src/core/server/db/index.ts"
+            ],
+            "actions": [
+                "./src/core/server/actions/index.ts"
+            ],
+            "ui": [
+                "./src/components/ui/index.ts"
+            ],
+            "stores": [
+                "./src/core/stores/index.ts"
+            ],
+            "cn": [
+                "./src/core/utils/tw-cn.ts"
+            ],
+            "schema": [
+                "src/core/server/schema/index.ts"
+            ],
+            "env": [
+                "./src/core/utils/env.mjs"
+            ]
         },
         "resolveJsonModule": true
     },
@@ -36,5 +58,7 @@
         ".next/types/**/*.ts",
         "src/core/config/metadata/dashboard.root-layout ts"
     ],
-    "exclude": ["node_modules"]
+    "exclude": [
+        "node_modules"
+    ]
 }
