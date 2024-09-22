@@ -44,10 +44,10 @@ export function UserInfoButton(): JSX.Element {
             <Button
                 variant="outline"
                 size="icon"
-                className={`fixed bg-avatar hover:opacity-100 hover:scale-110 hover:rotate-6 active:scale-90 active:translate-y-3 opacity-80 border-outline bottom-4 right-5 rounded-full size-10 transition-all duration-300 ${
+                className={`z-50 fixed bg-avatar hover:opacity-100 hover:scale-110 hover:rotate-6 active:scale-90 active:translate-y-3 opacity-80 border-outline bottom-4 right-5 rounded-full size-10 transition-all duration-300 ${
                     isAuthenticated
                         ? 'shadow-[0_0_15px_rgba(0,255,0,0.5)] hover:shadow-[0_0_20px_rgba(0,255,0,0.7)]'
-                        : ''
+                        : 'shadow-[0_0_5px_rgba(255,0,0,0.4)] hover:shadow-[0_0_10px_rgba(255,0,0,0.3)]'
                 }`}
                 onClick={handleClick}
             >

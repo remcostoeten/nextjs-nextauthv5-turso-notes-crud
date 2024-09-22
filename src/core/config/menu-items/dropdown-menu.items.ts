@@ -1,4 +1,5 @@
 import { HelpCircle, LogIn, LucideIcon, UserPlus } from 'lucide-react'
+
 type AuthLinkProps = {
     href: string
     Icon: LucideIcon
@@ -8,7 +9,7 @@ type AuthLinkProps = {
 export const links: AuthLinkProps[] = [
     { href: '/sign-in', Icon: LogIn, text: 'Login' },
     { href: '/sign-up', Icon: UserPlus, text: 'Register' },
-    { href: '/help', Icon: HelpCircle, text: 'Help' },
+    { href: '/dashboard/settings', Icon: HelpCircle, text: 'Help' },
 ]
 
 export const textContent = {

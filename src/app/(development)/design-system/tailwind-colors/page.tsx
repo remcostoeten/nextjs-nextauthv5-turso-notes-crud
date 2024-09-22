@@ -17,14 +17,14 @@ function ColorShowcase() {
             title="Tailwind config colors"
             description="Every (custom) tailwind property in this repository is shown here.."
         >
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
                 {Object.entries(colors).map(([name, value]) => (
                     <div
                         key={name}
                         className="rounded-lg p-4 flex flex-col items-center border-outline   m-2"
                     >
                         <div
-                            className="w-16 border border-border-outline h-16 mb-2"
+                            className="w-16 border-outline-50 h-16 mb-2"
                             style={{ backgroundColor: value }}
                         />
                         <p className="text-sm font-semibold mb-2">{name}</p>

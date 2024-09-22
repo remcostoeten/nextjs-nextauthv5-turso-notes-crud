@@ -11,14 +11,14 @@ interface BlogPost {
 const blogPosts: BlogPost[] = [
     {
         id: '1',
-        imageSrc: '/imgs/blog/4.png',
+        imageSrc: '/menu/blog1.jpg',
         title: 'Lorem ipsum dolor',
         description:
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet illo quidem eos.',
     },
     {
         id: '2',
-        imageSrc: '/imgs/blog/5.png',
+        imageSrc: '/menu/blog2.jpg',
         title: 'Lorem ipsum dolor',
         description:
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet illo quidem eos.',
@@ -33,7 +33,7 @@ const BlogPostCard: React.FC<BlogPost> = ({ imageSrc, title, description }) => (
             alt={title}
         />
         <h4 className="mb-0.5 text-sm font-medium">{title}</h4>
-        <p className="text-xs text-neutral-400">{description}</p>
+        <p className="text-xs text-text-regular-nav">{description}</p>
     </a>
 )
 

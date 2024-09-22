@@ -6,6 +6,7 @@ import Spotlight, {
     SpotlightCard,
 } from '@/components/effects/card-spotlight/card-spotlight'
 import Ripple from '@/components/effects/ripple'
+import { Label } from '@/components/ui'
 import {
     Select,
     SelectContent,
@@ -93,7 +94,6 @@ const themes = {
         borderColor: 'border-[#483d8b]',
         blurColor: 'bg-[#191970]',
     },
-    // New dark variants based on Tailwind config
     midnightOil: {
         name: 'Midnight Oil',
         bgMain: 'bg-[#171616]',
@@ -143,7 +143,6 @@ const themes = {
         borderColor: 'border-[#00ccff]',
         blurColor: 'bg-[#004d66]',
     },
-    // Corporate theme
     executiveSuite: {
         name: 'Executive Suite',
         bgMain: 'bg-[#f0f0f0]',
@@ -155,6 +154,19 @@ const themes = {
         buttonHover: 'hover:bg-[#003d82]',
         borderColor: 'border-[#cccccc]',
         blurColor: 'bg-[#e6e6e6]',
+    },
+
+    themeGrey: {
+        name: 'Grey',
+        bgMain: 'bg-card',
+        bgCard: 'bg-section',
+        textPrimary: 'text-title',
+        textSecondary: 'text-subtitle',
+        buttonBg: 'bg-section border-outline-50',
+        buttonText: 'text-subtitle',
+        buttonHover: 'hover:bg-primary/90',
+        borderColor: 'border-red-400',
+        blurColor: 'bg-section',
     },
 }
 
@@ -217,7 +229,7 @@ const SpotlightCardContent = ({
                     </p>
                 </div>
                 <a
-                    className={`inline-flex items-center justify-center whitespace-nowrap rounded-lg border ${theme.borderColor} ${theme.buttonBg} ${theme.buttonText} px-3 py-1.5 text-sm font-medium transition-colors duration-150 ${theme.buttonHover} focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 dark:focus-visible:ring-slate-600`}
+                    className={`inline-flex items-center justify-center whitespace-nowrap rounded-lg !border-outline ${theme.borderColor} ${theme.buttonBg} ${theme.buttonText} px-3 py-1.5 text-sm font-medium transition-colors duration-150 ${theme.buttonHover} focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 dark:focus-visible:ring-slate-600`}
                     href="#0"
                 >
                     <Icons.connect />
@@ -234,15 +246,16 @@ export default function SpotlightPage() {
 
     return (
         <DesignSystemWrapper
-            title="Spotlight Page"
-            description="Explore our spotlight features."
+            title="Spotlight Card"
+            description="Hover over the cards to see the effect, can differ per card."
             actionButtons={[]}
         >
             <main
-                className={`relative flex min-h-screen flex-col  overflow-hidden ${theme.bgMain}`}
+                className={`relative flex min-h-screen flex-col border-outline rounded-lg  overflow-hidden ${theme.bgMain}`}
             >
                 <div className="mx-auto w-full max-w-6xl px-4 py-24 md:px-6">
-                    <div className="mb-8 flex justify-end">
+                    <div className="mb-8 flex  flex-col gap-2 w-full justify-end">
+                        <Label>Theme</Label>
                         <Select
                             value={currentTheme}
                             onValueChange={setCurrentTheme}

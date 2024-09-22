@@ -13,7 +13,7 @@ const AuthLink: React.FC<AuthLinkProps> = ({ href, Icon, text }) => {
     return (
         <Link
             href={href}
-            className="flex w-full flex-col items-center justify-center py-2 text-neutral-400 transition-colors hover:text-neutral-50"
+            className="flex w-full flex-col items-center justify-center py-2 text-text-regular-nav transition-colors hover:text-neutral-50"
         >
             <Icon className="mb-2 text-xl text-indigo-300" />
             <span className="text-xs">{text}</span>
