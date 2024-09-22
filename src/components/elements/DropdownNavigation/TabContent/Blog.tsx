@@ -18,7 +18,7 @@ const blogPosts: BlogPost[] = [
     },
     {
         id: '2',
-        imageSrc: '/menu/blog2.jpg',
+        imageSrc: '/menu/blog2.jpeg',
         title: 'Lorem ipsum dolor',
         description:
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet illo quidem eos.',

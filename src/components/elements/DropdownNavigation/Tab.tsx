@@ -19,7 +19,7 @@ export function Tab({ children, tab, handleSetSelected, selected }: TabProps) {
             className={`flex items-center gap-1 rounded-full px-3 py-1.5 text-sm transition-colors ${
                 isSelected
                     ? 'border-outline bg-gradient-to-tr from-body via-card to-body '
-                    : 'text-neutral-400'
+                    : 'text-neutral-400 border-outline bg-[#0a0a0a]'
             }`}
         >
             <span>{children}</span>

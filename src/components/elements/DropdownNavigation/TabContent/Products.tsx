@@ -62,7 +62,7 @@ const Products: React.FC = () => {
                     <ProductCategory key={index} {...category} />
                 ))}
             </div>
-            <button className="ml-auto mt-4 flex items-center gap-1 text-sm text-indigo-300">
+            <button className=" mt-4 flex items-center gap-1 text-sm text-indigo-300">
                 <span>View more</span>
                 <ArrowRightIcon />
             </button>

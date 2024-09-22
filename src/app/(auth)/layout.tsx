@@ -8,5 +8,5 @@ export default async function AuthRoute({ children }: { children: PageProps }) {
         redirect('/dashboard')
     }
 
-    return { children }
+    return <>children</>
 }

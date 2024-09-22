@@ -6,14 +6,6 @@ $border-styles: (
     outline-50: var(--border-outline-50),
 );
 
-.border-seperator {
-    border: 1px solid var(--border-separator);
-}
-
-.border-top-seperator {
-    border-top: 1px solid var(--border-separator);
-}
-
 // Define border positions
 $border-positions: left, right, top, bottom;
 
@@ -31,31 +23,40 @@ $border-positions: left, right, top, bottom;
     }
 }
 
-// Examples of generated classes:
-//
-// .border-regular { border: 1px solid var(--border-default); }
-// .border-regular-left { border: none; border-left: 1px solid var(--border-default); }
-// .border-regular-right { border: none; border-right: 1px solid var(--border-default); }
-// .border-regular-top { border: none; border-top: 1px solid var(--border-default); }
-// .border-regular-bottom { border: none; border-bottom: 1px solid var(--border-default); }
-//
-// .border-outline { border: 1px solid var(--border-outline); }
-// .border-outline-left { border: none; border-left: 1px solid var(--border-outline); }
-// .border-outline-right { border: none; border-right: 1px solid var(--border-outline); }
-// .border-outline-top { border: none; border-top: 1px solid var(--border-outline); }
-// .border-outline-bottom { border: none; border-bottom: 1px solid var(--border-outline); }
-//
-// .border-separator { border: 1px solid var(--border-separator); }
-// .border-separator-left { border: none; border-left: 1px solid var(--border-separator); }
-// .border-separator-right { border: none; border-right: 1px solid var(--border-separator); }
-// .border-separator-top { border: none; border-top: 1px solid var(--border-separator); }
-// .border-separator-bottom { border: none; border-bottom: 1px solid var(--border-separator); }
-//
-// Usage in HTML:
-// <div class="border-regular">All sides border</div>
-// <div class="border-outline-left">Left border only</div>
-// <div class="border-separator-top">Top border only</div>
+// Additional classes for specific border styles
+.border-separator {
+    border: 1px solid var(--border-separator);
+}
 
+.border-top-separator {
+    border-top: 1px solid var(--border-separator);
+}
+
+.border-outline {
+    border: 1px solid var(--border-outline);
+}
+
+.border-outline-5 {
+    border: 1px solid var(--border-outline-5);
+}
+
+.border-outline-10 {
+    border: 1px solid var(--border-outline-10);
+}
+
+.border-outline-soft {
+    border: 1px solid rgba(39, 38, 39, 0.7);
+}
+
+.border-top-outline {
+    border-top: 1px solid var(--border-outline);
+}
+
+.border-bottom-outline {
+    border-bottom: 1px solid var(--border-outline);
+}
+
+// Example of a custom line element
 .line {
     position: relative;
 

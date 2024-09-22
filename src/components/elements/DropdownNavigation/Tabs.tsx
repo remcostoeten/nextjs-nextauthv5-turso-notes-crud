@@ -32,7 +32,7 @@ export function Tabs() {
     return (
         <div
             onMouseLeave={handleMouseLeave}
-            className="relative flex h-fit gap-2"
+            className="relative flex h-fit gap-4"
         >
             {TABS.map((tab) => (
                 <Tab
