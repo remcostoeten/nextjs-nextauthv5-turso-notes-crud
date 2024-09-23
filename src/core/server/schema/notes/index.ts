@@ -1,5 +1,5 @@
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { userTable } from "../user";
+import { userTable } from "../schema";
 
 export const folderTable = sqliteTable("folder", {
     id: text("id").notNull().primaryKey(),

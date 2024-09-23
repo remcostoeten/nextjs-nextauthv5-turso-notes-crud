@@ -1,12 +1,11 @@
 "use server";
 import { SignInSchema, SignUpSchema } from "@/core/models/sign-up-model.z";
-import {db} from "@/core/server/db";
+import { db } from "@/core/server/db";
 import * as argon2 from "argon2";
 import { eq } from "drizzle-orm";
-import { generateId } from "lucia";
+import { generateId, lucia, validateRequest } from "lucia";
 import { cookies } from "next/headers";
-import { userTable } from "../../schema/user";
-import { lucia, validateRequest } from "../../lucia";
+import { userTable } from "schema";
 
 export const signUp = async (values: {
     username: string;
